@@ -10,17 +10,17 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o /docker-gs-ping
+# RUN go build -o /docker-gs-ping
 
 ## Deploy
-FROM gcr.io/distroless/base-debian10
+# FROM gcr.io/distroless/base-debian10
 
-WORKDIR /
+# WORKDIR /
 
-COPY --from=build /docker-gs-ping /docker-gs-ping
+# COPY --from=build /docker-gs-ping /docker-gs-ping
 
-EXPOSE 8080
+# EXPOSE 8080
 
-USER nonroot:nonroot
+# USER nonroot:nonroot
 
-ENTRYPOINT ["/docker-gs-ping"]
+# ENTRYPOINT ["/docker-gs-ping"]
