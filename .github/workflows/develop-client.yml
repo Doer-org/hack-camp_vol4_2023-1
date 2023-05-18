@@ -1,0 +1,17 @@
+name: deploy client
+on: 
+    push:
+        branches:
+            - develop
+        paths:
+            - client/**
+            - '.github/workflows/develop-client.yml'
+
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: client
+
