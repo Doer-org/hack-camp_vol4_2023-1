@@ -14,4 +14,29 @@ jobs:
         defaults:
             run:
                 working-directory: client
+        steps:
+            - name: Checkout the repository
+              uses: actions/checkout@3
+              
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v3.6.0
+              
+            - name: Install pnpm
+              run: npm install -g pnpm
+              
+            - name: Setup pnpm
+              run: pnpm install
+              
+            - name: Setup server
+              run: make up
+              working-directory: server
+              
+            - name: Build
+              run: pnpm build
+              env:
+                NEXT_PUBLIC_SERVER_URL: http://localhost:8080
+          
+          
+              
+        
 
