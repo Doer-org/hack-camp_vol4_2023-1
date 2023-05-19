@@ -6,7 +6,7 @@ on:
       - develop
     paths:
       - server/**
-      - ".github/workflows/develop-server.yml"
+      - .github/workflows/develop-server.yml
 
 jobs:
   build:
