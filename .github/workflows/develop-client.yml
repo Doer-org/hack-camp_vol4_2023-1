@@ -5,7 +5,7 @@ on:
       - develop
     paths:
       - client/**
-      - ".github/workflows/develop-client.yml"
+      - .github/workflows/develop-client.yml
 
 jobs:
   build:
