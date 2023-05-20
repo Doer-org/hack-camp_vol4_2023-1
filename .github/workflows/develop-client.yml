@@ -3,19 +3,16 @@ on:
   push:
     branches:
       - develop
-    paths:
-      - client/**
-      - ".github/workflows/develop-client.yml"
+      - main
+      - 'feature/**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: client
+        
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@3
+        uses: actions/checkout@v3
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.6.0
