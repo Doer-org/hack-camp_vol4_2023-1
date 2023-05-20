@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - develop
+      - main
+      - 'feature/**'
     paths:
       - server/**
       - .github/workflows/develop-server.yml
@@ -13,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: client
+        working-directory: server
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
