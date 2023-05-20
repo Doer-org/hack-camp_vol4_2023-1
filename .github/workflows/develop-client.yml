@@ -5,10 +5,16 @@ on:
       - develop
       - main
       - 'feature/**'
+    paths:
+      - client/**
+      - .github/workflows/develop-client.yml
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
         
     steps:
       - name: Checkout the repository
