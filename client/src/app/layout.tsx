@@ -15,10 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} ${"bg-new-white"}`}>
+    <html lang="en" className="w-full h-full">
+      <body className={`${inter.className} ${"bg-ivory"}`}>
         <div>{children}</div>
-        <div className="fixed bottom-36 left-[15px]">
+        <div className="fixed bottom-28">
           <Navbar />
         </div>
       </body>
