@@ -2,7 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import "./globals.css";
 import { Nunito } from "next/font/google";
 
-const inter = Nunito({ subsets: ["latin"] });
+const nunito = Nunito({ subsets: ["latin"] });
 
 export const metadata = {
   title: "App",
@@ -15,10 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} ${"bg-new-white"}`}>
+    <html lang="en" className="w-full h-full">
+      <body className={`${nunito.className} ${"bg-ivory"}`}>
         <div>{children}</div>
-        <div className="fixed bottom-36 left-[15px]">
+        <div className="fixed bottom-28">
           <Navbar />
         </div>
       </body>

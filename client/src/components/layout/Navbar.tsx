@@ -19,7 +19,7 @@ const Navbar = () => {
   const isSetting = pathname === "/service/setting";
 
   return (
-    <div className="bg-ivory rounded-lg w-[360px] h-16 mx-auto flex items-center justify-between px-6">
+    <div className="bg-new-white rounded-t-lg w-screen h-16 mx-auto flex items-center justify-between px-6">
       <LinkButton
         className={`${!isHome && "opacity-30"} ${"w-7 h-7 text-navy-3"}`}
         href="/"
