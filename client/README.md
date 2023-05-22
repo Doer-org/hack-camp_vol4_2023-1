@@ -4,7 +4,7 @@
 
 `/client`で入力
 
-```
+```zsh
 npm install -g pnpm
 pnpm install
 pnpm run dev
@@ -14,7 +14,7 @@ pnpm run dev
 
 ## ディレクトリ構造
 
-```
+```none
 /client
 ├ .next
 ├ node_modules
@@ -46,3 +46,4 @@ pnpm run dev
 - 作業ディレクトリは必ず`/client`で
 - 開発前に**pull**を必ずする
 - **prettier**で必ず整形してから commit する
+- commitするディレクトリも必ず`/client`
