@@ -60,6 +60,10 @@ attach-db: ## dockerのdbコンテナにアクセスする
 lint: ## goのコードを整形する
 	gofmt -l -w .
 
+.PHONY: gqlgen
+gqlgen:
+	gqlgen generate
+
 .PHONY: deploy
 deploy:
 
