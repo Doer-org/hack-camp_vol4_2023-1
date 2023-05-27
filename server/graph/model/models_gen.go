@@ -2,17 +2,17 @@
 
 package model
 
-type NewTodo struct {
-	FirebaseID string `json:"firebase_id"`
-	Name string `json:"name"`
+type NewUser struct {
+	FirebaseID  string `json:"firebase_id"`
+	Name        string `json:"name"`
 	Description string `json:"description"`
-	GroupID string `json:"group_id"`
+	GroupID     string `json:"group_id"`
 }
 
 type User struct {
-	ID   string `json:"id"`
-	FirebaseID string `json:"firebase_id"`
-	Name string `json:"name"`
+	ID          string `json:"id"`
+	FirebaseID  string `json:"firebase_id"`
+	Name        string `json:"name"`
 	Description string `json:"description"`
-	GroupID string `json:"group_id"`
+	GroupID     string `json:"group_id"`
 }
