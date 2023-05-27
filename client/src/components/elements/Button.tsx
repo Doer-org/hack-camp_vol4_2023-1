@@ -22,7 +22,7 @@ export const LinkButton: FC<LinkButtonProps> = ({
   children,
 }) => {
   return (
-    <Link href={href}>
+    <Link href={href} as={href}>
       <button className={className}>{children}</button>
     </Link>
   );
