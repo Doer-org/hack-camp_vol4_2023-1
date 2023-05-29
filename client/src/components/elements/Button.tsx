@@ -3,11 +3,12 @@ import React, { FC, ReactNode } from "react";
 
 type ButtonProps = {
   className: string;
+  onClick:React.MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
 };
 
-export const Button: FC<ButtonProps> = ({ className, children }) => {
-  return <button className={className}>{children}</button>;
+export const Button: FC<ButtonProps> = ({ className, onClick, children }) => {
+  return <button className={className} onClick={onClick}>{children}</button>;
 };
 
 type LinkButtonProps = {

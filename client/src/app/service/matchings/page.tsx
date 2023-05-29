@@ -1,9 +1,12 @@
-import React from 'react'
+import { MatchingPage } from "@/components/service/Matching/matching-page";
+import React from "react";
 
 const Matchings = () => {
   return (
-    <div>Matchings</div>
-  )
-}
+    <div>
+      <MatchingPage />
+    </div>
+  );
+};
 
-export default Matchings
+export default Matchings;

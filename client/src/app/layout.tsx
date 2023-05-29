@@ -2,7 +2,10 @@ import Navbar from "@/components/layout/Navbar";
 import "./globals.css";
 import { Nunito } from "next/font/google";
 
-const nunito = Nunito({ subsets: ["latin"] });
+const nunito = Nunito({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+});
 
 export const metadata = {
   title: "App",
