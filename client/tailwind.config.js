@@ -19,6 +19,25 @@ module.exports = {
         "navy-3": "#233858",
         ivory: "#f1f0eb",
       },
+      animation: {
+        "slide-fwd-top":
+          "slide-fwd-top 0.2s",
+      },
+      keyframes: {
+        "slide-fwd-top": {
+          "0%": {
+            left:0,
+            transform: "translateX(44%) translateY(10px)",
+            opacity:0.5,
+            
+          },
+          to: {
+            left:0,
+            transform: "translateX(44%) translateY(0px)",
+            opacity:1,
+          },
+        },
+      },
     },
   },
   plugins: [],

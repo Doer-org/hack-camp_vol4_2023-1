@@ -3,17 +3,24 @@ import React, { FC, ReactNode } from "react";
 
 type ButtonProps = {
   className: string;
-  onClick:React.MouseEventHandler<HTMLButtonElement>;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
   children: ReactNode;
 };
 
-export const Button: FC<ButtonProps> = ({ className, onClick, children }) => {
-  return <button className={className} onClick={onClick}>{children}</button>;
+export const Button: FC<ButtonProps> = ({ className, onClick, children, disabled }) => {
+  return (
+    <button className={className} onClick={onClick} disabled={disabled}>
+      {children}
+    </button>
+  );
 };
 
 type LinkButtonProps = {
   className: string;
   href: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
   children: ReactNode;
 };
 
@@ -21,10 +28,14 @@ export const LinkButton: FC<LinkButtonProps> = ({
   href,
   className,
   children,
+  onClick,
+  disabled,
 }) => {
   return (
-    <Link href={href} as={href}>
-      <button className={className}>{children}</button>
+    <Link href={href} as={href} className={disabled?"pointer-events-none":""}>
+      <button className={className} onClick={onClick} disabled={disabled}>
+        {children}
+      </button>
     </Link>
   );
 };
