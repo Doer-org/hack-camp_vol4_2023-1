@@ -3,9 +3,10 @@ import React, { FC, ReactNode } from "react";
 
 type ButtonProps = {
   className: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   children: ReactNode;
+  type?: string;
 };
 
 export const Button: FC<ButtonProps> = ({ className, onClick, children, disabled }) => {

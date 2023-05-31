@@ -30,7 +30,7 @@ const Navbar:FC = () => {
   return (
     <div>
       {isCreateModalOpen && (
-        <div className="fixed -bottom-16 w-52 h-52 left-1/2 -translate-x-1/2 bg-new-white rounded-full z-0 p-8 animate-slide-fwd-top">
+        <div className="fixed -bottom-16 w-52 h-52 left-[calc(50%-104px)] bg-new-white rounded-full -z-10 p-8 animate-slide-fwd-top">
           <div className="flex justify-between text-navy-3 px-3">
             <LinkButton
               className=""
@@ -71,9 +71,9 @@ const Navbar:FC = () => {
             hidden={!isHome}
           ></div>
         </LinkButton>
-        <div>
+        <div className={isCreateModalOpen ? "opacity-0":""}>
           <Button
-            className={`${!isCreate && "opacity-30"} ${isCreateModalOpen && "opacity-0"} ${"w-7 h-7 text-navy-3"}`}
+            className={`${!isCreate && "opacity-30"} ${"w-7 h-7 text-navy-3"}`}
             onClick={handleCreateModalOpen}
           >
             <HiOutlinePlusCircle className="w-7 h-7" />
