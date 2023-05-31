@@ -2,11 +2,72 @@
 
 package model
 
-type NewUser struct {
+type CreateFriendInput struct {
+	UserID   string `json:"user_id"`
+	FriendID string `json:"friend_id"`
+}
+
+type CreateHangoutInput struct {
+	UserID string `json:"user_id"`
+	Name   string `json:"name"`
+}
+
+type CreateScheduleInput struct {
+	UserID string `json:"user_id"`
+	Date   string `json:"date"`
+}
+
+type CreateUserInput struct {
 	FirebaseID  string `json:"firebase_id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	GroupID     string `json:"group_id"`
+}
+
+type DeleteFriendInput struct {
+	ID string `json:"id"`
+}
+
+type DeleteHangoutInput struct {
+	ID string `json:"id"`
+}
+
+type DeleteScheduleInput struct {
+	ID string `json:"id"`
+}
+
+type Friend struct {
+	ID       string `json:"id"`
+	UserID   string `json:"user_id"`
+	FriendID string `json:"friend_id"`
+	Accept   bool   `json:"accept"`
+}
+
+type Hangout struct {
+	ID     string `json:"id"`
+	UserID string `json:"user_id"`
+	Name   string `json:"name"`
+}
+
+type Schedule struct {
+	ID     string `json:"id"`
+	UserID string `json:"user_id"`
+	Date   string `json:"date"`
+}
+
+type UpdateFriendAcceptInput struct {
+	ID     string `json:"id"`
+	Accept bool   `json:"accept"`
+}
+
+type UpdateHangoutInput struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+type UpdateScheduleInput struct {
+	ID   string `json:"id"`
+	Date string `json:"date"`
 }
 
 type User struct {
@@ -14,5 +75,4 @@ type User struct {
 	FirebaseID  string `json:"firebase_id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
-	GroupID     string `json:"group_id"`
 }

@@ -4,23 +4,98 @@
 
 type User {
   id: ID!
-  firebase_id: String!
+  firebase_id: ID!
   name: String!
   description: String!
-  group_id: String!
+}
+
+type Hangout{
+  id: ID!
+  user_id: ID!
+  name: String!
+}
+
+type Schedule{
+  id: ID!
+  user_id: ID!
+  date: String!
+}
+
+type Friend{
+  id: ID!
+  user_id: ID!
+  friend_id: ID!
+  accept: Boolean!
 }
 
 type Query {
-  users: [User!]!
+  getUserById(id: ID!): User!
+  getHangoutsByuserId(user_id: ID!): [Hangout!]!
+  getSchedulesByUserId(user_id: ID!):[Schedule!]!
+  getFriendsByUserId(user_id: ID!):[Friend!]!
 }
 
-input NewUser {
-  firebase_id: String!
+input CreateUserInput {
+  firebase_id: ID!
   name: String!
   description: String!
-  group_id: String!
+  group_id: ID!
+}
+
+input CreateHangoutInput{
+  user_id: ID!
+  name: String!
+}
+
+input UpdateHangoutInput{
+  id: ID!
+  name: String!
+}
+
+input DeleteHangoutInput{
+  id: ID!
+}
+
+input CreateScheduleInput{
+  user_id: ID!
+  date: String!
+}
+
+input UpdateScheduleInput{
+  id: ID!
+  date: String!
+}
+
+input DeleteScheduleInput{
+  id: ID!
+}
+
+input CreateFriendInput{
+  user_id: ID!
+  friend_id:ID!
+}
+
+input UpdateFriendAcceptInput{
+  id: ID!
+  accept: Boolean!
+}
+input DeleteFriendInput{
+  id: ID!
 }
 
 type Mutation {
-  createUser(input: NewUser!): User!
+  createUser(input: CreateUserInput!): User!
+
+  createHangout(input: CreateHangoutInput!): Hangout!
+  updateHangout(input: UpdateHangoutInput!): Hangout!
+  deleteHangout(input: DeleteHangoutInput!): Hangout!
+
+  createSchedule(input: CreateScheduleInput!): Schedule!
+  updateSchedule(input: UpdateScheduleInput!): Schedule!
+  deleteSchedule(input: DeleteScheduleInput!): Schedule!
+
+  createFriend(input: CreateFriendInput): Friend!
+  updateFriendAccept(input: UpdateFriendAcceptInput): Friend!
+  deleteFriend(input: DeleteFriendInput): Friend!
 }
+
