@@ -12,7 +12,7 @@ const Schedule = () => {
         登録しましょう！
       </Title>
       <div className="py-4">
-        <Text>ooさんは何をして遊びたいですか？</Text>
+        <Text>ooさんはいつ遊びたいですか？</Text>
       </div>
       <div>
         <ScheduleForm />

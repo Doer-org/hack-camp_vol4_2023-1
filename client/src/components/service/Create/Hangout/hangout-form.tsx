@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/elements/Button";
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -41,9 +41,9 @@ export const HangoutForm: FC = () => {
     router.push("/service/profile");
   };
   return (
-    <div className="">
+    <div className="py-8">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-2 gap-3 py-16">
+        <div className="grid grid-cols-2 gap-3 py-6">
           {hangoutList.map(
             (hangout: { value: string; label: string }, index: number) => (
               <div className="w-36 h-14" key={index}>
@@ -52,7 +52,7 @@ export const HangoutForm: FC = () => {
                   id={hangout.value}
                   value={hangout.value}
                   className="peer hidden"
-                  {...register("hangouts", {})}
+                  {...register("hangouts",)}
                 />
                 <label
                   htmlFor={hangout.value}
@@ -62,17 +62,16 @@ export const HangoutForm: FC = () => {
                 </label>
               </div>
             )
-          )}
+            )}
         </div>
-        {/* {errors && <div>error</div>} */}
-        <div className="w-32 mx-auto">
-          <Button
+            {errors.hangouts && <Text style="text-red-600 text-center pb-4">遊びは1つ以上3つ以下で設定してください</Text>}
+        <div className="w-32 mx-auto py-4">
+          <input
             type="submit"
             className="bg-navy-3 text-new-white rounded-lg w-32 h-14"
-            disabled={!isValid || isSubmitting}
-          >
-            登録
-          </Button>
+            value="登録"
+            disabled={isSubmitting}
+          />
         </div>
       </form>
     </div>
