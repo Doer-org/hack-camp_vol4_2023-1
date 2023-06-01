@@ -1,8 +1,8 @@
 import { gql } from "graphql-tag";
 
 export const GET_HANGOUT_BY_USERID = gql`
-  query getHangoutByUserId($user_id: ID!) {
-    getHangoutByUserId(user_id: $id) {
+  query getHangoutsByUserId($user_id: ID!) {
+    getHangoutsByUserId(user_id: $user_id) {
       id
       user_id
       name
