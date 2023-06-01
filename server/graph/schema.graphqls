@@ -39,14 +39,13 @@ input CreateUserInput {
   firebase_id: ID!
   name: String!
   description: String
-  group_id: ID!
 }
 
 input UpdateUserInput {
   firebase_id: ID!
   name: String!
   description: String
-  group_id: ID!
+  id: ID!
 }
 
 input CreateHangoutInput{

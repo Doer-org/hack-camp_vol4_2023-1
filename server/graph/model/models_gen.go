@@ -21,7 +21,6 @@ type CreateUserInput struct {
 	FirebaseID  string  `json:"firebase_id"`
 	Name        string  `json:"name"`
 	Description *string `json:"description,omitempty"`
-	GroupID     string  `json:"group_id"`
 }
 
 type DeleteFriendInput struct {
@@ -74,7 +73,7 @@ type UpdateUserInput struct {
 	FirebaseID  string  `json:"firebase_id"`
 	Name        string  `json:"name"`
 	Description *string `json:"description,omitempty"`
-	GroupID     string  `json:"group_id"`
+	ID          string  `json:"id"`
 }
 
 type User struct {
