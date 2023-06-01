@@ -34,7 +34,6 @@ export type CreateScheduleInput = {
 export type CreateUserInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   firebase_id: Scalars['ID']['input'];
-  group_id: Scalars['ID']['input'];
   name: Scalars['String']['input'];
 };
 
@@ -188,7 +187,7 @@ export type UpdateScheduleInput = {
 export type UpdateUserInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   firebase_id: Scalars['ID']['input'];
-  group_id: Scalars['ID']['input'];
+  id: Scalars['ID']['input'];
   name: Scalars['String']['input'];
 };
 
