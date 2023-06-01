@@ -30,7 +30,7 @@ type Friend{
 
 type Query {
   getUserById(id: ID!): User!
-  getHangoutsByuserId(user_id: ID!): [Hangout!]!
+  getHangoutsByUserId(user_id: ID!): [Hangout!]!
   getSchedulesByUserId(user_id: ID!):[Schedule!]!
   getFriendsByUserId(user_id: ID!):[Friend!]!
 }
@@ -38,7 +38,14 @@ type Query {
 input CreateUserInput {
   firebase_id: ID!
   name: String!
-  description: String!
+  description: String
+  group_id: ID!
+}
+
+input UpdateUserInput {
+  firebase_id: ID!
+  name: String!
+  description: String
   group_id: ID!
 }
 
@@ -85,6 +92,7 @@ input DeleteFriendInput{
 
 type Mutation {
   createUser(input: CreateUserInput!): User!
+  updateUser(input: UpdateUserInput!): User!
 
   createHangout(input: CreateHangoutInput!): Hangout!
   updateHangout(input: UpdateHangoutInput!): Hangout!
