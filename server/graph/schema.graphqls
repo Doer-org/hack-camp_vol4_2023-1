@@ -2,27 +2,25 @@
 #
 # https://gqlgen.com/getting-started/
 
-type Todo {
-  id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
-}
-
 type User {
   id: ID!
+  firebase_id: String!
   name: String!
+  description: String!
+  group_id: String!
 }
 
 type Query {
-  todos: [Todo!]!
+  users: [User!]!
 }
 
-input NewTodo {
-  text: String!
-  userId: String!
+input NewUser {
+  firebase_id: String!
+  name: String!
+  description: String!
+  group_id: String!
 }
 
 type Mutation {
-  createTodo(input: NewTodo!): Todo!
+  createUser(input: NewUser!): User!
 }
