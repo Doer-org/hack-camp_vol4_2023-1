@@ -8,20 +8,18 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/Doer-org/hack-camp_vol4_2023-1/utils"
+
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/database"
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/model"
 )
 
 // CreateUser is the resolver for the createUser field.
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUserInput) (*model.User, error) {
-	// user, err := r.CreateUser.Create(ctx, input)
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// return user, nil
 	db := database.DB()
-
+	id := utils.GetUlid()
 	user := model.User{
+		ID:          id,
 		Name:        input.Name,
 		Description: input.Description,
 		FirebaseID:  input.FirebaseID,
@@ -81,7 +79,14 @@ func (r *mutationResolver) DeleteFriend(ctx context.Context, input *model.Delete
 
 // GetUserByID is the resolver for the getUserById field.
 func (r *queryResolver) GetUserByID(ctx context.Context, id string) (*model.User, error) {
-	panic(fmt.Errorf("not implemented: GetUserByID - getUserById"))
+	db := database.DB()
+
+	user := model.User{}
+	if err := db.Where("id = ?", id).Find(&user).Commit().Error; err != nil {
+		return nil, err
+	}
+
+	return &user, nil
 }
 
 // GetHangoutsByuserID is the resolver for the getHangoutsByuserId field.

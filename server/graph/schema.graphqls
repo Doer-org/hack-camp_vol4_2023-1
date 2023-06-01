@@ -12,7 +12,7 @@ type User {
 type Hangout{
   id: ID!
   user_id: ID!
-  name: String!
+  name: String! 
 }
 
 type Schedule{
@@ -39,7 +39,6 @@ input CreateUserInput {
   firebase_id: ID!
   name: String!
   description: String!
-  group_id: ID!
 }
 
 input CreateHangoutInput{

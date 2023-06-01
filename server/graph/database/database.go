@@ -3,6 +3,7 @@ package database
 import (
 	"log"
 
+	"github.com/Doer-org/hack-camp_vol4_2023-1/domain/entity"
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -17,6 +18,10 @@ func Connect() error {
 	}
 
 	conn, err := gorm.Open(mysql.Open(DbURI))
+	if err != nil {
+		return err
+	}
+	err = conn.AutoMigrate(&entity.User{})
 	if err != nil {
 		return err
 	}
