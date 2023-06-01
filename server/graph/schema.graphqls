@@ -30,7 +30,7 @@ type Friend{
 
 type Query {
   getUserById(id: ID!): User!
-  getHangoutsByuserId(user_id: ID!): [Hangout!]!
+  getHangoutsByUserId(user_id: ID!): [Hangout!]!
   getSchedulesByUserId(user_id: ID!):[Schedule!]!
   getFriendsByUserId(user_id: ID!):[Friend!]!
 }

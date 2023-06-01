@@ -74,7 +74,7 @@ type ComplexityRoot struct {
 
 	Query struct {
 		GetFriendsByUserID   func(childComplexity int, userID string) int
-		GetHangoutsByuserID  func(childComplexity int, userID string) int
+		GetHangoutsByUserID  func(childComplexity int, userID string) int
 		GetSchedulesByUserID func(childComplexity int, userID string) int
 		GetUserByID          func(childComplexity int, id string) int
 	}
@@ -108,7 +108,7 @@ type MutationResolver interface {
 }
 type QueryResolver interface {
 	GetUserByID(ctx context.Context, id string) (*model.User, error)
-	GetHangoutsByuserID(ctx context.Context, userID string) ([]*model.Hangout, error)
+	GetHangoutsByUserID(ctx context.Context, userID string) ([]*model.Hangout, error)
 	GetSchedulesByUserID(ctx context.Context, userID string) ([]*model.Schedule, error)
 	GetFriendsByUserID(ctx context.Context, userID string) ([]*model.Friend, error)
 }
@@ -321,17 +321,17 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Query.GetFriendsByUserID(childComplexity, args["user_id"].(string)), true
 
-	case "Query.getHangoutsByuserId":
-		if e.complexity.Query.GetHangoutsByuserID == nil {
+	case "Query.getHangoutsByUserId":
+		if e.complexity.Query.GetHangoutsByUserID == nil {
 			break
 		}
 
-		args, err := ec.field_Query_getHangoutsByuserId_args(context.TODO(), rawArgs)
+		args, err := ec.field_Query_getHangoutsByUserId_args(context.TODO(), rawArgs)
 		if err != nil {
 			return 0, false
 		}
 
-		return e.complexity.Query.GetHangoutsByuserID(childComplexity, args["user_id"].(string)), true
+		return e.complexity.Query.GetHangoutsByUserID(childComplexity, args["user_id"].(string)), true
 
 	case "Query.getSchedulesByUserId":
 		if e.complexity.Query.GetSchedulesByUserID == nil {
@@ -699,7 +699,7 @@ func (ec *executionContext) field_Query_getFriendsByUserId_args(ctx context.Cont
 	return args, nil
 }
 
-func (ec *executionContext) field_Query_getHangoutsByuserId_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+func (ec *executionContext) field_Query_getHangoutsByUserId_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
 	var arg0 string
@@ -1858,8 +1858,8 @@ func (ec *executionContext) fieldContext_Query_getUserById(ctx context.Context, 
 	return fc, nil
 }
 
-func (ec *executionContext) _Query_getHangoutsByuserId(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Query_getHangoutsByuserId(ctx, field)
+func (ec *executionContext) _Query_getHangoutsByUserId(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_getHangoutsByUserId(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -1872,7 +1872,7 @@ func (ec *executionContext) _Query_getHangoutsByuserId(ctx context.Context, fiel
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().GetHangoutsByuserID(rctx, fc.Args["user_id"].(string))
+		return ec.resolvers.Query().GetHangoutsByUserID(rctx, fc.Args["user_id"].(string))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -1889,7 +1889,7 @@ func (ec *executionContext) _Query_getHangoutsByuserId(ctx context.Context, fiel
 	return ec.marshalNHangout2ᚕᚖgithubᚗcomᚋDoerᚑorgᚋhackᚑcamp_vol4_2023ᚑ1ᚋgraphᚋmodelᚐHangoutᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Query_getHangoutsByuserId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Query_getHangoutsByUserId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Query",
 		Field:      field,
@@ -1914,7 +1914,7 @@ func (ec *executionContext) fieldContext_Query_getHangoutsByuserId(ctx context.C
 		}
 	}()
 	ctx = graphql.WithFieldContext(ctx, fc)
-	if fc.Args, err = ec.field_Query_getHangoutsByuserId_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+	if fc.Args, err = ec.field_Query_getHangoutsByUserId_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
 		ec.Error(ctx, err)
 		return
 	}
@@ -4956,7 +4956,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 			out.Concurrently(i, func() graphql.Marshaler {
 				return rrm(innerCtx)
 			})
-		case "getHangoutsByuserId":
+		case "getHangoutsByUserId":
 			field := field
 
 			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
@@ -4965,7 +4965,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 						ec.Error(ctx, ec.Recover(ctx, r))
 					}
 				}()
-				res = ec._Query_getHangoutsByuserId(ctx, field)
+				res = ec._Query_getHangoutsByUserId(ctx, field)
 				if res == graphql.Null {
 					atomic.AddUint32(&invalids, 1)
 				}

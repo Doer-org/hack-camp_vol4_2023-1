@@ -119,9 +119,9 @@ func (r *queryResolver) GetUserByID(ctx context.Context, id string) (*model.User
 	return user, nil
 }
 
-// GetHangoutsByuserID is the resolver for the getHangoutsByuserId field.
-func (r *queryResolver) GetHangoutsByuserID(ctx context.Context, userID string) ([]*model.Hangout, error) {
-	hangouts, err := r.GetHangoutsByuserID.Get(ctx, userID)
+// GetHangoutsByUserID is the resolver for the getHangoutsByUserId field.
+func (r *queryResolver) GetHangoutsByUserID(ctx context.Context, userID string) ([]*model.Hangout, error) {
+	hangouts, err := r.GetHangoutsByUserID.Get(ctx, userID)
 	if err != nil {
 		return nil, err
 	}
@@ -154,3 +154,4 @@ func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
+
