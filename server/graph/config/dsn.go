@@ -21,13 +21,16 @@ var (
 
 func GetDbURI() (string, error) {
 	if dbUser == "" || dbPass == "" {
-		return "", fmt.Errorf("id is empty")
+		return "", fmt.Errorf("dbUser or dbPass is empty")
 	}
 	return fmt.Sprintf(
-		"%s:%s@/",
+		`%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local`,
 		dbUser,
 		dbPass,
-	) + "country?charset=utf8&parseTime=True&loc=Local", nil
+		dbHost,
+		dbPort,
+		dbDatabase,
+	), nil
 }
 
 func InitDB() error {
