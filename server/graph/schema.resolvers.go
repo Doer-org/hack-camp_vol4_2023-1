@@ -20,7 +20,6 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUse
 		ID:          id,
 		Name:        input.Name,
 		Description: input.Description,
-		FirebaseID:  input.FirebaseID,
 	}
 
 	if err := db.Create(&user).Error; err != nil {
@@ -37,7 +36,6 @@ func (r *mutationResolver) UpdateUser(ctx context.Context, input model.UpdateUse
 		ID:          input.ID,
 		Name:        input.Name,
 		Description: input.Description,
-		FirebaseID:  input.FirebaseID,
 	}
 
 	if err := db.Save(&user).Error; err != nil {
