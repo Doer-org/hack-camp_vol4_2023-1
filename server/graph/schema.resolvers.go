@@ -6,7 +6,6 @@ package graph
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/database"
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/model"
@@ -50,53 +49,142 @@ func (r *mutationResolver) UpdateUser(ctx context.Context, input model.UpdateUse
 
 // CreateHangout is the resolver for the createHangout field.
 func (r *mutationResolver) CreateHangout(ctx context.Context, input model.CreateHangoutInput) (*model.Hangout, error) {
-	panic(fmt.Errorf("not implemented: CreateHangout - createHangout"))
+	db := database.DB()
+	id := utils.GetUlid()
+	hangout := model.Hangout{
+		ID:     id,
+		UserID: input.UserID,
+		Name:   input.Name,
+	}
+
+	if err := db.Create(&hangout).Error; err != nil {
+		return nil, err
+	}
+
+	return &hangout, nil
 }
 
 // UpdateHangout is the resolver for the updateHangout field.
 func (r *mutationResolver) UpdateHangout(ctx context.Context, input model.UpdateHangoutInput) (*model.Hangout, error) {
-	panic(fmt.Errorf("not implemented: UpdateHangout - updateHangout"))
+	db := database.DB()
+	hangout := model.Hangout{
+		ID:   input.ID,
+		Name: input.Name,
+	}
+
+	if err := db.Save(&hangout).Error; err != nil {
+		return nil, err
+	}
+
+	return &hangout, nil
 }
 
 // DeleteHangout is the resolver for the deleteHangout field.
 func (r *mutationResolver) DeleteHangout(ctx context.Context, input model.DeleteHangoutInput) (*model.Hangout, error) {
-	panic(fmt.Errorf("not implemented: DeleteHangout - deleteHangout"))
+	db := database.DB()
+	hangout := model.Hangout{
+		ID: input.ID,
+	}
+
+	if err := db.Delete(&hangout).Error; err != nil {
+		return nil, err
+	}
+
+	return &hangout, nil
 }
 
 // CreateSchedule is the resolver for the createSchedule field.
 func (r *mutationResolver) CreateSchedule(ctx context.Context, input model.CreateScheduleInput) (*model.Schedule, error) {
-	panic(fmt.Errorf("not implemented: CreateSchedule - createSchedule"))
+	db := database.DB()
+	schedule := model.Schedule{
+		UserID: input.UserID,
+		Date:   input.Date,
+	}
+
+	if err := db.Create(&schedule).Error; err != nil {
+		return nil, err
+	}
+
+	return &schedule, nil
 }
 
 // UpdateSchedule is the resolver for the updateSchedule field.
 func (r *mutationResolver) UpdateSchedule(ctx context.Context, input model.UpdateScheduleInput) (*model.Schedule, error) {
-	panic(fmt.Errorf("not implemented: UpdateSchedule - updateSchedule"))
+	db := database.DB()
+	schedule := model.Schedule{
+		ID:   input.ID,
+		Date: input.Date,
+	}
+
+	if err := db.Save(&schedule).Error; err != nil {
+		return nil, err
+	}
+
+	return &schedule, nil
 }
 
 // DeleteSchedule is the resolver for the deleteSchedule field.
 func (r *mutationResolver) DeleteSchedule(ctx context.Context, input model.DeleteScheduleInput) (*model.Schedule, error) {
-	panic(fmt.Errorf("not implemented: DeleteSchedule - deleteSchedule"))
+	db := database.DB()
+	schedule := model.Schedule{
+		ID: input.ID,
+	}
+
+	if err := db.Delete(&schedule).Error; err != nil {
+		return nil, err
+	}
+
+	return &schedule, nil
 }
 
 // CreateFriend is the resolver for the createFriend field.
 func (r *mutationResolver) CreateFriend(ctx context.Context, input *model.CreateFriendInput) (*model.Friend, error) {
-	panic(fmt.Errorf("not implemented: CreateFriend - createFriend"))
+	db := database.DB()
+	friend := model.Friend{
+		UserID:   input.UserID,
+		FriendID: input.FriendID,
+	}
+
+	if err := db.Create(&friend).Error; err != nil {
+		return nil, err
+	}
+
+	return &friend, nil
+
 }
 
 // UpdateFriendAccept is the resolver for the updateFriendAccept field.
 func (r *mutationResolver) UpdateFriendAccept(ctx context.Context, input *model.UpdateFriendAcceptInput) (*model.Friend, error) {
-	panic(fmt.Errorf("not implemented: UpdateFriendAccept - updateFriendAccept"))
+	db := database.DB()
+	friend := model.Friend{
+		ID:     input.ID,
+		Accept: input.Accept,
+	}
+
+	if err := db.Save(&friend).Error; err != nil {
+		return nil, err
+	}
+
+	return &friend, nil
 }
 
 // DeleteFriend is the resolver for the deleteFriend field.
 func (r *mutationResolver) DeleteFriend(ctx context.Context, input *model.DeleteFriendInput) (*model.Friend, error) {
-	panic(fmt.Errorf("not implemented: DeleteFriend - deleteFriend"))
+	db := database.DB()
+	friend := model.Friend{
+		ID: input.ID,
+	}
+
+	if err := db.Create(&friend).Error; err != nil {
+		return nil, err
+	}
+
+	return &friend, nil
 }
 
 // GetUserByID is the resolver for the getUserById field.
 func (r *queryResolver) GetUserByID(ctx context.Context, id string) (*model.User, error) {
 	db := database.DB()
-
 	user := model.User{}
 
 	if err := db.Where("id = ?", id).Find(&user).Error; err != nil {
@@ -108,17 +196,39 @@ func (r *queryResolver) GetUserByID(ctx context.Context, id string) (*model.User
 
 // GetHangoutsByUserID is the resolver for the getHangoutsByUserId field.
 func (r *queryResolver) GetHangoutsByUserID(ctx context.Context, userID string) ([]*model.Hangout, error) {
-	panic(fmt.Errorf("not implemented: GetHangoutsByUserID - getHangoutsByUserId"))
+	db := database.DB()
+	hangouts := []*model.Hangout{}
+
+	if err := db.Where("user_id = ?", userID).Find(&hangouts).Error; err != nil {
+		return nil, err
+	}
+
+	return hangouts, nil
+
 }
 
 // GetSchedulesByUserID is the resolver for the getSchedulesByUserId field.
 func (r *queryResolver) GetSchedulesByUserID(ctx context.Context, userID string) ([]*model.Schedule, error) {
-	panic(fmt.Errorf("not implemented: GetSchedulesByUserID - getSchedulesByUserId"))
+	db := database.DB()
+	schedules := []*model.Schedule{}
+
+	if err := db.Where("user_id = ?", userID).Find(&schedules).Error; err != nil {
+		return nil, err
+	}
+
+	return schedules, nil
 }
 
 // GetFriendsByUserID is the resolver for the getFriendsByUserId field.
 func (r *queryResolver) GetFriendsByUserID(ctx context.Context, userID string) ([]*model.Friend, error) {
-	panic(fmt.Errorf("not implemented: GetFriendsByUserID - getFriendsByUserId"))
+	db := database.DB()
+	friends := []*model.Friend{}
+
+	if err := db.Where("user_id = ?", userID).Find(&friends).Error; err != nil {
+		return nil, err
+	}
+
+	return friends, nil
 }
 
 // Mutation returns MutationResolver implementation.
@@ -129,13 +239,3 @@ func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
-
-// !!! WARNING !!!
-// The code below was going to be deleted when updating resolvers. It has been copied here so you have
-// one last chance to move it out of harms way if you want. There are two reasons this happens:
-//   - When renaming or deleting a resolver the old code will be put in here. You can safely delete
-//     it when you're done.
-//   - You have helper methods in this file. Move them out to keep these resolver files clean.
-func (r *queryResolver) GetHangoutsByuserID(ctx context.Context, userID string) ([]*model.Hangout, error) {
-	panic(fmt.Errorf("not implemented: GetHangoutsByuserID - getHangoutsByuserId"))
-}
