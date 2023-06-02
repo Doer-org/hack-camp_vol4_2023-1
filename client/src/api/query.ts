@@ -13,7 +13,8 @@ import { GET_HANGOUTS_BY_USERID } from "@/apollo/query/getHangoutsByUserId";
 import { GET_FRIENDS_BY_USERID } from "@/apollo/query/getFriendsByUserId";
 
 export const GetUserById = async (input: QueryGetUserByIdArgs) => {
-  let data: User, err: Error;
+  let data: User | null = null;
+  let err: Error | null = null;
   await client
     .query<Query["getUserById"], QueryGetUserByIdArgs>({
       query: GET_USER_BY_ID,
@@ -70,7 +71,9 @@ export const GetSchedulesByUserId = async (
   return { data, err };
 };
 
-export const GetFriendsByUserId = async (input: QueryGetFriendsByUserIdArgs) => {
+export const GetFriendsByUserId = async (
+  input: QueryGetFriendsByUserIdArgs
+) => {
   let data, err;
   await client
     .query<Query["getFriendsByUserId"], QueryGetFriendsByUserIdArgs>({
