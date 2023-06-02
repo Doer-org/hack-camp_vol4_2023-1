@@ -82,7 +82,8 @@ func (r *queryResolver) GetUserByID(ctx context.Context, id string) (*model.User
 	db := database.DB()
 
 	user := model.User{}
-	if err := db.Where("id = ?", id).Find(&user).Commit().Error; err != nil {
+
+	if err := db.Where("id = ?", id).Find(&user).Error; err != nil {
 		return nil, err
 	}
 
