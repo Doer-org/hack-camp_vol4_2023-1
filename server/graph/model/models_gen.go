@@ -18,9 +18,9 @@ type CreateScheduleInput struct {
 }
 
 type CreateUserInput struct {
-	FirebaseID  string  `json:"firebase_id"`
-	Name        string  `json:"name"`
-	Description *string `json:"description,omitempty"`
+	FirebaseID  string `json:"firebase_id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
 type DeleteFriendInput struct {
@@ -70,10 +70,10 @@ type UpdateScheduleInput struct {
 }
 
 type UpdateUserInput struct {
-	FirebaseID  string  `json:"firebase_id"`
-	Name        string  `json:"name"`
-	Description *string `json:"description,omitempty"`
-	ID          string  `json:"id"`
+	ID          string `json:"id"`
+	FirebaseID  string `json:"firebase_id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
 type User struct {

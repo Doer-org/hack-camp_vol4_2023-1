@@ -70,12 +70,10 @@ export const GetSchedulesByUserId = async (
   return { data, err };
 };
 
-export const GetFriendssByUserId = async (
-  input: QueryGetFriendsByUserIdArgs
-) => {
+export const GetFriendsByUserId = async (input: QueryGetFriendsByUserIdArgs) => {
   let data, err;
   await client
-    .query<Query["getSchedulesByUserId"], QueryGetFriendsByUserIdArgs>({
+    .query<Query["getFriendsByUserId"], QueryGetFriendsByUserIdArgs>({
       query: GET_FRIENDS_BY_USERID,
       variables: {
         user_id: input.user_id,

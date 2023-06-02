@@ -6,6 +6,7 @@ import {
   CreateUserInput,
   DeleteFriendInput,
   DeleteHangoutInput,
+  DeleteScheduleInput,
   Friend,
   Hangout,
   MutationCreateFriendArgs,
@@ -14,6 +15,7 @@ import {
   MutationCreateUserArgs,
   MutationDeleteFriendArgs,
   MutationDeleteHangoutArgs,
+  MutationDeleteScheduleArgs,
   MutationUpdateFriendAcceptArgs,
   MutationUpdateHangoutArgs,
   MutationUpdateScheduleArgs,
@@ -31,6 +33,9 @@ import { UPDATE_FRIEND_ACCEPT } from "@/apollo/mutation/Friend/updateFriendAccep
 import { CREATE_HANGOUT } from "@/apollo/mutation/Hangout/createHangout";
 import { DELETE_HANGOUT } from "@/apollo/mutation/Hangout/deleteHangout";
 import { UPDATE_HANGOUT } from "@/apollo/mutation/Hangout/updateHangout";
+import { CREATE_SCHEDULE } from "@/apollo/mutation/Schedule/createSchedule";
+import { DELETE_SCHEDULE } from "@/apollo/mutation/Schedule/deleteSchedule";
+import { UPDATE_SCHEDULE } from "@/apollo/mutation/Schedule/updateSchedule";
 import { CREATE_USER } from "@/apollo/mutation/User/createUser";
 import { UPDATE_USER } from "@/apollo/mutation/User/updateUser";
 
@@ -140,7 +145,7 @@ export const CreateSchedule = async (input: CreateScheduleInput) => {
   let data, err;
   await client
     .mutate<Schedule, MutationCreateScheduleArgs>({
-      mutation: CREATE_HANGOUT,
+      mutation: CREATE_SCHEDULE,
       variables: {
         input: {
           date: input.date,
@@ -178,11 +183,11 @@ export const UpdateSchedule = async (input: UpdateScheduleInput) => {
   return { data, err };
 };
 
-export const DeleteSchedule = async (input: DeleteHangoutInput) => {
+export const DeleteSchedule = async (input: DeleteScheduleInput) => {
   let data, err;
   await client
-    .mutate<Schedule, MutationDeleteHangoutArgs>({
-      mutation: DELETE_HANGOUT,
+    .mutate<Schedule, MutationDeleteScheduleArgs>({
+      mutation: DELETE_SCHEDULE,
       variables: {
         input: {
           id: input.id,
