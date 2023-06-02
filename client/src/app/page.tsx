@@ -1,9 +1,8 @@
-import Image from "next/image";
-
+import { HomeComponent } from "@/components/service/Home/home-page";
 export default function Home() {
   return (
     <div>
-      <div>home</div>
+      <HomeComponent />
     </div>
   );
 }
