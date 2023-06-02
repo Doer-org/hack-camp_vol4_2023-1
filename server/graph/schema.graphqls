@@ -55,6 +55,7 @@ input CreateHangoutInput{
 
 input UpdateHangoutInput{
   id: ID!
+  user_id:ID!
   name: String!
 }
 
@@ -69,6 +70,7 @@ input CreateScheduleInput{
 
 input UpdateScheduleInput{
   id: ID!
+  user_id:ID!
   date: String!
 }
 

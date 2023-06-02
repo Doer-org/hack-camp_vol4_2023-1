@@ -4570,7 +4570,7 @@ func (ec *executionContext) unmarshalInputUpdateHangoutInput(ctx context.Context
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"id", "name"}
+	fieldsInOrder := [...]string{"id", "user_id", "name"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -4586,6 +4586,15 @@ func (ec *executionContext) unmarshalInputUpdateHangoutInput(ctx context.Context
 				return it, err
 			}
 			it.ID = data
+		case "user_id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("user_id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.UserID = data
 		case "name":
 			var err error
 
@@ -4608,7 +4617,7 @@ func (ec *executionContext) unmarshalInputUpdateScheduleInput(ctx context.Contex
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"id", "date"}
+	fieldsInOrder := [...]string{"id", "user_id", "date"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -4624,6 +4633,15 @@ func (ec *executionContext) unmarshalInputUpdateScheduleInput(ctx context.Contex
 				return it, err
 			}
 			it.ID = data
+		case "user_id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("user_id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.UserID = data
 		case "date":
 			var err error
 
