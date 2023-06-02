@@ -55,8 +55,10 @@ type Schedule struct {
 }
 
 type UpdateFriendAcceptInput struct {
-	ID     string `json:"id"`
-	Accept bool   `json:"accept"`
+	ID       string `json:"id"`
+	UserID   string `json:"user_id"`
+	FriendID string `json:"friend_id"`
+	Accept   bool   `json:"accept"`
 }
 
 type UpdateHangoutInput struct {

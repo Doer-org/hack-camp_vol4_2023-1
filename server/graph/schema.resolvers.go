@@ -140,7 +140,9 @@ func (r *mutationResolver) DeleteSchedule(ctx context.Context, input model.Delet
 // CreateFriend is the resolver for the createFriend field.
 func (r *mutationResolver) CreateFriend(ctx context.Context, input *model.CreateFriendInput) (*model.Friend, error) {
 	db := database.DB()
+	id := utils.GetUlid()
 	friend := model.Friend{
+		ID:       id,
 		UserID:   input.UserID,
 		FriendID: input.FriendID,
 	}
@@ -150,15 +152,16 @@ func (r *mutationResolver) CreateFriend(ctx context.Context, input *model.Create
 	}
 
 	return &friend, nil
-
 }
 
 // UpdateFriendAccept is the resolver for the updateFriendAccept field.
 func (r *mutationResolver) UpdateFriendAccept(ctx context.Context, input *model.UpdateFriendAcceptInput) (*model.Friend, error) {
 	db := database.DB()
 	friend := model.Friend{
-		ID:     input.ID,
-		Accept: input.Accept,
+		ID:       input.ID,
+		UserID:   input.UserID,
+		FriendID: input.FriendID,
+		Accept:   input.Accept,
 	}
 
 	if err := db.Save(&friend).Error; err != nil {
@@ -204,7 +207,6 @@ func (r *queryResolver) GetHangoutsByUserID(ctx context.Context, userID string) 
 	}
 
 	return hangouts, nil
-
 }
 
 // GetSchedulesByUserID is the resolver for the getSchedulesByUserId field.

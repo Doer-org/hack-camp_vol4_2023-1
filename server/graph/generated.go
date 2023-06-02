@@ -4514,7 +4514,7 @@ func (ec *executionContext) unmarshalInputUpdateFriendAcceptInput(ctx context.Co
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"id", "accept"}
+	fieldsInOrder := [...]string{"id", "user_id", "friend_id", "accept"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -4530,6 +4530,24 @@ func (ec *executionContext) unmarshalInputUpdateFriendAcceptInput(ctx context.Co
 				return it, err
 			}
 			it.ID = data
+		case "user_id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("user_id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.UserID = data
+		case "friend_id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("friend_id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.FriendID = data
 		case "accept":
 			var err error
 
