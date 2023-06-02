@@ -1,7 +1,7 @@
 "use client";
 
 import { Text } from "@/components/elements/Text";
-import { LoginForm } from "@/components/service/login/login-form";
+import { LoginForm } from "@/components/pages/login/login-form";
 import React from "react";
 
 const Login = () => {

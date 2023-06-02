@@ -39,7 +39,7 @@ export const ScheduleForm: FC = () => {
   const router = useRouter();
   const onSubmit: SubmitHandler<Inputs> = (data: any) => {
     console.log(data);
-    router.push("/service/profile");
+    router.push("/profile");
   };
 
   return (

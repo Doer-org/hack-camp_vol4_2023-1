@@ -16,10 +16,10 @@ const Navbar: FC = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const isHome = pathname === "/";
   const isCreate =
-    pathname === "/service/create/hangout" ||
-    pathname === "/service/create/schedule";
-  const isProfile = pathname === "/service/profile";
-  const isLogin = pathname === "/service/login";
+    pathname === "/create/hangout" ||
+    pathname === "/create/schedule";
+  const isProfile = pathname === "/profile";
+  const isLogin = pathname === "/login";
   const handleCreateModalOpen = () => {
     if (isCreateModalOpen) {
       setIsCreateModalOpen(false);
@@ -37,7 +37,7 @@ const Navbar: FC = () => {
           <div className="flex justify-between text-navy-3 px-3">
             <LinkButton
               className=""
-              href="/service/create/hangout"
+              href="/create/hangout"
               onClick={handleCreateModalOpen}
             >
               <LuHeartHandshake className="w-7 h-7" />
@@ -45,7 +45,7 @@ const Navbar: FC = () => {
             </LinkButton>
             <LinkButton
               className=""
-              href="/service/create/schedule"
+              href="/create/schedule"
               onClick={handleCreateModalOpen}
             >
               <HiOutlineCalendar className="w-7 h-7" />
@@ -96,7 +96,7 @@ const Navbar: FC = () => {
           className={`${
             !isProfile && "opacity-30"
           } ${"w-7 h-7 text-navy-3 disabled:opacity-30"}`}
-          href="/service/profile"
+          href="/profile"
           disabled={isCreateModalOpen}
         >
           <HiOutlineUser className="w-7 h-7" />
