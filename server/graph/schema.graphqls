@@ -85,8 +85,11 @@ input CreateFriendInput{
 
 input UpdateFriendAcceptInput{
   id: ID!
+  user_id: ID!
+  friend_id: ID!
   accept: Boolean!
 }
+
 input DeleteFriendInput{
   id: ID!
 }
