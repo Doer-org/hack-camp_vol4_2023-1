@@ -1,7 +1,12 @@
 import { initializeApp, cert, getApps } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
+import type { ServiceAccount } from "firebase-admin";
 
-const serviceAccount = require("/geek-camp-vol4-2023-1-firebase-adminsdk-6ntih-f79462edd4.json");
+const serviceAccount: ServiceAccount = {
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+  privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+};
 export const firebaseAdmin =
   getApps()[0] ??
   initializeApp({
