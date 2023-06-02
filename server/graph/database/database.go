@@ -1,22 +1,36 @@
 package database
 
 import (
-	"database/sql"
 	"log"
 
-
+	"github.com/Doer-org/hack-camp_vol4_2023-1/domain/entity"
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/config"
-	_ "github.com/go-sql-driver/mysql"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
-func Connect() *sql.DB {
-	db, err := sql.Open("postgres", config.GetDbUri())
-	if err != nil {
-		log.Println("db connect failed")
-		panic(err)
-	}
-	log.Println("db connect success")
+var db *gorm.DB
 
-	return db
+func Connect() error {
+	DbURI, err := config.GetDbURI()
+	if err != nil {
+		return err
+	}
+
+	conn, err := gorm.Open(mysql.Open(DbURI))
+	if err != nil {
+		return err
+	}
+	err = conn.AutoMigrate(&entity.User{})
+	if err != nil {
+		return err
+	}
+	log.Printf("dbconnect")
+
+	db = conn.Set("gorm:auto_update", false)
+	return nil
 }
 
+func DB() *gorm.DB {
+	return db
+}

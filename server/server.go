@@ -8,11 +8,16 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph"
+	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/database"
 )
 
 const defaultPort = "8080"
 
 func main() {
+	if err := database.Connect(); err != nil {
+		panic(err.Error())
+	}
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = defaultPort
