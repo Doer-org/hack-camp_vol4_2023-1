@@ -60,13 +60,15 @@ type UpdateFriendAcceptInput struct {
 }
 
 type UpdateHangoutInput struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	ID     string `json:"id"`
+	UserID string `json:"user_id"`
+	Name   string `json:"name"`
 }
 
 type UpdateScheduleInput struct {
-	ID   string `json:"id"`
-	Date string `json:"date"`
+	ID     string `json:"id"`
+	UserID string `json:"user_id"`
+	Date   string `json:"date"`
 }
 
 type UpdateUserInput struct {

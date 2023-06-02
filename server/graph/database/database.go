@@ -21,7 +21,7 @@ func Connect() error {
 	if err != nil {
 		return err
 	}
-	err = conn.AutoMigrate(&entity.User{}, &entity.Hangout{})
+	err = conn.AutoMigrate(&entity.User{}, &entity.Hangout{}, &entity.Schedule{})
 	if err != nil {
 		return err
 	}
