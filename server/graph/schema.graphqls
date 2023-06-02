@@ -41,6 +41,13 @@ input CreateUserInput {
   description: String!
 }
 
+input UpdateUserInput {
+  id: ID!
+  firebase_id: ID!
+  name: String!
+  description: String!
+}
+
 input CreateHangoutInput{
   user_id: ID!
   name: String!
@@ -84,6 +91,7 @@ input DeleteFriendInput{
 
 type Mutation {
   createUser(input: CreateUserInput!): User!
+  updateUser(input: UpdateUserInput!): User!
 
   createHangout(input: CreateHangoutInput!): Hangout!
   updateHangout(input: UpdateHangoutInput!): Hangout!

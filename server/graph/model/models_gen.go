@@ -69,6 +69,13 @@ type UpdateScheduleInput struct {
 	Date string `json:"date"`
 }
 
+type UpdateUserInput struct {
+	ID          string `json:"id"`
+	FirebaseID  string `json:"firebase_id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+}
+
 type User struct {
 	ID          string `json:"id"`
 	FirebaseID  string `json:"firebase_id"`

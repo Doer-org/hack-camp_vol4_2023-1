@@ -8,10 +8,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/Doer-org/hack-camp_vol4_2023-1/utils"
-
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/database"
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/model"
+	"github.com/Doer-org/hack-camp_vol4_2023-1/utils"
 )
 
 // CreateUser is the resolver for the createUser field.
@@ -26,6 +25,23 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUse
 	}
 
 	if err := db.Create(&user).Error; err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
+// UpdateUser is the resolver for the updateUser field.
+func (r *mutationResolver) UpdateUser(ctx context.Context, input model.UpdateUserInput) (*model.User, error) {
+	db := database.DB()
+	user := model.User{
+		ID:          input.ID,
+		Name:        input.Name,
+		Description: input.Description,
+		FirebaseID:  input.FirebaseID,
+	}
+
+	if err := db.Save(&user).Error; err != nil {
 		return nil, err
 	}
 
