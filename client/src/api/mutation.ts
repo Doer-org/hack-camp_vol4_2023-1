@@ -166,7 +166,7 @@ export const CreateSchedule = async (input: CreateScheduleInput) => {
   return { data, err };
 };
 
-// inputにuser_idを追加
+// inputにuser_idを追加 + mutationの部分をスケジュールのものに変更して欲しいです
 export const UpdateSchedule = async (input: UpdateScheduleInput) => {
   let data, err;
   await client
