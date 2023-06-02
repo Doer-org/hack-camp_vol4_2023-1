@@ -39,6 +39,8 @@ import { UPDATE_SCHEDULE } from "@/apollo/mutation/Schedule/updateSchedule";
 import { CREATE_USER } from "@/apollo/mutation/User/createUser";
 import { UPDATE_USER } from "@/apollo/mutation/User/updateUser";
 
+
+// firebase_idをidに
 export const CreateUser = async (input: CreateUserInput) => {
   let data, err;
   await client
@@ -57,6 +59,7 @@ export const CreateUser = async (input: CreateUserInput) => {
   return { data, err };
 };
 
+// firebase_idを削除
 export const UpdateUser = async (input: UpdateUserInput) => {
   let data, err;
   await client
@@ -101,6 +104,7 @@ export const CreateHangout = async (input: CreateHangoutInput) => {
   return { data, err };
 };
 
+// inputにuser_idを追加＋他のコードみたいに最後にreturnをつけて欲しいです
 export const UpdateHangout = async (input: UpdateHangoutInput) => {
   let data, err;
   await client
@@ -162,6 +166,7 @@ export const CreateSchedule = async (input: CreateScheduleInput) => {
   return { data, err };
 };
 
+// inputにuser_idを追加
 export const UpdateSchedule = async (input: UpdateScheduleInput) => {
   let data, err;
   await client
@@ -224,6 +229,7 @@ export const CreateFriend = async (input: CreateFriendInput) => {
   return { data, err };
 };
 
+// inputにuser_idとfriend_idを追加
 export const UpdateFriendAccept = async (input: UpdateFriendAcceptInput) => {
   let data, err;
   await client
