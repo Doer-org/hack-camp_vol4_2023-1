@@ -1,8 +1,26 @@
-import { getAuth, getIdToken } from "@firebase/auth";
 import NextAuth from "next-auth";
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, DefaultSession } from "next-auth";
+import { auth } from "@/firebase/admin";
 
 import CredentialsProvider from "next-auth/providers/credentials";
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      // Firebaseの認証情報
+      uid: string;
+      emailVerified?: boolean;
+    } & DefaultSession["user"];
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    // Firebaseの認証情報
+    uid: string;
+    emailVerified: boolean;
+  }
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -11,9 +29,9 @@ export const authOptions: NextAuthOptions = {
       authorize: async ({ idToken }: any, _req) => {
         if (idToken) {
           try {
-            const decoded = await verifyIdToken(idToken);
+            const decoded = await auth.verifyIdToken(idToken);
 
-            return { ...decoded };
+            return { ...decoded } as any;
           } catch (err) {
             console.error(err);
           }
@@ -26,10 +44,6 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    async jwt({ token, user }) {
-      return { ...token, ...user };
-    },
-    // sessionにJWTトークンからのユーザ情報を格納
     async session({ session, token }) {
       return session;
     },

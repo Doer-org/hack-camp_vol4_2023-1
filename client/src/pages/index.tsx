@@ -23,7 +23,9 @@ const Home: NextPage<Props> = ({ id, user }) => {
       <div className="text-navy-3 pt-20 px-[15px]">
         <div className="pl-[15px]">
           <h1 className="font-bold text-[32px]">マッチング一覧</h1>
-          <p className="py-4">{user.name}さん、今日はx件マッチングしました！</p>
+          <p className="py-4">
+            {user ? user.name : "null"}さん、今日はx件マッチングしました！
+          </p>
         </div>
         <div className="pt-6">
           <MatchingList matchingList={matchingList} />
@@ -46,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   //@ts-ignore
   const id = session.user?.id as string;
-  const { data: user, err: getUserError } = await GetUserById({ id });
+  const { data, err } = await GetUserById({ id });
   // if (!user || getUserError) {
   //   return {
   //     redirect: {
@@ -55,10 +57,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //     },
   //   };
   // }
+
   return {
     props: {
-      user: user,
-      id: id,
+      user: data ? data : null,
+      id: id ? id : null,
     },
   };
 };

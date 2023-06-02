@@ -13,7 +13,7 @@ import { GET_HANGOUTS_BY_USERID } from "@/apollo/query/getHangoutsByUserId";
 import { GET_FRIENDS_BY_USERID } from "@/apollo/query/getFriendsByUserId";
 
 export const GetUserById = async (input: QueryGetUserByIdArgs) => {
-  let data, err;
+  let data: User, err: Error;
   await client
     .query<Query["getUserById"], QueryGetUserByIdArgs>({
       query: GET_USER_BY_ID,
