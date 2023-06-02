@@ -11,7 +11,7 @@ import {
 import { LuHeartHandshake } from "react-icons/lu";
 import { usePathname } from "next/navigation";
 
-const Navbar:FC = () => {
+const Navbar: FC = () => {
   const pathname = usePathname();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const isHome = pathname === "/";
@@ -19,6 +19,7 @@ const Navbar:FC = () => {
     pathname === "/service/create/hangout" ||
     pathname === "/service/create/schedule";
   const isProfile = pathname === "/service/profile";
+  const isLogin = pathname === "/service/login";
   const handleCreateModalOpen = () => {
     if (isCreateModalOpen) {
       setIsCreateModalOpen(false);
@@ -27,7 +28,9 @@ const Navbar:FC = () => {
     }
   };
 
-  return (
+  return isLogin ? (
+    <></>
+  ) : (
     <div>
       {isCreateModalOpen && (
         <div className="fixed -bottom-16 w-52 h-52 left-[calc(50%-104px)] bg-new-white rounded-full -z-10 p-8 animate-slide-fwd-top">
@@ -59,9 +62,15 @@ const Navbar:FC = () => {
           </div>
         </div>
       )}
-      <div className={`${isCreateModalOpen&&"opacity-50"} ${"bg-new-white rounded-t-lg w-screen h-16 mx-auto flex items-center justify-between px-6 z-[1]"}`}>
+      <div
+        className={`${
+          isCreateModalOpen && "opacity-50"
+        } ${"bg-new-white rounded-t-lg w-screen h-16 mx-auto flex items-center justify-between px-6 z-[1]"}`}
+      >
         <LinkButton
-          className={`${!isHome && "opacity-30"} ${"w-7 h-7 text-navy-3 disabled:opacity-30"}`}
+          className={`${
+            !isHome && "opacity-30"
+          } ${"w-7 h-7 text-navy-3 disabled:opacity-30"}`}
           href="/"
           disabled={isCreateModalOpen}
         >
@@ -71,7 +80,7 @@ const Navbar:FC = () => {
             hidden={!isHome}
           ></div>
         </LinkButton>
-        <div className={isCreateModalOpen ? "opacity-0":""}>
+        <div className={isCreateModalOpen ? "opacity-0" : ""}>
           <Button
             className={`${!isCreate && "opacity-30"} ${"w-7 h-7 text-navy-3"}`}
             onClick={handleCreateModalOpen}
@@ -84,7 +93,9 @@ const Navbar:FC = () => {
           ></div>
         </div>
         <LinkButton
-          className={`${!isProfile && "opacity-30"} ${"w-7 h-7 text-navy-3 disabled:opacity-30"}`}
+          className={`${
+            !isProfile && "opacity-30"
+          } ${"w-7 h-7 text-navy-3 disabled:opacity-30"}`}
           href="/service/profile"
           disabled={isCreateModalOpen}
         >

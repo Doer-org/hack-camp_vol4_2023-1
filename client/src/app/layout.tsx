@@ -18,13 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="w-full h-full">
-      <body className={`${nunito.className} ${"bg-ivory"}`}>
-        <div>{children}</div>
-        <div className="fixed bottom-0">
-          <Navbar />
-        </div>
-      </body>
-    </html>
+      <html lang="en" className="w-full h-full">
+        <body className={`${nunito.className} ${"bg-ivory"}`}>
+          <div>{children}</div>
+          <div className="fixed bottom-0">
+            <Navbar />
+          </div>
+        </body>
+      </html>
   );
 }
