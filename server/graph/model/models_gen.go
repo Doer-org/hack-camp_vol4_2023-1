@@ -48,6 +48,13 @@ type Hangout struct {
 	Name   string `json:"name"`
 }
 
+type Matching struct {
+	UserID   string `json:"user_id"`
+	FriendID string `json:"friend_id"`
+	Hangout  string `json:"hangout"`
+	Schedule string `json:"schedule"`
+}
+
 type Schedule struct {
 	ID     string `json:"id"`
 	UserID string `json:"user_id"`

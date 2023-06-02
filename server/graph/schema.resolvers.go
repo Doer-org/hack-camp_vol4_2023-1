@@ -237,6 +237,28 @@ func (r *queryResolver) GetFriendsByUserID(ctx context.Context, userID string) (
 	return friends, nil
 }
 
+// GetMatchings is the resolver for the getMatchings field.
+func (r *queryResolver) GetMatchings(ctx context.Context, userID string) ([]*model.Matching, error) {
+	db := database.DB()
+	friends := []*string{}
+	hangouts := []*model.Hangout{}
+	schedules := []*model.Schedule{}
+
+	if err := db.Where("user_id = ? AND accept = ?", userID, true).Select("friend_id").Find(&friends).Error; err != nil {
+		return nil, err
+	}
+
+	my_friends:=db.Where("user_id = ? AND accept = ?", userID, true).Select("friend_id").Find(&friends)
+	my_hangouts:=db.Where("user_id = ?",userID).Select("name").Find(&hangouts)
+	my_schedules:=db.Where("user_id = ?",userID).Select("date").Find(&schedules)
+
+	
+
+
+
+	return friends, nil
+}
+
 // Mutation returns MutationResolver implementation.
 func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
 
