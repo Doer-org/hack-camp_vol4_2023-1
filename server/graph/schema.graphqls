@@ -38,14 +38,14 @@ type Query {
 input CreateUserInput {
   firebase_id: ID!
   name: String!
-  description: String
+  description: String!
 }
 
 input UpdateUserInput {
   id: ID!
   firebase_id: ID!
   name: String!
-  description: String
+  description: String!
 }
 
 input CreateHangoutInput{

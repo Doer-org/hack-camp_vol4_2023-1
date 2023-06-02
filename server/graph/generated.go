@@ -4409,7 +4409,7 @@ func (ec *executionContext) unmarshalInputCreateUserInput(ctx context.Context, o
 			var err error
 
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("description"))
-			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			data, err := ec.unmarshalNString2string(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -4627,7 +4627,6 @@ func (ec *executionContext) unmarshalInputUpdateUserInput(ctx context.Context, o
 	for k, v := range obj.(map[string]interface{}) {
 		asMap[k] = v
 	}
-
 
 	fieldsInOrder := [...]string{"id", "firebase_id", "name", "description"}
 	for _, k := range fieldsInOrder {

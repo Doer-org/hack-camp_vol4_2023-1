@@ -106,9 +106,9 @@ func (r *queryResolver) GetUserByID(ctx context.Context, id string) (*model.User
 	return &user, nil
 }
 
-// GetHangoutsByuserID is the resolver for the getHangoutsByuserId field.
-func (r *queryResolver) GetHangoutsByuserID(ctx context.Context, userID string) ([]*model.Hangout, error) {
-	panic(fmt.Errorf("not implemented: GetHangoutsByuserID - getHangoutsByuserId"))
+// GetHangoutsByUserID is the resolver for the getHangoutsByUserId field.
+func (r *queryResolver) GetHangoutsByUserID(ctx context.Context, userID string) ([]*model.Hangout, error) {
+	panic(fmt.Errorf("not implemented: GetHangoutsByUserID - getHangoutsByUserId"))
 }
 
 // GetSchedulesByUserID is the resolver for the getSchedulesByUserId field.
@@ -129,3 +129,13 @@ func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
+
+// !!! WARNING !!!
+// The code below was going to be deleted when updating resolvers. It has been copied here so you have
+// one last chance to move it out of harms way if you want. There are two reasons this happens:
+//   - When renaming or deleting a resolver the old code will be put in here. You can safely delete
+//     it when you're done.
+//   - You have helper methods in this file. Move them out to keep these resolver files clean.
+func (r *queryResolver) GetHangoutsByuserID(ctx context.Context, userID string) ([]*model.Hangout, error) {
+	panic(fmt.Errorf("not implemented: GetHangoutsByuserID - getHangoutsByuserId"))
+}
