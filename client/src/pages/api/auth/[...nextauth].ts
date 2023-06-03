@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import type { NextAuthOptions, DefaultSession } from "next-auth";
-import { auth } from "@/firebase/admin";
+import auth from "@/firebase/admin";
 
 import CredentialsProvider from "next-auth/providers/credentials";
 
