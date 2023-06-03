@@ -22,12 +22,12 @@ const documents = {
     "\n  mutation createSchedule($input: CreateScheduleInput!) {\n    createSchedule(input: $input) {\n      id\n      user_id\n      date\n    }\n  }\n": types.CreateScheduleDocument,
     "\n  mutation deleteSchedule($input: DeleteScheduleInput!) {\n    deleteSchedule(input: $input) {\n      id\n      user_id\n      date\n    }\n  }\n": types.DeleteScheduleDocument,
     "\n  mutation updateSchedule($input: UpdateScheduleInput!) {\n    updateSchedule(input: $input) {\n      id\n      user_id\n      date\n    }\n  }\n": types.UpdateScheduleDocument,
-    "\n  mutation createUser($input: CreateUserInput!) {\n    createUser(input: $input) {\n      id\n      firebase_id\n      name\n      description\n    }\n  }\n": types.CreateUserDocument,
-    "\n  mutation updateUser($input: UpdateUserInput!) {\n    updateUser(input: $input) {\n      id\n      firebase_id\n      name\n      description\n    }\n  }\n": types.UpdateUserDocument,
+    "\n  mutation createUser($input: CreateUserInput!) {\n    createUser(input: $input) {\n      id\n      name\n      description\n    }\n  }\n": types.CreateUserDocument,
+    "\n  mutation updateUser($input: UpdateUserInput!) {\n    updateUser(input: $input) {\n      id\n      name\n      description\n    }\n  }\n": types.UpdateUserDocument,
     "\n  query getFriendsByUserId($user_id: ID!) {\n    getFriendsByUserId(user_id: $user_id) {\n      id\n      user_id\n      friend_id\n      accept\n    }\n  }\n": types.GetFriendsByUserIdDocument,
     "\n  query getHangoutsByUserId($user_id: ID!) {\n    getHangoutsByUserId(user_id: $user_id) {\n      id\n      user_id\n      name\n    }\n  }\n": types.GetHangoutsByUserIdDocument,
     "\n  query getSchedulesByUserId($user_id: ID!) {\n    getSchedulesByUserId(user_id: $user_id) {\n      id\n      user_id\n      date\n    }\n  }\n": types.GetSchedulesByUserIdDocument,
-    "\n  query getUserById($id: ID!) {\n    getUserById(id: $id) {\n      id\n      firebase_id\n      name\n      description\n    }\n  }\n": types.GetUserByIdDocument,
+    "\n  query getUserById($id: ID!) {\n    getUserById(id: $id) {\n      id\n      name\n      description\n    }\n  }\n": types.GetUserByIdDocument,
 };
 
 /**
@@ -83,11 +83,11 @@ export function graphql(source: "\n  mutation updateSchedule($input: UpdateSched
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation createUser($input: CreateUserInput!) {\n    createUser(input: $input) {\n      id\n      firebase_id\n      name\n      description\n    }\n  }\n"): (typeof documents)["\n  mutation createUser($input: CreateUserInput!) {\n    createUser(input: $input) {\n      id\n      firebase_id\n      name\n      description\n    }\n  }\n"];
+export function graphql(source: "\n  mutation createUser($input: CreateUserInput!) {\n    createUser(input: $input) {\n      id\n      name\n      description\n    }\n  }\n"): (typeof documents)["\n  mutation createUser($input: CreateUserInput!) {\n    createUser(input: $input) {\n      id\n      name\n      description\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation updateUser($input: UpdateUserInput!) {\n    updateUser(input: $input) {\n      id\n      firebase_id\n      name\n      description\n    }\n  }\n"): (typeof documents)["\n  mutation updateUser($input: UpdateUserInput!) {\n    updateUser(input: $input) {\n      id\n      firebase_id\n      name\n      description\n    }\n  }\n"];
+export function graphql(source: "\n  mutation updateUser($input: UpdateUserInput!) {\n    updateUser(input: $input) {\n      id\n      name\n      description\n    }\n  }\n"): (typeof documents)["\n  mutation updateUser($input: UpdateUserInput!) {\n    updateUser(input: $input) {\n      id\n      name\n      description\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -103,7 +103,7 @@ export function graphql(source: "\n  query getSchedulesByUserId($user_id: ID!) {
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query getUserById($id: ID!) {\n    getUserById(id: $id) {\n      id\n      firebase_id\n      name\n      description\n    }\n  }\n"): (typeof documents)["\n  query getUserById($id: ID!) {\n    getUserById(id: $id) {\n      id\n      firebase_id\n      name\n      description\n    }\n  }\n"];
+export function graphql(source: "\n  query getUserById($id: ID!) {\n    getUserById(id: $id) {\n      id\n      name\n      description\n    }\n  }\n"): (typeof documents)["\n  query getUserById($id: ID!) {\n    getUserById(id: $id) {\n      id\n      name\n      description\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
