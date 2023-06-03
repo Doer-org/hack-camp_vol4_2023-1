@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#login_bg {
+background-image: url("../../public/assets/login_bg.png");
+}
+
+#home_bg {
+    background-image: url("../../public/assets/home_bg.png");
+    }
+
+#hangout_bg {
+    background-image: url("../../public/assets/hangout_bg.png");
+}
+
+#schedule_bg {
+    background-image: url("../../public/assets/schedule_bg.png");
+}
+
+#user_bg {
+    background-image: url("../../public/assets/user_bg.png");
+}
