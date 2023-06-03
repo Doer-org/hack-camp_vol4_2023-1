@@ -1,5 +1,5 @@
 import { FC } from "react";
-import "../../styles/App.css"
+import background from "../../../public/assets/home_bg.png"
 
 type LayoutProps = {
   children:React.ReactNode;
@@ -9,8 +9,8 @@ export const HomeContainer:FC<LayoutProps> = ({ children }) => {
   
   return (
     <div
-    id="home_bg"
-      className="w-screen h-screen justify-center flex text-center bg-no-repeat bg-cover"
+      className="w-screen h-screenr"
+      style={{ backgroundImage: `url(${background})` }}
     >
       {children}
     </div>
