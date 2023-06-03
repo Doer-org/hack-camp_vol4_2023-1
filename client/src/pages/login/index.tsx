@@ -2,7 +2,7 @@
 
 import { Text } from "@/components/elements/Text";
 import { RootLayout } from "@/components/layout/Layout";
-import { LoginForm } from "@/components/pages/Login/login-form";
+import { LoginForm } from "@/components/pages/SignIn/login-form";
 import { NextPage } from "next";
 import React from "react";
 
