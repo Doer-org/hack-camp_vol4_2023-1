@@ -47,3 +47,4 @@ pnpm run dev
 - 開発前に**pull**を必ずする
 - **prettier**で必ず整形してから commit する
 - commitするディレクトリも必ず`/client`
+- schema変更時は必ず`pnpm codegen`

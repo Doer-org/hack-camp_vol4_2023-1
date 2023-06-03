@@ -47,7 +47,7 @@ export const CreateUser = async (input: CreateUserInput) => {
       variables: {
         input: {
           name: input.name,
-          firebase_id: input.firebase_id,
+          id: input.id,
           description: input.description,
         },
       },
@@ -65,9 +65,8 @@ export const UpdateUser = async (input: UpdateUserInput) => {
       variables: {
         input: {
           name: input.name,
-          firebase_id: input.firebase_id,
-          description: input.description,
           id: input.id,
+          description: input.description,
         },
       },
     })
@@ -109,6 +108,7 @@ export const UpdateHangout = async (input: UpdateHangoutInput) => {
       variables: {
         input: {
           id: input.id,
+          user_id: input.user_id,
           name: input.name,
         },
       },
@@ -119,6 +119,7 @@ export const UpdateHangout = async (input: UpdateHangoutInput) => {
     .catch((error) => {
       err = error;
     });
+    return{data,err};
 };
 
 export const DeleteHangout = async (input: DeleteHangoutInput) => {
@@ -170,6 +171,7 @@ export const UpdateSchedule = async (input: UpdateScheduleInput) => {
       variables: {
         input: {
           date: input.date,
+          user_id: input.user_id,
           id: input.id,
         },
       },
@@ -224,6 +226,7 @@ export const CreateFriend = async (input: CreateFriendInput) => {
   return { data, err };
 };
 
+
 export const UpdateFriendAccept = async (input: UpdateFriendAcceptInput) => {
   let data, err;
   await client
@@ -232,6 +235,8 @@ export const UpdateFriendAccept = async (input: UpdateFriendAcceptInput) => {
       variables: {
         input: {
           id: input.id,
+          user_id: input.user_id,
+          friend_id: input.friend_id,
           accept: input.accept,
         },
       },
