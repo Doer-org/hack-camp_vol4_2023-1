@@ -21,6 +21,7 @@ type CreateUserInput struct {
 	ID          string `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
+	Image       string `json:"image"`
 }
 
 type DeleteFriendInput struct {
@@ -77,10 +78,12 @@ type UpdateUserInput struct {
 	ID          string `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
+	Image       string `json:"image"`
 }
 
 type User struct {
 	ID          string `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
+	Image       string `json:"image"`
 }
