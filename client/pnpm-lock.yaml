@@ -35,9 +35,6 @@ dependencies:
   autoprefixer:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.23)
-  client:
-    specifier: link:@/firebase/client
-    version: link:@/firebase/client
   eslint:
     specifier: 8.40.0
     version: 8.40.0
