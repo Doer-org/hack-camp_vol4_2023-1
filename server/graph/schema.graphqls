@@ -28,11 +28,16 @@ type Friend{
   accept: Boolean!
 }
 
+type Matching{
+  friend_id:ID!
+}
+
 type Query {
   getUserById(id: ID!): User!
   getHangoutsByUserId(user_id: ID!): [Hangout!]!
   getSchedulesByUserId(user_id: ID!):[Schedule!]!
   getFriendsByUserId(user_id: ID!):[Friend!]!
+  getMatchings(user_id:ID!):[Matching!]!
 }
 
 input CreateUserInput {

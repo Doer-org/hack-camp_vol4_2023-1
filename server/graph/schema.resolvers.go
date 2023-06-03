@@ -6,6 +6,7 @@ package graph
 
 import (
 	"context"
+	"log"
 
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/database"
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/model"
@@ -14,6 +15,7 @@ import (
 
 // CreateUser is the resolver for the createUser field.
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUserInput) (*model.User, error) {
+	log.Printf("testestest")
 	db := database.DB()
 	user := model.User{
 		ID:          input.ID,
@@ -234,6 +236,25 @@ func (r *queryResolver) GetFriendsByUserID(ctx context.Context, userID string) (
 	}
 
 	return friends, nil
+}
+
+// GetMatchings is the resolver for the getMatchings field.
+func (r *queryResolver) GetMatchings(ctx context.Context, userID string) ([]*model.Matching, error) {
+
+	db := database.DB()
+	resFriends := []*model.Matching{}
+	userFriends := []*model.Friend{}
+
+	if err := db.Where("user_id = ?", userID).Where("accept = ?", true).Find(&userFriends).Error; err != nil {
+		return nil, err
+	}
+
+	for _, userFriend := range userFriends {
+		matching := &model.Matching{FriendID: userFriend.FriendID}
+		resFriends = append(resFriends, matching)
+	}
+
+	return resFriends, nil
 }
 
 // Mutation returns MutationResolver implementation.

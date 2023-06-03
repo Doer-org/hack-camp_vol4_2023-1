@@ -58,6 +58,10 @@ type ComplexityRoot struct {
 		UserID func(childComplexity int) int
 	}
 
+	Matching struct {
+		FriendID func(childComplexity int) int
+	}
+
 	Mutation struct {
 		CreateFriend       func(childComplexity int, input *model.CreateFriendInput) int
 		CreateHangout      func(childComplexity int, input model.CreateHangoutInput) int
@@ -75,6 +79,7 @@ type ComplexityRoot struct {
 	Query struct {
 		GetFriendsByUserID   func(childComplexity int, userID string) int
 		GetHangoutsByUserID  func(childComplexity int, userID string) int
+		GetMatchings         func(childComplexity int, userID string) int
 		GetSchedulesByUserID func(childComplexity int, userID string) int
 		GetUserByID          func(childComplexity int, id string) int
 	}
@@ -111,6 +116,7 @@ type QueryResolver interface {
 	GetHangoutsByUserID(ctx context.Context, userID string) ([]*model.Hangout, error)
 	GetSchedulesByUserID(ctx context.Context, userID string) ([]*model.Schedule, error)
 	GetFriendsByUserID(ctx context.Context, userID string) ([]*model.Friend, error)
+	GetMatchings(ctx context.Context, userID string) ([]*model.Matching, error)
 }
 
 type executableSchema struct {
@@ -176,6 +182,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Hangout.UserID(childComplexity), true
+
+	case "Matching.friend_id":
+		if e.complexity.Matching.FriendID == nil {
+			break
+		}
+
+		return e.complexity.Matching.FriendID(childComplexity), true
 
 	case "Mutation.createFriend":
 		if e.complexity.Mutation.CreateFriend == nil {
@@ -332,6 +345,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Query.GetHangoutsByUserID(childComplexity, args["user_id"].(string)), true
+
+	case "Query.getMatchings":
+		if e.complexity.Query.GetMatchings == nil {
+			break
+		}
+
+		args, err := ec.field_Query_getMatchings_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.GetMatchings(childComplexity, args["user_id"].(string)), true
 
 	case "Query.getSchedulesByUserId":
 		if e.complexity.Query.GetSchedulesByUserID == nil {
@@ -700,6 +725,21 @@ func (ec *executionContext) field_Query_getFriendsByUserId_args(ctx context.Cont
 }
 
 func (ec *executionContext) field_Query_getHangoutsByUserId_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["user_id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("user_id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["user_id"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_getMatchings_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
 	var arg0 string
@@ -1085,6 +1125,50 @@ func (ec *executionContext) fieldContext_Hangout_name(ctx context.Context, field
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Matching_friend_id(ctx context.Context, field graphql.CollectedField, obj *model.Matching) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Matching_friend_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.FriendID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Matching_friend_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Matching",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
 		},
 	}
 	return fc, nil
@@ -2043,6 +2127,65 @@ func (ec *executionContext) fieldContext_Query_getFriendsByUserId(ctx context.Co
 	}()
 	ctx = graphql.WithFieldContext(ctx, fc)
 	if fc.Args, err = ec.field_Query_getFriendsByUserId_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Query_getMatchings(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_getMatchings(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().GetMatchings(rctx, fc.Args["user_id"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.Matching)
+	fc.Result = res
+	return ec.marshalNMatching2ᚕᚖgithubᚗcomᚋDoerᚑorgᚋhackᚑcamp_vol4_2023ᚑ1ᚋgraphᚋmodelᚐMatchingᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Query_getMatchings(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Query",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "friend_id":
+				return ec.fieldContext_Matching_friend_id(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type Matching", field.Name)
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Query_getMatchings_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
 		ec.Error(ctx, err)
 		return
 	}
@@ -4821,6 +4964,34 @@ func (ec *executionContext) _Hangout(ctx context.Context, sel ast.SelectionSet, 
 	return out
 }
 
+var matchingImplementors = []string{"Matching"}
+
+func (ec *executionContext) _Matching(ctx context.Context, sel ast.SelectionSet, obj *model.Matching) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, matchingImplementors)
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("Matching")
+		case "friend_id":
+
+			out.Values[i] = ec._Matching_friend_id(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
 var mutationImplementors = []string{"Mutation"}
 
 func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet) graphql.Marshaler {
@@ -5048,6 +5219,29 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 					}
 				}()
 				res = ec._Query_getFriendsByUserId(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
+			}
+
+			rrm := func(ctx context.Context) graphql.Marshaler {
+				return ec.OperationContext.RootResolverMiddleware(ctx, innerFunc)
+			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return rrm(innerCtx)
+			})
+		case "getMatchings":
+			field := field
+
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_getMatchings(ctx, field)
 				if res == graphql.Null {
 					atomic.AddUint32(&invalids, 1)
 				}
@@ -5662,6 +5856,60 @@ func (ec *executionContext) marshalNID2string(ctx context.Context, sel ast.Selec
 		}
 	}
 	return res
+}
+
+func (ec *executionContext) marshalNMatching2ᚕᚖgithubᚗcomᚋDoerᚑorgᚋhackᚑcamp_vol4_2023ᚑ1ᚋgraphᚋmodelᚐMatchingᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.Matching) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNMatching2ᚖgithubᚗcomᚋDoerᚑorgᚋhackᚑcamp_vol4_2023ᚑ1ᚋgraphᚋmodelᚐMatching(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNMatching2ᚖgithubᚗcomᚋDoerᚑorgᚋhackᚑcamp_vol4_2023ᚑ1ᚋgraphᚋmodelᚐMatching(ctx context.Context, sel ast.SelectionSet, v *model.Matching) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._Matching(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNSchedule2githubᚗcomᚋDoerᚑorgᚋhackᚑcamp_vol4_2023ᚑ1ᚋgraphᚋmodelᚐSchedule(ctx context.Context, sel ast.SelectionSet, v model.Schedule) graphql.Marshaler {
