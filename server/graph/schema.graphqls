@@ -29,10 +29,7 @@ type Friend{
 }
 
 type Matching{
-  user_id:ID!
   friend_id:ID!
-  hangout:String!
-  schedule:String!
 }
 
 type Query {

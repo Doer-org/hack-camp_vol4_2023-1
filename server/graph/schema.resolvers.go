@@ -239,24 +239,37 @@ func (r *queryResolver) GetFriendsByUserID(ctx context.Context, userID string) (
 
 // GetMatchings is the resolver for the getMatchings field.
 func (r *queryResolver) GetMatchings(ctx context.Context, userID string) ([]*model.Matching, error) {
-	db := database.DB()
-	friends := []*string{}
-	hangouts := []*model.Hangout{}
-	schedules := []*model.Schedule{}
+	panic("")
+	// db := database.DB()
+	// user_friends := []*string{}
+	// user_hangouts := []*string{}
+	// user_schedules := []*string{}
+	// res_friends := []*model.Matching{}
 
-	if err := db.Where("user_id = ? AND accept = ?", userID, true).Select("friend_id").Find(&friends).Error; err != nil {
-		return nil, err
-	}
+	// if err :=db.Model("friend").Where("user_id = ? AND accept = ?", userID, true).Select("friend_id").Find(&user_friends).Error; err != nil {
+	// 	return nil, err
+	// }
+	// if err:=db.Model("hangout").Where("user_id = ?",userID).Select("name").Find(&user_hangouts).Error; err != nil {
+	// 	return nil, err
+	// }
+	// if err:=db.Model("schedule").Where("user_id = ?",userID).Select("date").Find(&user_schedules).Error; err != nil {
+	// 	return nil, err
+	// }
+	// for _, v:=range user_friends {
+	// 	friend_hangout := []*model.Matching{}
+	// 	friend_schedule := []*model.Matching{}
+	// 	if err := db.Model("hangout").Where("user_id = ? AND name IN (?, ?, ?)", v, user_hangouts[0],user_hangouts[1],user_hangouts[2]).Select("user_id").Find(&friend_hangout).Error; err != nil {
+	// 		return nil, err
+	// 	}
+	// 	if err := db.Model("schedule").Where("user_id = ? AND date IN (?, ?, ?)", v, user_schedules[0],user_schedules[1],user_schedules[2]).Select("user_id").Find(&friend_schedule).Error; err != nil {
+	// 		return nil, err
+	// 	}
+	// 	if len(friend_hangout) != 0 && len(friend_schedule )!= 0 {
+	// 		res_friends = append(res_friends, friend_hangout[0])
+	// 	}
+	// }
 
-	my_friends:=db.Where("user_id = ? AND accept = ?", userID, true).Select("friend_id").Find(&friends)
-	my_hangouts:=db.Where("user_id = ?",userID).Select("name").Find(&hangouts)
-	my_schedules:=db.Where("user_id = ?",userID).Select("date").Find(&schedules)
-
-	
-
-
-
-	return friends, nil
+	// return  res_friends, nil
 }
 
 // Mutation returns MutationResolver implementation.

@@ -60,9 +60,6 @@ type ComplexityRoot struct {
 
 	Matching struct {
 		FriendID func(childComplexity int) int
-		Hangout  func(childComplexity int) int
-		Schedule func(childComplexity int) int
-		UserID   func(childComplexity int) int
 	}
 
 	Mutation struct {
@@ -192,27 +189,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Matching.FriendID(childComplexity), true
-
-	case "Matching.hangout":
-		if e.complexity.Matching.Hangout == nil {
-			break
-		}
-
-		return e.complexity.Matching.Hangout(childComplexity), true
-
-	case "Matching.schedule":
-		if e.complexity.Matching.Schedule == nil {
-			break
-		}
-
-		return e.complexity.Matching.Schedule(childComplexity), true
-
-	case "Matching.user_id":
-		if e.complexity.Matching.UserID == nil {
-			break
-		}
-
-		return e.complexity.Matching.UserID(childComplexity), true
 
 	case "Mutation.createFriend":
 		if e.complexity.Mutation.CreateFriend == nil {
@@ -1154,50 +1130,6 @@ func (ec *executionContext) fieldContext_Hangout_name(ctx context.Context, field
 	return fc, nil
 }
 
-func (ec *executionContext) _Matching_user_id(ctx context.Context, field graphql.CollectedField, obj *model.Matching) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Matching_user_id(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.UserID, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	fc.Result = res
-	return ec.marshalNID2string(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_Matching_user_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "Matching",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type ID does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
 func (ec *executionContext) _Matching_friend_id(ctx context.Context, field graphql.CollectedField, obj *model.Matching) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Matching_friend_id(ctx, field)
 	if err != nil {
@@ -1237,94 +1169,6 @@ func (ec *executionContext) fieldContext_Matching_friend_id(ctx context.Context,
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type ID does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _Matching_hangout(ctx context.Context, field graphql.CollectedField, obj *model.Matching) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Matching_hangout(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Hangout, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	fc.Result = res
-	return ec.marshalNString2string(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_Matching_hangout(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "Matching",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type String does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _Matching_schedule(ctx context.Context, field graphql.CollectedField, obj *model.Matching) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Matching_schedule(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Schedule, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	fc.Result = res
-	return ec.marshalNString2string(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_Matching_schedule(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "Matching",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type String does not have child fields")
 		},
 	}
 	return fc, nil
@@ -2328,14 +2172,8 @@ func (ec *executionContext) fieldContext_Query_getMatchings(ctx context.Context,
 		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
-			case "user_id":
-				return ec.fieldContext_Matching_user_id(ctx, field)
 			case "friend_id":
 				return ec.fieldContext_Matching_friend_id(ctx, field)
-			case "hangout":
-				return ec.fieldContext_Matching_hangout(ctx, field)
-			case "schedule":
-				return ec.fieldContext_Matching_schedule(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Matching", field.Name)
 		},
@@ -5127,30 +4965,9 @@ func (ec *executionContext) _Matching(ctx context.Context, sel ast.SelectionSet,
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("Matching")
-		case "user_id":
-
-			out.Values[i] = ec._Matching_user_id(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
 		case "friend_id":
 
 			out.Values[i] = ec._Matching_friend_id(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "hangout":
-
-			out.Values[i] = ec._Matching_hangout(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "schedule":
-
-			out.Values[i] = ec._Matching_schedule(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
