@@ -15,11 +15,11 @@ import (
 // CreateUser is the resolver for the createUser field.
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUserInput) (*model.User, error) {
 	db := database.DB()
-	id := utils.GetUlid()
 	user := model.User{
-		ID:          id,
+		ID:          input.ID,
 		Name:        input.Name,
 		Description: input.Description,
+		Image:       input.Image,
 	}
 
 	if err := db.Create(&user).Error; err != nil {
@@ -36,6 +36,7 @@ func (r *mutationResolver) UpdateUser(ctx context.Context, input model.UpdateUse
 		ID:          input.ID,
 		Name:        input.Name,
 		Description: input.Description,
+		Image:       input.Image,
 	}
 
 	if err := db.Save(&user).Error; err != nil {

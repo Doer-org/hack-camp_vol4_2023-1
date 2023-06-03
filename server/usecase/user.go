@@ -34,6 +34,10 @@ func (uu *UserUsecase) CreateUser(ctx context.Context, user *entity.User) (*enti
 		return nil, fmt.Errorf("user id empty")
 	}
 
+	if user.Image == "" {
+		return nil, fmt.Errorf("user image empty")
+	}
+
 	resuser, err := uu.repo.CreateUser(ctx, user)
 	return resuser, err
 }
