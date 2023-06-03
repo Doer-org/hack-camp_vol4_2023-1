@@ -39,21 +39,21 @@ export const ScheduleForm: FC = () => {
           <div className="">
             <input
               type="date"
-              className="w-full h-10 text-xl px-2 rounded-lg"
+              className="w-full h-10 text-xl px-2 rounded-lg shadow-md"
               {...register("schedule1")}
             />
           </div>
           <div className="">
             <input
               type="date"
-              className="w-full h-10 text-xl px-2 rounded-lg"
+              className="w-full h-10 text-xl px-2 rounded-lg shadow-md"
               {...register("schedule2")}
             />
           </div>
           <div className="">
             <input
               type="date"
-              className="w-full h-10 text-xl px-2 rounded-lg"
+              className="w-full h-10 text-xl px-2 rounded-lg shadow-md"
               {...register("schedule3")}
             />
           </div>
@@ -66,7 +66,7 @@ export const ScheduleForm: FC = () => {
         <div className="w-32 mx-auto py-4">
           <input
             type="submit"
-            className="bg-navy-3 text-new-white rounded-lg w-32 h-14"
+            className="bg-new-yellow-700 hover:bg-new-yellow-400 text-new-white rounded-lg w-32 h-14"
             value="登録"
             disabled={isSubmitting}
           />

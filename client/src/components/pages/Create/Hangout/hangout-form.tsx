@@ -55,7 +55,7 @@ export const HangoutForm: FC = () => {
                 />
                 <label
                   htmlFor={hangout.value}
-                  className="flex cursor-pointer bg-new-white w-36 h-14 rounded-lg justify-center items-center peer-checked:bg-new-yellow-300"
+                  className="flex cursor-pointer bg-new-white shadow-md w-36 h-14 rounded-lg justify-center items-center peer-checked:bg-new-yellow-300"
                 >
                   {hangout.label}
                 </label>
@@ -67,7 +67,7 @@ export const HangoutForm: FC = () => {
         <div className="w-32 mx-auto py-4">
           <input
             type="submit"
-            className="bg-new-blue-700 font-semibold text-xl text-new-white rounded-lg w-32 h-14"
+            className="bg-new-yellow-700 hover:bg-new-yellow-400 font-semibold text-xl text-new-white rounded-lg w-32 h-14"
             value="登録"
             disabled={isSubmitting}
           />

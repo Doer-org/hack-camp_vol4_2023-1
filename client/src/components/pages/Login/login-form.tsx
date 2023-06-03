@@ -25,16 +25,16 @@ export const LoginForm: FC = () => {
     console.log(data);
 
     localStorage.setItem("user", JSON.stringify(userData));
-    const idToken = await cred.user.getIdToken();
-    await signInByNextAuth("credentials", {
-      idToken,
-      callbackUrl: "/",
-    });
+    // const idToken = await cred.user.getIdToken();
+    // await signInByNextAuth("credentials", {
+    //   idToken,
+    //   callbackUrl: "/",
+    // });
   };
   return (
-    <div className="w-40 mx-auto py-12">
+    <div className="w-60 mx-auto">
       <Button
-        className="bg-navy-3 text-new-white text-[20px] flex justify-center gap-3 items-center w-40 h-12 rounded-lg"
+        className="bg-new-blue-700 text-new-white text-[20px] flex justify-center gap-3 items-center w-60 h-16 rounded-lg px-10"
         onClick={login}
       >
         <RiGoogleFill className="w-7 h-7" />
