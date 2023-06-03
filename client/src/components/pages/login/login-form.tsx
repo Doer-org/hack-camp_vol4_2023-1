@@ -1,15 +1,13 @@
 "use client";
 import auth from "@/firebase/client";
-import React from "react";
+import React, { FC } from "react";
 import { signIn as signInByNextAuth } from "next-auth/react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/elements/Button";
 import { RiGoogleFill } from "react-icons/ri";
 import { CreateUser } from "@/api/mutation";
 
-export const LoginForm = () => {
-  const router = useRouter();
+export const LoginForm:FC = () => {
   const login = async () => {
     const provider = new GoogleAuthProvider();
     const cred = await signInWithPopup(auth, provider);

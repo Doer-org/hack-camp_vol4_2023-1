@@ -6,22 +6,12 @@ import React, { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
-// type Inputs = {
-//   schedules:string[]
-// };
-
 type Inputs = {
   schedule1: string;
   schedule2: string;
   schedule3: string;
 };
 
-// const schema = z.object({
-//   schedules: z
-//     .array(z.string())
-//     .min(1, { message: "1つ以上選択してください" })
-//     .max(3, { message: "3つまで選択してください" }),
-// });
 const schema = z.object({
   schedule1: z.string().min(1, { message: "1つ以上選択してください" }),
   schedule2: z.string(),
