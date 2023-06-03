@@ -5,17 +5,17 @@ import { RootLayout } from "@/components/layout/Layout";
 import { LoginForm } from "@/components/pages/Login/login-form";
 import { NextPage } from "next";
 import React from "react";
+import { Title } from "@/components/elements/Title";
 
-const Login:NextPage = () => {
+const Login: NextPage = () => {
   return (
     <RootLayout meta="ログイン">
-      <div className="login-bg h-screen w-screen p-8 py-32">
-        <div className="text-center">
-          <Text fontsize="text-[32px]">
-            <span className="font-bold text-[36px]">Google</span>で<br />
-            ログインする
-          </Text>
-          <Text style="py-8">新たな世界へ飛び込みましょう！</Text>
+      <div className="login-bg h-screen w-screen p-8">
+        <div className="pt-14">
+          <Title>LOGIN</Title>
+          <div className="py-16 pt-44">
+            <Text fontsize="text-[20px]" style="text-center font-semibold">新たな世界へ飛び込みましょう！</Text>
+          </div>
         </div>
         <LoginForm />
       </div>

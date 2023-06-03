@@ -2,7 +2,6 @@ import { GetUserById } from "@/api/query";
 import { User } from "@/apollo/generated/graphql";
 import { Text } from "@/components/elements/Text";
 import { Title } from "@/components/elements/Title";
-import { HomeContainer } from "@/components/layout/HomeContainer";
 import { RootLayout } from "@/components/layout/Layout";
 import { MatchingList } from "@/components/pages/Home/matching-list";
 import { GetServerSideProps, NextPage } from "next";
