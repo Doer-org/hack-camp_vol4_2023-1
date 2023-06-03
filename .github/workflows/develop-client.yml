@@ -5,9 +5,9 @@ on:
       - develop
       - main
       - 'feature/**'
-    paths:
-      - client/**
-      - .github/workflows/develop-client.yml
+    # paths:
+    #   - client/**
+    #   - .github/workflows/develop-client.yml
       
 
 jobs:

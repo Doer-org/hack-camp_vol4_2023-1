@@ -7,7 +7,7 @@ import { Button } from "@/components/elements/Button";
 import { RiGoogleFill } from "react-icons/ri";
 import { CreateUser } from "@/api/mutation";
 
-export const LoginForm:FC = () => {
+export const LoginForm: FC = () => {
   const login = async () => {
     const provider = new GoogleAuthProvider();
     const cred = await signInWithPopup(auth, provider);
