@@ -9,6 +9,7 @@ import (
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph"
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/database"
+	"github.com/rs/cors"
 )
 
 const defaultPort = "8080"
@@ -23,11 +24,24 @@ func main() {
 		port = defaultPort
 	}
 
-	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}}))
+	// c := cors.New(cors.Options{
+	// 	AllowedOrigins: []string{"http://localhost", "http://localhost:8080","http://localhost:3000/"},
+	// 	AllowCredentials: true,
+	// 	// Enable Debugging for testing, consider disabling in production
+	// 	Debug: true,
+	// })
+    r := http.NewServeMux()
 
-	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
-	http.Handle("/query", srv)
+    srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}}))
+    r.Handle("/", playground.Handler("GraphQL playground", "/query"))
+    r.Handle("/query", srv)
+	handler := cors.AllowAll().Handler(r)
 
-	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+    s := &http.Server{
+        Addr:           ":8080",
+        Handler:        handler,
+    }
+
+    log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
+    log.Fatal(s.ListenAndServe())
 }
