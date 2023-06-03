@@ -6,6 +6,8 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/elements/Button";
 import { RiGoogleFill } from "react-icons/ri";
+import { CreateUser } from "@/api/mutation";
+
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -13,9 +15,16 @@ export const LoginForm = () => {
     const provider = new GoogleAuthProvider();
     const cred = await signInWithPopup(auth, provider);
     const userData = {
-      firebase_id: cred.user.uid,
-      name: cred.user.displayName,
+      id: cred.user.uid,
+      name: cred.user.displayName?cred.user.displayName:"",
+      description:""
     };
+
+    const{data,err}=await CreateUser(userData)
+    if(err){
+      console.log("Error:",err);
+    }
+    console.log(data);
 
     localStorage.setItem("user", JSON.stringify(userData));
     const idToken = await cred.user.getIdToken();
