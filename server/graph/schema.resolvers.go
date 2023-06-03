@@ -239,31 +239,32 @@ func (r *queryResolver) GetFriendsByUserID(ctx context.Context, userID string) (
 func (r *queryResolver) GetMatchings(ctx context.Context, userID string) ([]*model.Matching, error) {
 	panic("")
 	// db := database.DB()
-	// user_friends := []*string{}
-	// user_hangouts := []*string{}
-	// user_schedules := []*string{}
+	// user_friends := []*model.Friend{}
+	// user_hangouts := []*model.Hangout{}
+	// user_schedules := []*model.Schedule{}
 	// res_friends := []*model.Matching{}
 
-	// if err :=db.Model("friend").Where("user_id = ? AND accept = ?", userID, true).Select("friend_id").Find(&user_friends).Error; err != nil {
+	// if err :=db.Where("user_id = ? AND accept = ?", userID, true).Find(&user_friends).Error; err != nil {
 	// 	return nil, err
 	// }
-	// if err:=db.Model("hangout").Where("user_id = ?",userID).Select("name").Find(&user_hangouts).Error; err != nil {
+	// if err:=db.Where("user_id = ?",userID).Find(&user_hangouts).Error; err != nil {
 	// 	return nil, err
 	// }
-	// if err:=db.Model("schedule").Where("user_id = ?",userID).Select("date").Find(&user_schedules).Error; err != nil {
+	// if err:=db.Where("user_id = ?",userID).Find(&user_schedules).Error; err != nil {
 	// 	return nil, err
 	// }
 	// for _, v:=range user_friends {
-	// 	friend_hangout := []*model.Matching{}
-	// 	friend_schedule := []*model.Matching{}
-	// 	if err := db.Model("hangout").Where("user_id = ? AND name IN (?, ?, ?)", v, user_hangouts[0],user_hangouts[1],user_hangouts[2]).Select("user_id").Find(&friend_hangout).Error; err != nil {
+	// 	friend_hangout := []*model.Hangout{}
+	// 	friend_schedule := []*model.Schedule{}
+	// 	if err := db.Model("hangout").Where("user_id = ? AND name IN (?, ?, ?)", v.FriendID, user_hangouts[0].Name,user_hangouts[1].Name,user_hangouts[2].Name).Find(&friend_hangout).Error; err != nil {
 	// 		return nil, err
 	// 	}
-	// 	if err := db.Model("schedule").Where("user_id = ? AND date IN (?, ?, ?)", v, user_schedules[0],user_schedules[1],user_schedules[2]).Select("user_id").Find(&friend_schedule).Error; err != nil {
+	// 	if err := db.Model("schedule").Where("user_id = ? AND date IN (?, ?, ?)", v.FriendID, user_schedules[0].Date,user_schedules[1].Date,user_schedules[2].Date).Find(&friend_schedule).Error; err != nil {
 	// 		return nil, err
 	// 	}
 	// 	if len(friend_hangout) != 0 && len(friend_schedule )!= 0 {
-	// 		res_friends = append(res_friends, friend_hangout[0])
+	// 		matching:=&model.Matching{FriendID: v.FriendID,}
+	// 		res_friends = append(res_friends, matching)
 	// 	}
 	// }
 
