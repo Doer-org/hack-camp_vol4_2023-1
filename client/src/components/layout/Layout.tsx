@@ -21,7 +21,7 @@ export const RootLayout:FC<LayoutProps> = ({children, meta}) => {
         <title>{meta} | あそ募</title>
 
       </Head>
-      <div className={`${mplus1.className} ${"bg-ivory"}`}>
+      <div className={`${mplus1.className} ${"bg-new-white"}`}>
         <div>{children}</div>
         <div className="fixed bottom-0">
           <Navbar />
