@@ -6,7 +6,7 @@ import React from "react";
 
 const Hangout = () => {
   return (
-    <RootLayout>
+    <RootLayout meta="遊びを登録する">
       <div className="p-10 py-20 h-screen">
         <Title fontsize="text-[24px]">
           したいことを

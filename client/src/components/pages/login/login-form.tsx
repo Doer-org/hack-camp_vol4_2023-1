@@ -27,7 +27,7 @@ export const LoginForm = () => {
   return (
     <div className="w-40 mx-auto py-12">
       <Button
-        className="bg-navy-3 text-new-white text-[24px] flex justify-center gap-3 items-center font-bold w-40 h-12 rounded-lg"
+        className="bg-navy-3 text-new-white text-[20px] flex justify-center gap-3 items-center w-40 h-12 rounded-lg"
         onClick={login}
       >
         <RiGoogleFill className="w-7 h-7" />

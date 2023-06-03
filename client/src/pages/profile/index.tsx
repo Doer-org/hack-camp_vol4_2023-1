@@ -5,7 +5,7 @@ import { RootLayout } from "../../components/layout/Layout";
 
 const Profile = () => {
   return (
-    <RootLayout>
+    <RootLayout　meta="プロフィール">
       <div className="w-[320px] mx-auto py-16 h-screen">
         <div className="">
           <ProfileOverview />
