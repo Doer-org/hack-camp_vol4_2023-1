@@ -1,14 +1,20 @@
 import client from "@/apollo/apolloClient";
-import { Query, QueryGetFriendsByUserIdArgs, QueryGetHangoutsByUserIdArgs, QueryGetSchedulesByUserIdArgs } from "@/apollo/generated/graphql";
+import {
+  Query,
+  QueryGetFriendsByUserIdArgs,
+  QueryGetHangoutsByUserIdArgs,
+  QueryGetSchedulesByUserIdArgs,
+  User,
+} from "@/apollo/generated/graphql";
 import { QueryGetUserByIdArgs } from "@/apollo/generated/graphql";
 import { GET_USER_BY_ID } from "@/apollo/query/getUserById";
 import { GET_SCHEDULES_BY_USERID } from "@/apollo/query/getSchedulesByUserId";
 import { GET_HANGOUTS_BY_USERID } from "@/apollo/query/getHangoutsByUserId";
 import { GET_FRIENDS_BY_USERID } from "@/apollo/query/getFriendsByUserId";
 
-
 export const GetUserById = async (input: QueryGetUserByIdArgs) => {
-  let data, err;
+  let data: User | null = null;
+  let err: Error | null = null;
   await client
     .query<Query["getUserById"], QueryGetUserByIdArgs>({
       query: GET_USER_BY_ID,
@@ -25,7 +31,9 @@ export const GetUserById = async (input: QueryGetUserByIdArgs) => {
   return { data, err };
 };
 
-export const GetHangoutsByUserId = async (input: QueryGetHangoutsByUserIdArgs) => {
+export const GetHangoutsByUserId = async (
+  input: QueryGetHangoutsByUserIdArgs
+) => {
   let data, err;
   await client
     .query<Query["getHangoutsByUserId"], QueryGetHangoutsByUserIdArgs>({
@@ -43,7 +51,9 @@ export const GetHangoutsByUserId = async (input: QueryGetHangoutsByUserIdArgs) =
   return { data, err };
 };
 
-export const GetSchedulesByUserId = async (input: QueryGetSchedulesByUserIdArgs) => {
+export const GetSchedulesByUserId = async (
+  input: QueryGetSchedulesByUserIdArgs
+) => {
   let data, err;
   await client
     .query<Query["getSchedulesByUserId"], QueryGetSchedulesByUserIdArgs>({
@@ -61,7 +71,9 @@ export const GetSchedulesByUserId = async (input: QueryGetSchedulesByUserIdArgs)
   return { data, err };
 };
 
-export const GetFriendsByUserId = async (input: QueryGetFriendsByUserIdArgs) => {
+export const GetFriendsByUserId = async (
+  input: QueryGetFriendsByUserIdArgs
+) => {
   let data, err;
   await client
     .query<Query["getFriendsByUserId"], QueryGetFriendsByUserIdArgs>({
@@ -78,5 +90,3 @@ export const GetFriendsByUserId = async (input: QueryGetFriendsByUserIdArgs) => 
     });
   return { data, err };
 };
-
-

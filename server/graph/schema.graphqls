@@ -4,9 +4,9 @@
 
 type User {
   id: ID!
-  firebase_id: ID!
   name: String!
   description: String!
+  image:String!
 }
 
 type Hangout{
@@ -36,16 +36,17 @@ type Query {
 }
 
 input CreateUserInput {
-  firebase_id: ID!
+  id: ID!
   name: String!
   description: String!
+  image:String!
 }
 
 input UpdateUserInput {
   id: ID!
-  firebase_id: ID!
   name: String!
   description: String!
+  image:String!
 }
 
 input CreateHangoutInput{

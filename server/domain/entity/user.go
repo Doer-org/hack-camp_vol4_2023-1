@@ -4,7 +4,7 @@ type User struct {
 	Id          string
 	Name        string
 	Description string
-	Firebase_id string
+	Image       string
 }
 
 type Users []*User

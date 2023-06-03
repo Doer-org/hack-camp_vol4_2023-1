@@ -30,8 +30,12 @@ func (uu *UserUsecase) CreateUser(ctx context.Context, user *entity.User) (*enti
 	if user.Name == "" {
 		return nil, fmt.Errorf("user name empty")
 	}
-	if user.Firebase_id == "" {
-		return nil, fmt.Errorf("user firebase_id empty")
+	if user.Id == "" {
+		return nil, fmt.Errorf("user id empty")
+	}
+
+	if user.Image == "" {
+		return nil, fmt.Errorf("user image empty")
 	}
 
 	resuser, err := uu.repo.CreateUser(ctx, user)
@@ -42,8 +46,8 @@ func (uu *UserUsecase) UpdateUser(ctx context.Context, user *entity.User) (*enti
 	if user.Name == "" {
 		return nil, fmt.Errorf("user name empty")
 	}
-	if user.Firebase_id == "" {
-		return nil, fmt.Errorf("user firebase_id empty")
+	if user.Id == "" {
+		return nil, fmt.Errorf("user id empty")
 	}
 
 	resuser, err := uu.repo.UpdateUser(ctx, user)
