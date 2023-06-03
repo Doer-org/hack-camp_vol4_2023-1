@@ -1,7 +1,7 @@
 import { Text } from "@/components/elements/Text";
-import React from "react";
+import React, { FC } from "react";
 
-export const ProfileMylist = () => {
+export const ProfileMylist:FC = () => {
   const hangoutList = ["hoge", "hoge", "hoge"];
   const scheduleList = [
     new Date(2022, 5 - 1, 5, 6, 35, 20, 333),

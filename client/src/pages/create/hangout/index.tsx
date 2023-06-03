@@ -2,9 +2,10 @@ import { Text } from "@/components/elements/Text";
 import { Title } from "@/components/elements/Title";
 import { RootLayout } from "@/components/layout/Layout";
 import { HangoutForm } from "@/components/pages/Create/Hangout/hangout-form";
+import { NextPage } from "next";
 import React from "react";
 
-const Hangout = () => {
+const Hangout:NextPage = () => {
   return (
     <RootLayout meta="遊びを登録する">
       <div className="p-10 py-20 h-screen">
