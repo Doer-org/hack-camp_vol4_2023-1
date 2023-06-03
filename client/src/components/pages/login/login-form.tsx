@@ -1,5 +1,5 @@
 "use client";
-import { auth } from "@/firebase/client";
+import auth from "@/firebase/client";
 import React from "react";
 import { signIn as signInByNextAuth } from "next-auth/react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
