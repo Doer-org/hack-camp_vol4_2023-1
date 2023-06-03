@@ -1,5 +1,7 @@
 import { GetUserById } from "@/api/query";
 import { User } from "@/apollo/generated/graphql";
+import { Text } from "@/components/elements/Text";
+import { Title } from "@/components/elements/Title";
 import { RootLayout } from "@/components/layout/Layout";
 import { MatchingList } from "@/components/pages/Home/matching-list";
 import { GetServerSideProps, NextPage } from "next";
@@ -20,12 +22,16 @@ const Home: NextPage<Props> = ({ id, user }) => {
   ];
   return (
     <RootLayout meta="ホーム">
-      <div className="text-navy-3 pt-20 px-[15px] h-screen">
+      <div className="home-bg text-navy-3 px-[15px] h-screen pt-32">
         <div className="pl-[15px]">
-          <h1 className="font-bold text-[32px]">マッチング一覧</h1>
-          <p className="py-4">
-            {user ? user.name : "null"}さん、今日はx件マッチングしました！
-          </p>
+          <div className=" pb-[100px]">
+            <Title fontsize="text-[32px]">マッチング一覧</Title>
+          </div>
+          <div className="py-7">
+            <Text>
+              {user ? user.name : "null"}さん、今日はx件マッチングしました！
+            </Text>
+          </div>
         </div>
         <div className="pt-6">
           <MatchingList matchingList={matchingList} />
