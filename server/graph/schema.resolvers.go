@@ -6,6 +6,7 @@ package graph
 
 import (
 	"context"
+	"log"
 
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/database"
 	"github.com/Doer-org/hack-camp_vol4_2023-1/graph/model"
@@ -14,10 +15,10 @@ import (
 
 // CreateUser is the resolver for the createUser field.
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUserInput) (*model.User, error) {
+	log.Printf("testestest")
 	db := database.DB()
-	id := utils.GetUlid()
 	user := model.User{
-		ID:          id,
+		ID:          input.ID,
 		Name:        input.Name,
 		Description: input.Description,
 	}
@@ -237,51 +238,21 @@ func (r *queryResolver) GetFriendsByUserID(ctx context.Context, userID string) (
 
 // GetMatchings is the resolver for the getMatchings field.
 func (r *queryResolver) GetMatchings(ctx context.Context, userID string) ([]*model.Matching, error) {
-	panic("")
-	// db := database.DB()
-	// user_friends := []*model.Friend{}
-	// user_hangouts := []*model.Hangout{}
-	// user_schedules := []*model.Schedule{}
-	// res_friends := []*model.Matching{}
 
-	// if err :=db.Where("user_id = ? AND accept = ?", userID, true).Find(&user_friends).Error; err != nil {
-	// 	return nil, err
-	// }
-	// if err:=db.Where("user_id = ?",userID).Find(&user_hangouts).Error; err != nil {
-	// 	return nil, err
-	// }
-	// if err:=db.Where("user_id = ?",userID).Find(&user_schedules).Error; err != nil {
-	// 	return nil, err
-	// }
-	// for _, friend:=range user_friends {
-	// 	friend_hangout := []*model.Hangout{}
-	// 	friend_schedule := []*model.Schedule{}
-	// 	hangout_flag := false
-	// 	schedule_flag := false
-	// 	for _, hangout:=range user_hangouts {
-	// 		if err := db.Model("hangout").Where("user_id = ? AND name = ?", friend.FriendID, hangout.Name).Find(&friend_hangout).Error; err != nil {
-	// 			return nil, err
-	// 		}
-	// 		if len(friend_hangout)!=0 {
-	// 			hangout_flag = true
-	// 			break
-	// 		}
-	// 	}
-	// 	for _, schedule:=range user_schedules {
-	// 		if err := db.Model("schedule").Where("user_id = ? AND name = ?", friend.FriendID, schedule.Date).Find(&friend_schedule).Error; err != nil {
-	// 			return nil, err
-	// 		}
-	// 		if len(friend_schedule)!=0 {
-	// 			schedule_flag = true
-	// 			break
-	// 		}
-	// 	}
-	// 	if hangout_flag && schedule_flag {
-	// 		matching:=&model.Matching{FriendID: friend.FriendID,}
-	// 		res_friends = append(res_friends, matching)
-	// 	}
-	// }
-	// return  res_friends, nil
+	db := database.DB()
+	resFriends := []*model.Matching{}
+	userFriends := []*model.Friend{}
+
+	if err := db.Where("user_id = ?", userID).Where("accept = ?", true).Find(&userFriends).Error; err != nil {
+		return nil, err
+	}
+
+	for _, userFriend := range userFriends {
+		matching := &model.Matching{FriendID: userFriend.FriendID}
+		resFriends = append(resFriends, matching)
+	}
+
+	return resFriends, nil
 }
 
 // Mutation returns MutationResolver implementation.
