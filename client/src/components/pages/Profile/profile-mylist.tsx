@@ -11,14 +11,14 @@ export const ProfileMylist:FC = () => {
   return (
     <div className="bg-new-white shadow-md rounded-lg p-4">
       <div>
-        <div className="grid grid-cols-3 gap-4 py-3 border-b border-navy-3">
+        <div className="grid grid-cols-3 gap-4 py-4 pb-8 border-b border-navy-3">
           {hangoutList.map((hangout, index) => (
             <div key={index} className="text-center ">
               <Text style="font-bold" fontsize="text-[20px]">{hangout}</Text>
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-3 gap-4 py-3">
+        <div className="grid grid-cols-3 gap-4 py-4 pt-8">
           {scheduleList.map((schedule, index) => {
             return (
               <div key={index} className="text-center">

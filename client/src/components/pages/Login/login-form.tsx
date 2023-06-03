@@ -25,11 +25,11 @@ export const LoginForm: FC = () => {
     console.log(data);
 
     localStorage.setItem("user", JSON.stringify(userData));
-    const idToken = await cred.user.getIdToken();
-    await signInByNextAuth("credentials", {
-      idToken,
-      callbackUrl: "/",
-    });
+    // const idToken = await cred.user.getIdToken();
+    // await signInByNextAuth("credentials", {
+    //   idToken,
+    //   callbackUrl: "/",
+    // });
   };
   return (
     <div className="w-40 mx-auto py-12">

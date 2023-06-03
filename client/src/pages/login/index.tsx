@@ -9,7 +9,7 @@ import React from "react";
 const Login:NextPage = () => {
   return (
     <RootLayout meta="ログイン">
-      <div className="h-screen w-screen p-8 py-32">
+      <div className="login-bg h-screen w-screen p-8 py-32">
         <div className="text-center">
           <Text fontsize="text-[32px]">
             <span className="font-bold text-[36px]">Google</span>で<br />
