@@ -1,4 +1,5 @@
 "use client";
+
 import auth from "@/firebase/client";
 import React, { FC } from "react";
 import { signIn as signInByNextAuth } from "next-auth/react";

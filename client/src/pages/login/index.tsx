@@ -2,10 +2,11 @@
 
 import { Text } from "@/components/elements/Text";
 import { RootLayout } from "@/components/layout/Layout";
-import { LoginForm } from "@/components/pages/Login/login-form";
+import { LoginForm } from "@/components/pages/login/login-form";
+import { NextPage } from "next";
 import React from "react";
 
-const Login = () => {
+const Login:NextPage = () => {
   return (
     <RootLayout meta="ログイン">
       <div className="h-screen w-screen p-8 py-32">

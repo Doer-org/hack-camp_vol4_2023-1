@@ -1,8 +1,9 @@
 import { Text } from "@/components/elements/Text";
-import React from "react";
+import React, { FC } from "react";
 import { Button, LinkButton } from "@/components/elements/Button";
 
-export const ProfileOverview = () => {
+
+export const ProfileOverview:FC = () => {
   const description = "hogehogehogehoge";
   const number_friend = 2;
   return (

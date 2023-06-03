@@ -1,7 +1,7 @@
 "use client";
-import React from "react";
+import React, { FC } from "react";
 import { HomeAfterLogin } from "./home-after-login";
 
-export const HomeComponent = () => {
+export const HomeComponent:FC = () => {
   return <HomeAfterLogin />;
 };

@@ -15,6 +15,7 @@ const Friends: NextPage = () => {
       </div>
     </RootLayout>
   );
+
 };
 
 export default Friends;
