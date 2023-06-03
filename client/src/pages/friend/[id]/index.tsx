@@ -10,7 +10,7 @@ const FriendAccept = () => {
   const {id} = router.query;
   return (
     <RootLayout meta="友達を承認する">
-      <div className='h-screen p-10'>
+      <div className='addfriend-bg h-screen p-10'>
 
         <div className='flex justify-center'>
           <div className='h-80 w-60 absolute m-auto top-[calc(50%-200px)] text-center  bg-new-white rounded-xl text-new-black p-16 shadow-md'>
