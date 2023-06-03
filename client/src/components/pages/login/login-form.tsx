@@ -8,7 +8,6 @@ import { Button } from "@/components/elements/Button";
 import { RiGoogleFill } from "react-icons/ri";
 import { CreateUser } from "@/api/mutation";
 
-
 export const LoginForm = () => {
   const router = useRouter();
   const login = async () => {
@@ -16,13 +15,13 @@ export const LoginForm = () => {
     const cred = await signInWithPopup(auth, provider);
     const userData = {
       id: cred.user.uid,
-      name: cred.user.displayName?cred.user.displayName:"",
-      description:""
+      name: cred.user.displayName ? cred.user.displayName : "",
+      description: "",
     };
 
-    const{data,err}=await CreateUser(userData)
-    if(err){
-      console.log("Error:",err);
+    const { data, err } = await CreateUser(userData);
+    if (err) {
+      console.log("Error:", err);
     }
     console.log(data);
 
@@ -36,7 +35,7 @@ export const LoginForm = () => {
   return (
     <div className="w-40 mx-auto py-12">
       <Button
-        className="bg-navy-3 text-new-white text-[24px] flex justify-center gap-3 items-center font-bold w-40 h-12 rounded-lg"
+        className="bg-navy-3 text-new-white text-[20px] flex justify-center gap-3 items-center w-40 h-12 rounded-lg"
         onClick={login}
       >
         <RiGoogleFill className="w-7 h-7" />

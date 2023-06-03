@@ -6,7 +6,7 @@ import React from "react";
 
 const Schedule = () => {
   return (
-    <RootLayout>
+    <RootLayout　meta="予定を登録する">
       <div className="p-10 py-20 h-screen">
         <Title>
           予定を
