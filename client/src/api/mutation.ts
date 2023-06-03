@@ -39,8 +39,6 @@ import { UPDATE_SCHEDULE } from "@/apollo/mutation/Schedule/updateSchedule";
 import { CREATE_USER } from "@/apollo/mutation/User/createUser";
 import { UPDATE_USER } from "@/apollo/mutation/User/updateUser";
 
-
-// firebase_idをidに
 export const CreateUser = async (input: CreateUserInput) => {
   let data, err;
   await client
@@ -49,7 +47,7 @@ export const CreateUser = async (input: CreateUserInput) => {
       variables: {
         input: {
           name: input.name,
-          firebase_id: input.firebase_id,
+          id: input.id,
           description: input.description,
         },
       },
@@ -59,7 +57,6 @@ export const CreateUser = async (input: CreateUserInput) => {
   return { data, err };
 };
 
-// firebase_idを削除
 export const UpdateUser = async (input: UpdateUserInput) => {
   let data, err;
   await client
@@ -68,9 +65,8 @@ export const UpdateUser = async (input: UpdateUserInput) => {
       variables: {
         input: {
           name: input.name,
-          firebase_id: input.firebase_id,
-          description: input.description,
           id: input.id,
+          description: input.description,
         },
       },
     })
@@ -104,7 +100,6 @@ export const CreateHangout = async (input: CreateHangoutInput) => {
   return { data, err };
 };
 
-// inputにuser_idを追加＋他のコードみたいに最後にreturnをつけて欲しいです
 export const UpdateHangout = async (input: UpdateHangoutInput) => {
   let data, err;
   await client
@@ -113,6 +108,7 @@ export const UpdateHangout = async (input: UpdateHangoutInput) => {
       variables: {
         input: {
           id: input.id,
+          user_id: input.user_id,
           name: input.name,
         },
       },
@@ -123,6 +119,7 @@ export const UpdateHangout = async (input: UpdateHangoutInput) => {
     .catch((error) => {
       err = error;
     });
+    return{data,err};
 };
 
 export const DeleteHangout = async (input: DeleteHangoutInput) => {
@@ -166,7 +163,6 @@ export const CreateSchedule = async (input: CreateScheduleInput) => {
   return { data, err };
 };
 
-// inputにuser_idを追加 + mutationの部分をスケジュールのものに変更して欲しいです
 export const UpdateSchedule = async (input: UpdateScheduleInput) => {
   let data, err;
   await client
@@ -175,6 +171,7 @@ export const UpdateSchedule = async (input: UpdateScheduleInput) => {
       variables: {
         input: {
           date: input.date,
+          user_id: input.user_id,
           id: input.id,
         },
       },
@@ -229,7 +226,7 @@ export const CreateFriend = async (input: CreateFriendInput) => {
   return { data, err };
 };
 
-// inputにuser_idとfriend_idを追加
+
 export const UpdateFriendAccept = async (input: UpdateFriendAcceptInput) => {
   let data, err;
   await client
@@ -238,6 +235,8 @@ export const UpdateFriendAccept = async (input: UpdateFriendAcceptInput) => {
       variables: {
         input: {
           id: input.id,
+          user_id: input.user_id,
+          friend_id: input.friend_id,
           accept: input.accept,
         },
       },
