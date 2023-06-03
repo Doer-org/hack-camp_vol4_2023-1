@@ -37,7 +37,7 @@ export const HangoutForm: FC = () => {
   ];
   const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
     console.log(data);
-    router.push("/service/profile");
+    router.push("/profile");
   };
   return (
     <div className="py-8">

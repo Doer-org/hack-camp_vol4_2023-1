@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
+    "@firebase/auth": "^0.23.2",
+    "@firebase/firestore": "^3.12.1",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@hookform/resolvers": "^3.1.0",
     "@types/node": "20.1.4",
