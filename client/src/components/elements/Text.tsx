@@ -12,7 +12,7 @@ export const Text: FC<TextProps> = ({ children, fontsize, style }) => {
     <p
       className={`${fontsize ? fontsize : "text-[16px]"} ${
         style ? style : ""
-      } ${"text-navy-3"}`}
+      } ${"text-new-black"}`}
     >
       {children}
     </p>
