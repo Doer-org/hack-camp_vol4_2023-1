@@ -1,6 +1,6 @@
 import { Text } from "@/components/elements/Text";
 import React from "react";
-import { Button, LinkButton } from "../../elements/Button";
+import { Button, LinkButton } from "@/components/elements/Button";
 
 export const ProfileOverview = () => {
   const description = "hogehogehogehoge";
