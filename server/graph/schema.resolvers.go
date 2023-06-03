@@ -253,21 +253,34 @@ func (r *queryResolver) GetMatchings(ctx context.Context, userID string) ([]*mod
 	// if err:=db.Where("user_id = ?",userID).Find(&user_schedules).Error; err != nil {
 	// 	return nil, err
 	// }
-	// for _, v:=range user_friends {
+	// for _, friend:=range user_friends {
 	// 	friend_hangout := []*model.Hangout{}
 	// 	friend_schedule := []*model.Schedule{}
-	// 	if err := db.Model("hangout").Where("user_id = ? AND name IN (?, ?, ?)", v.FriendID, user_hangouts[0].Name,user_hangouts[1].Name,user_hangouts[2].Name).Find(&friend_hangout).Error; err != nil {
-	// 		return nil, err
+	// 	hangout_flag := false
+	// 	schedule_flag := false
+	// 	for _, hangout:=range user_hangouts {
+	// 		if err := db.Model("hangout").Where("user_id = ? AND name = ?", friend.FriendID, hangout.Name).Find(&friend_hangout).Error; err != nil {
+	// 			return nil, err
+	// 		}
+	// 		if len(friend_hangout)!=0 {
+	// 			hangout_flag = true
+	// 			break
+	// 		}
 	// 	}
-	// 	if err := db.Model("schedule").Where("user_id = ? AND date IN (?, ?, ?)", v.FriendID, user_schedules[0].Date,user_schedules[1].Date,user_schedules[2].Date).Find(&friend_schedule).Error; err != nil {
-	// 		return nil, err
+	// 	for _, schedule:=range user_schedules {
+	// 		if err := db.Model("schedule").Where("user_id = ? AND name = ?", friend.FriendID, schedule.Date).Find(&friend_schedule).Error; err != nil {
+	// 			return nil, err
+	// 		}
+	// 		if len(friend_schedule)!=0 {
+	// 			schedule_flag = true
+	// 			break
+	// 		}
 	// 	}
-	// 	if len(friend_hangout) != 0 && len(friend_schedule )!= 0 {
-	// 		matching:=&model.Matching{FriendID: v.FriendID,}
+	// 	if hangout_flag && schedule_flag {
+	// 		matching:=&model.Matching{FriendID: friend.FriendID,}
 	// 		res_friends = append(res_friends, matching)
 	// 	}
 	// }
-
 	// return  res_friends, nil
 }
 
