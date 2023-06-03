@@ -13,4 +13,5 @@ export const firebaseAdmin =
     credential: cert(serviceAccount),
   });
 
-export const auth = getAuth();
+const auth = getAuth();
+export default auth
