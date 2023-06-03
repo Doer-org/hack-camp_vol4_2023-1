@@ -19,7 +19,7 @@ export const ProfileOverview = () => {
       </div>
       <div className="flex justify-between p-8">
         <div className="w-28 h-9">
-          <LinkButton className="bg-navy-3 text-new-white rounded-lg w-28 h-9" href="/service/profile/edit">
+          <LinkButton className="bg-navy-3 text-new-white rounded-lg w-28 h-9" href="/profile/edit">
             Edit
           </LinkButton>
         </div>
