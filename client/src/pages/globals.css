@@ -36,3 +36,11 @@
   background-repeat: no-repeat;
   background-image: url("/assets/user_bg.png");
 }
+
+
+.addfriend-bg {
+  background-size: cover;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-image: url("/assets/addfriend_bg.png");
+}
