@@ -1,8 +1,9 @@
 import { RootLayout } from "@/components/layout/Layout";
 import { FriendsCloseButton } from "@/components/pages/Profile/Friends/friends-close-button";
-import { NextPage } from "next";
 import React from "react";
 import { FriendsList } from "@/components/pages/Profile/Friends/friends-list";
+import { GetServerSideProps, NextPage } from "next";
+import { parseCookies } from "nookies";
 
 const Friends: NextPage = () => {
   return (
@@ -16,6 +17,26 @@ const Friends: NextPage = () => {
     </RootLayout>
   );
 
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = parseCookies(context);
+  console.log(cookies.user);
+  const user = JSON.parse(cookies.user);
+  if (!user) {
+    return {
+      redirect:{
+        permanent: false,
+        destination: `/login`,
+      }
+    }
+  }
+
+  return {
+    props: {
+      id: user ? user.id : null,
+    },
+  };
 };
 
 export default Friends;
