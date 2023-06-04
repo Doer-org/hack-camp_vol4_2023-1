@@ -1,6 +1,6 @@
 import { ProfileMylist } from "@/components/pages/Profile/profile-mylist";
 import { ProfileOverview } from "@/components/pages/Profile/profile-overview";
-import React from "react";
+import React, { useEffect } from "react";
 import { RootLayout } from "@/components/layout/Layout";
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
@@ -14,6 +14,9 @@ type Props = {
 };
 
 const Profile: NextPage<Props> = ({ user, hangouts, schedules }) => {
+  useEffect(()=>{
+    console.log(hangouts, schedules)
+  })
   return (
     <RootLayout meta="プロフィール">
       <div className="user-bg py-16 h-screen">
@@ -21,7 +24,7 @@ const Profile: NextPage<Props> = ({ user, hangouts, schedules }) => {
           <div className="">
             <ProfileOverview user={user} />
             <div>
-              {/* <ProfileMylist hangouts={hangouts} schedules={schedules} /> */}
+              <ProfileMylist hangouts={hangouts} schedules={schedules} />
             </div>
           </div>
         </div>
@@ -42,36 +45,40 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
   const user_id = user.id;
-  const { data: hangouts, err: getHangoutError } = await GetHangoutsByUserId({
+  let hangouts:any
+  const { data:hangout_data, err: getHangoutError } = await GetHangoutsByUserId({
     user_id,
   });
-  if (getHangoutError) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: `/login`,
-      },
-    };
-  }
+  hangouts = hangout_data
+  // if (getHangoutError) {
+  //   return {
+  //     redirect: {
+  //       permanent: false,
+  //       destination: `/login`,
+  //     },
+  //   };
+  // }
 
-  const { data: schedules, err: getScheduleError } = await GetSchedulesByUserId({
+  let schedules:any
+  const { data:schedule_data, err: getScheduleError } = await GetSchedulesByUserId({
     user_id,
   });
-  if (getScheduleError) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: `/login`,
-      },
-    };
-  }
+  schedules = schedule_data
+  // if (getScheduleError) {
+  //   return {
+  //     redirect: {
+  //       permanent: false,
+  //       destination: `/login`,
+  //     },
+  //   };
+  // }
 
   return {
     props: {
       user: user ? user : null,
       id: user ? user.id : null,
-      hangouts : hangouts ? hangouts : [],
-      schedules : schedules ? schedules : [],
+      hangouts : hangouts ? hangouts.getHangoutsByUserId : [],
+      schedules : schedules ? schedules.getSchedulesByUserId : [],
     },
   };
 };

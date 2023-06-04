@@ -17,18 +17,18 @@ export type Scalars = {
 };
 
 export type CreateFriendInput = {
-  friend_id: Scalars['ID']['input'];
-  user_id: Scalars['ID']['input'];
+  friend_id: Scalars['String']['input'];
+  user_id: Scalars['String']['input'];
 };
 
 export type CreateHangoutInput = {
   name: Scalars['String']['input'];
-  user_id: Scalars['ID']['input'];
+  user_id: Scalars['String']['input'];
 };
 
 export type CreateScheduleInput = {
   date: Scalars['String']['input'];
-  user_id: Scalars['ID']['input'];
+  user_id: Scalars['String']['input'];
 };
 
 export type CreateUserInput = {
@@ -53,16 +53,21 @@ export type DeleteScheduleInput = {
 export type Friend = {
   __typename?: 'Friend';
   accept: Scalars['Boolean']['output'];
-  friend_id: Scalars['ID']['output'];
+  friend_id: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  user_id: Scalars['ID']['output'];
+  user_id: Scalars['String']['output'];
 };
 
 export type Hangout = {
   __typename?: 'Hangout';
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
-  user_id: Scalars['ID']['output'];
+  user_id: Scalars['String']['output'];
+};
+
+export type Matching = {
+  __typename?: 'Matching';
+  friend_id: Scalars['String']['output'];
 };
 
 export type Mutation = {
@@ -139,23 +144,29 @@ export type Query = {
   __typename?: 'Query';
   getFriendsByUserId: Array<Friend>;
   getHangoutsByUserId: Array<Hangout>;
+  getMatchings: Array<Matching>;
   getSchedulesByUserId: Array<Schedule>;
   getUserById: User;
 };
 
 
 export type QueryGetFriendsByUserIdArgs = {
-  user_id: Scalars['ID']['input'];
+  user_id: Scalars['String']['input'];
 };
 
 
 export type QueryGetHangoutsByUserIdArgs = {
-  user_id: Scalars['ID']['input'];
+  user_id: Scalars['String']['input'];
+};
+
+
+export type QueryGetMatchingsArgs = {
+  user_id: Scalars['String']['input'];
 };
 
 
 export type QueryGetSchedulesByUserIdArgs = {
-  user_id: Scalars['ID']['input'];
+  user_id: Scalars['String']['input'];
 };
 
 
@@ -167,26 +178,26 @@ export type Schedule = {
   __typename?: 'Schedule';
   date: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  user_id: Scalars['ID']['output'];
+  user_id: Scalars['String']['output'];
 };
 
 export type UpdateFriendAcceptInput = {
   accept: Scalars['Boolean']['input'];
-  friend_id: Scalars['ID']['input'];
+  friend_id: Scalars['String']['input'];
   id: Scalars['ID']['input'];
-  user_id: Scalars['ID']['input'];
+  user_id: Scalars['String']['input'];
 };
 
 export type UpdateHangoutInput = {
   id: Scalars['ID']['input'];
   name: Scalars['String']['input'];
-  user_id: Scalars['ID']['input'];
+  user_id: Scalars['String']['input'];
 };
 
 export type UpdateScheduleInput = {
   date: Scalars['String']['input'];
   id: Scalars['ID']['input'];
-  user_id: Scalars['ID']['input'];
+  user_id: Scalars['String']['input'];
 };
 
 export type UpdateUserInput = {
@@ -282,21 +293,21 @@ export type UpdateUserMutationVariables = Exact<{
 export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, name: string, description: string, image: string } };
 
 export type GetFriendsByUserIdQueryVariables = Exact<{
-  user_id: Scalars['ID']['input'];
+  user_id: Scalars['String']['input'];
 }>;
 
 
 export type GetFriendsByUserIdQuery = { __typename?: 'Query', getFriendsByUserId: Array<{ __typename?: 'Friend', id: string, user_id: string, friend_id: string, accept: boolean }> };
 
 export type GetHangoutsByUserIdQueryVariables = Exact<{
-  user_id: Scalars['ID']['input'];
+  user_id: Scalars['String']['input'];
 }>;
 
 
 export type GetHangoutsByUserIdQuery = { __typename?: 'Query', getHangoutsByUserId: Array<{ __typename?: 'Hangout', id: string, user_id: string, name: string }> };
 
 export type GetSchedulesByUserIdQueryVariables = Exact<{
-  user_id: Scalars['ID']['input'];
+  user_id: Scalars['String']['input'];
 }>;
 
 
@@ -321,7 +332,7 @@ export const DeleteScheduleDocument = {"kind":"Document","definitions":[{"kind":
 export const UpdateScheduleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateSchedule"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateScheduleInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateSchedule"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]}}]} as unknown as DocumentNode<UpdateScheduleMutation, UpdateScheduleMutationVariables>;
 export const CreateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"image"}}]}}]}}]} as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;
 export const UpdateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"image"}}]}}]}}]} as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;
-export const GetFriendsByUserIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getFriendsByUserId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getFriendsByUserId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"user_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"friend_id"}},{"kind":"Field","name":{"kind":"Name","value":"accept"}}]}}]}}]} as unknown as DocumentNode<GetFriendsByUserIdQuery, GetFriendsByUserIdQueryVariables>;
-export const GetHangoutsByUserIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getHangoutsByUserId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHangoutsByUserId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"user_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetHangoutsByUserIdQuery, GetHangoutsByUserIdQueryVariables>;
-export const GetSchedulesByUserIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSchedulesByUserId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getSchedulesByUserId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"user_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]}}]} as unknown as DocumentNode<GetSchedulesByUserIdQuery, GetSchedulesByUserIdQueryVariables>;
+export const GetFriendsByUserIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getFriendsByUserId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getFriendsByUserId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"user_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"friend_id"}},{"kind":"Field","name":{"kind":"Name","value":"accept"}}]}}]}}]} as unknown as DocumentNode<GetFriendsByUserIdQuery, GetFriendsByUserIdQueryVariables>;
+export const GetHangoutsByUserIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getHangoutsByUserId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getHangoutsByUserId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"user_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetHangoutsByUserIdQuery, GetHangoutsByUserIdQueryVariables>;
+export const GetSchedulesByUserIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSchedulesByUserId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getSchedulesByUserId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"user_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]}}]} as unknown as DocumentNode<GetSchedulesByUserIdQuery, GetSchedulesByUserIdQueryVariables>;
 export const GetUserByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getUserById"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetUserByIdQuery, GetUserByIdQueryVariables>;

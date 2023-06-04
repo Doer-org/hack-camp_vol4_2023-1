@@ -11,33 +11,33 @@ type User {
 
 type Hangout{
   id: ID!
-  user_id: ID!
+  user_id: String!
   name: String! 
 }
 
 type Schedule{
   id: ID!
-  user_id: ID!
+  user_id: String!
   date: String!
 }
 
 type Friend{
   id: ID!
-  user_id: ID!
-  friend_id: ID!
+  user_id: String!
+  friend_id: String!
   accept: Boolean!
 }
 
 type Matching{
-  friend_id:ID!
+  friend_id: String!
 }
 
 type Query {
   getUserById(id: ID!): User!
-  getHangoutsByUserId(user_id: ID!): [Hangout!]!
-  getSchedulesByUserId(user_id: ID!):[Schedule!]!
-  getFriendsByUserId(user_id: ID!):[Friend!]!
-  getMatchings(user_id:ID!):[Matching!]!
+  getHangoutsByUserId(user_id: String!): [Hangout!]!
+  getSchedulesByUserId(user_id: String!):[Schedule!]!
+  getFriendsByUserId(user_id: String!):[Friend!]!
+  getMatchings(user_id: String!):[Matching!]!
 }
 
 input CreateUserInput {
@@ -55,13 +55,13 @@ input UpdateUserInput {
 }
 
 input CreateHangoutInput{
-  user_id: ID!
+  user_id: String!
   name: String!
 }
 
 input UpdateHangoutInput{
   id: ID!
-  user_id:ID!
+  user_id: String!
   name: String!
 }
 
@@ -70,13 +70,13 @@ input DeleteHangoutInput{
 }
 
 input CreateScheduleInput{
-  user_id: ID!
+  user_id: String!
   date: String!
 }
 
 input UpdateScheduleInput{
   id: ID!
-  user_id:ID!
+  user_id: String!
   date: String!
 }
 
@@ -85,14 +85,14 @@ input DeleteScheduleInput{
 }
 
 input CreateFriendInput{
-  user_id: ID!
-  friend_id:ID!
+  user_id: String!
+  friend_id: String!
 }
 
 input UpdateFriendAcceptInput{
   id: ID!
-  user_id: ID!
-  friend_id: ID!
+  user_id: String!
+  friend_id: String!
   accept: Boolean!
 }
 

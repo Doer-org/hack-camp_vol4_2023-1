@@ -240,7 +240,6 @@ func (r *queryResolver) GetFriendsByUserID(ctx context.Context, userID string) (
 
 // GetMatchings is the resolver for the getMatchings field.
 func (r *queryResolver) GetMatchings(ctx context.Context, userID string) ([]*model.Matching, error) {
-
 	db := database.DB()
 	resFriends := []*model.Matching{}
 	userFriends := []*model.Friend{}

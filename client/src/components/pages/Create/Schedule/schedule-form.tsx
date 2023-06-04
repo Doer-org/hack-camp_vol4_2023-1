@@ -19,7 +19,11 @@ const schema = z.object({
   schedule3: z.string(),
 });
 
-export const ScheduleForm: FC = () => {
+type ScheduleFormProps = {
+  user_id:string;
+}
+
+export const ScheduleForm: FC<ScheduleFormProps> = ({user_id}) => {
   const {
     register,
     handleSubmit,
@@ -29,19 +33,39 @@ export const ScheduleForm: FC = () => {
   });
   const router = useRouter();
   const onSubmit: SubmitHandler<Inputs> = async (data:any) => {
-    console.log(data);
-    router.push("/profile");
-
-    const userData = {
-      user_id:"hoge",
-      date: "6/4",
+    
+    const scheduleData1 = {
+      user_id:user_id,
+      date: data.schedule1
     };
-
-    const { data:schedule, err } = await CreateSchedule(userData);
+    const scheduleData2 = data.schedule2&&{
+      user_id:user_id,
+      date: data.schedule2
+    };
+    const scheduleData3 = data.schedule3&&{
+      user_id:user_id,
+      date: data.schedule3
+    };
+    const { data:schedule1, err } = await CreateSchedule(scheduleData1);
     if (err) {
       console.log("Error:", err);
     }
-    console.log(schedule);
+    console.log(schedule1);
+    if (scheduleData2){
+      const { data:schedule2, err } = await CreateSchedule(scheduleData2);
+      if (err) {
+        console.log("Error:", err);
+      }
+      console.log(schedule2)
+    }
+    if (scheduleData3){
+      const { data:schedule3, err } = await CreateSchedule(scheduleData3);
+      if (err) {
+        console.log("Error:", err);
+      }
+      console.log(schedule3)
+    }
+    router.push("/profile");
   };
 
   return (

@@ -28,7 +28,7 @@ const Home: NextPage<Props> = ({ user, id }) => {
             <Title fontsize="text-[32px]">マッチング一覧</Title>
           </div>
           <div className="py-7">
-            <Text>{user && user.name}さん、今日はx件マッチングしました！</Text>
+            <Text>{user && user.name}さん、今日は1件マッチングしました！</Text>
           </div>
         </div>
         <div className="pt-6">

@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation";
 import { Text } from "@/components/elements/Text";
 import { CreateHangout } from "@/api/mutation";
 
-
 type Inputs = {
+  map(arg0: (hangout: any) => void): unknown;
   hangouts: string[];
 };
 
@@ -20,7 +20,11 @@ const schema = z.object({
     .max(3, { message: "3つまで選択してください" }),
 });
 
-export const HangoutForm: FC = () => {
+type HangoutFormProps = {
+  user_id: string;
+};
+
+export const HangoutForm: FC<HangoutFormProps> = ({ user_id }) => {
   const {
     register,
     handleSubmit,
@@ -30,26 +34,49 @@ export const HangoutForm: FC = () => {
   const router = useRouter();
 
   const hangoutList = [
-    { value: "eating", label: "飲食" },
-    { value: "outdoor", label: "アウトドア" },
-    { value: "subculture", label: "サブカルチャー" },
-    { value: "indoor", label: "インドア" },
-    { value: "season", label: "シーズン" },
-    { value: "other", label: "その他" },
+    { value: "食事", label: "飲食" },
+    { value: "アウトドア", label: "アウトドア" },
+    { value: "サブカルシャー", label: "サブカルチャー" },
+    { value: "インドア", label: "インドア" },
+    { value: "シーズン", label: "シーズン" },
+    { value: "その他", label: "その他" },
   ];
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     console.log(data);
-    router.push("/profile");
-    const userData = {
-      name:  "hogehoge",
-      user_id: "hoge",
+
+    const hangoutData1 = {
+      name: data.hangouts[0],
+      user_id: user_id,
+    };
+    const hangoutData2 = data.hangouts[1] && {
+      name: data.hangouts[1],
+      user_id: user_id,
+    };
+    const hangoutData3 = data.hangouts[2] && {
+      name: data.hangouts[2],
+      user_id: user_id,
     };
 
-    const { data:hangout, err } = await CreateHangout(userData);
+    const { data: hangout1, err } = await CreateHangout(hangoutData1);
     if (err) {
       console.log("Error:", err);
     }
-    console.log(hangout);
+    console.log(hangout1);
+    if (hangoutData2) {
+      const { data: hangout2, err } = await CreateHangout(hangoutData2);
+      if (err) {
+        console.log("Error:", err);
+      }
+      console.log(hangout2);
+    }
+    if (hangoutData3) {
+      const { data: hangout3, err } = await CreateHangout(hangoutData3);
+      if (err) {
+        console.log("Error:", err);
+      }
+      console.log(hangout3);
+    }
+    router.push("/profile");
   };
 
   return (
@@ -64,7 +91,7 @@ export const HangoutForm: FC = () => {
                   id={hangout.value}
                   value={hangout.value}
                   className="peer hidden"
-                  {...register("hangouts",)}
+                  {...register("hangouts")}
                 />
                 <label
                   htmlFor={hangout.value}
@@ -74,9 +101,13 @@ export const HangoutForm: FC = () => {
                 </label>
               </div>
             )
-            )}
+          )}
         </div>
-            {errors.hangouts && <Text style="text-red-600 text-center pb-4">遊びは1つ以上3つ以下で設定してください</Text>}
+        {errors.hangouts && (
+          <Text style="text-red-600 text-center pb-4">
+            遊びは1つ以上3つ以下で設定してください
+          </Text>
+        )}
         <div className="w-32 mx-auto py-4">
           <input
             type="submit"

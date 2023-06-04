@@ -6,7 +6,11 @@ import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
 import React from "react";
 
-const Hangout: NextPage = () => {
+type Props = {
+  id: string;
+};
+
+const Hangout: NextPage<Props> = ({ id }) => {
   return (
     <RootLayout meta="遊びを登録する">
       <div className="hangout-bg p-10 py-20 h-screen">
@@ -21,13 +25,12 @@ const Hangout: NextPage = () => {
           <Text>ooさんは何をして遊びたいですか？</Text>
         </div>
         <div>
-          <HangoutForm />
+          <HangoutForm user_id={id} />
         </div>
       </div>
     </RootLayout>
   );
 };
-
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
@@ -35,11 +38,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const user = JSON.parse(cookies.user);
   if (!user) {
     return {
-      redirect:{
+      redirect: {
         permanent: false,
         destination: `/login`,
-      }
-    }
+      },
+    };
   }
 
   return {

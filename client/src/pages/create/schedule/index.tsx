@@ -6,7 +6,11 @@ import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
 import React from "react";
 
-const Schedule: NextPage = () => {
+type Props = {
+  id:string;
+}
+
+const Schedule: NextPage<Props>= ({id}) => {
   return (
     <RootLayout meta="予定を登録する">
       <div className="schedule-bg p-10 py-20 h-screen">
@@ -21,7 +25,7 @@ const Schedule: NextPage = () => {
           <Text>ooさんはいつ遊びたいですか？</Text>
         </div>
         <div>
-          <ScheduleForm />
+          <ScheduleForm user_id={id} />
         </div>
       </div>
     </RootLayout>
