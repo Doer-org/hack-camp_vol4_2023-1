@@ -2,19 +2,92 @@
 
 package model
 
-type NewTodo struct {
-	Text   string `json:"text"`
-	UserID string `json:"userId"`
+type CreateFriendInput struct {
+	UserID   string `json:"user_id"`
+	FriendID string `json:"friend_id"`
 }
 
-type Todo struct {
-	ID   string `json:"id"`
-	Text string `json:"text"`
-	Done bool   `json:"done"`
-	User *User  `json:"user"`
+type CreateHangoutInput struct {
+	UserID string `json:"user_id"`
+	Name   string `json:"name"`
+}
+
+type CreateScheduleInput struct {
+	UserID string `json:"user_id"`
+	Date   string `json:"date"`
+}
+
+type CreateUserInput struct {
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Image       string `json:"image"`
+}
+
+type DeleteFriendInput struct {
+	ID string `json:"id"`
+}
+
+type DeleteHangoutInput struct {
+	ID string `json:"id"`
+}
+
+type DeleteScheduleInput struct {
+	ID string `json:"id"`
+}
+
+type Friend struct {
+	ID       string `json:"id"`
+	UserID   string `json:"user_id"`
+	FriendID string `json:"friend_id"`
+	Accept   bool   `json:"accept"`
+}
+
+type Hangout struct {
+	ID     string `json:"id"`
+	UserID string `json:"user_id"`
+	Name   string `json:"name"`
+}
+
+type Matching struct {
+	FriendID string `json:"friend_id"`
+}
+
+type Schedule struct {
+	ID     string `json:"id"`
+	UserID string `json:"user_id"`
+	Date   string `json:"date"`
+}
+
+type UpdateFriendAcceptInput struct {
+	ID       string `json:"id"`
+	UserID   string `json:"user_id"`
+	FriendID string `json:"friend_id"`
+	Accept   bool   `json:"accept"`
+}
+
+type UpdateHangoutInput struct {
+	ID     string `json:"id"`
+	UserID string `json:"user_id"`
+	Name   string `json:"name"`
+}
+
+type UpdateScheduleInput struct {
+	ID     string `json:"id"`
+	UserID string `json:"user_id"`
+	Date   string `json:"date"`
+}
+
+type UpdateUserInput struct {
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Image       string `json:"image"`
 }
 
 type User struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Image       string `json:"image"`
 }
