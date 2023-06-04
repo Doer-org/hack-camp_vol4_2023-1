@@ -41,7 +41,6 @@ import { UPDATE_USER } from "@/apollo/mutation/User/updateUser";
 
 export const CreateUser = async (input: CreateUserInput) => {
   let data, err;
-  console.log(client)
   await client
     .mutate<User, MutationCreateUserArgs>({
       mutation: CREATE_USER,

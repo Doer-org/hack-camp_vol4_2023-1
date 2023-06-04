@@ -7,7 +7,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Button } from "@/components/elements/Button";
 import { RiGoogleFill } from "react-icons/ri";
 import { CreateUser } from "@/api/mutation";
-
+import { parseCookies, setCookie } from "nookies";
 export const LoginForm: FC = () => {
   const login = async () => {
     const provider = new GoogleAuthProvider();
@@ -25,7 +25,11 @@ export const LoginForm: FC = () => {
     }
     console.log(data);
 
-    localStorage.setItem("user", JSON.stringify(userData));
+    // localStorage.setItem("user", JSON.stringify(userData));
+
+    const cokkies = parseCookies();
+    console.log({cokkies})
+    setCookie(null, "user", JSON.stringify(userData))
     const idToken = await cred.user.getIdToken();
     await signInByNextAuth("credentials", {
       idToken,
