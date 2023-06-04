@@ -6,6 +6,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { Text } from "@/components/elements/Text";
+import { CreateHangout } from "@/api/mutation";
+
 
 type Inputs = {
   hangouts: string[];
@@ -35,10 +37,21 @@ export const HangoutForm: FC = () => {
     { value: "season", label: "シーズン" },
     { value: "other", label: "その他" },
   ];
-  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     console.log(data);
     router.push("/profile");
+    const userData = {
+      name:  "hogehoge",
+      user_id: "hoge",
+    };
+
+    const { data:hangout, err } = await CreateHangout(userData);
+    if (err) {
+      console.log("Error:", err);
+    }
+    console.log(hangout);
   };
+
   return (
     <div className="py-8">
       <form onSubmit={handleSubmit(onSubmit)}>
