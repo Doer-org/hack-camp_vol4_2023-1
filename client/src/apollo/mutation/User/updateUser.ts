@@ -7,6 +7,7 @@ export const UPDATE_USER = gql`
       id
       name
       description
+      image
     }
   }
 `;
