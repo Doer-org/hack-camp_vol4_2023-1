@@ -16,6 +16,7 @@ export const LoginForm: FC = () => {
       id: cred.user.uid,
       name: cred.user.displayName ? cred.user.displayName : "",
       description: "",
+      image: "",
     };
 
     const { data, err } = await CreateUser(userData);
@@ -25,6 +26,11 @@ export const LoginForm: FC = () => {
     console.log(data);
 
     localStorage.setItem("user", JSON.stringify(userData));
+    const idToken = await cred.user.getIdToken();
+    await signInByNextAuth("credentials", {
+      idToken,
+      callbackUrl: "/",
+    });
   };
   
   return (

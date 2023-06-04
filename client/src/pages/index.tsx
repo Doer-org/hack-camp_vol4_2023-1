@@ -6,6 +6,7 @@ import { RootLayout } from "@/components/layout/Layout";
 import { MatchingList } from "@/components/pages/Home/matching-list";
 import { GetServerSideProps, NextPage } from "next";
 import { getSession } from "next-auth/react";
+import { useEffect } from "react";
 
 type Props = {
   user: User;
@@ -20,6 +21,15 @@ const Home: NextPage<Props> = ({ id, user }) => {
       date: "2/10",
     },
   ];
+  useEffect(() => {
+    GetUserById({id})
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
   return (
     <RootLayout meta="ホーム">
       <div className="home-bg text-navy-3 px-[15px] h-screen pt-32">
@@ -55,14 +65,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const id = session.user?.id as string;
   const { data, err } = await GetUserById({ id });
-  // if (!user || getUserError) {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: "/service/login",
-  //     },
-  //   };
-  // }
+  if (!data || err) {
+    // return {
+    //     redirect: {
+    //       permanent: false,
+    //       destination: "/service/login",
+    // },
+    console.log(err);
+    // };
+  }
 
   return {
     props: {
