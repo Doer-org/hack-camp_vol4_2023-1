@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
+import { CreateSchedule } from "@/api/mutation";
 
 type Inputs = {
   schedule1: string;
@@ -27,9 +28,20 @@ export const ScheduleForm: FC = () => {
     resolver: zodResolver(schema), defaultValues: {}
   });
   const router = useRouter();
-  const onSubmit: SubmitHandler<Inputs> = (data: any) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data:any) => {
     console.log(data);
     router.push("/profile");
+
+    const userData = {
+      user_id:"hoge",
+      date: "6/4",
+    };
+
+    const { data:schedule, err } = await CreateSchedule(userData);
+    if (err) {
+      console.log("Error:", err);
+    }
+    console.log(schedule);
   };
 
   return (

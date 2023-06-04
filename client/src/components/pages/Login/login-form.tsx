@@ -32,6 +32,7 @@ export const LoginForm: FC = () => {
       callbackUrl: "/",
     });
   };
+  
   return (
     <div className="w-60 mx-auto">
       <Button
