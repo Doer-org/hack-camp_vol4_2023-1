@@ -42,6 +42,14 @@ const Home: NextPage<Props> = ({ user, id }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
   console.log(cookies.user);
+  if (!cookies.user) {
+    return {
+      redirect:{
+        permanent: false,
+        destination: `/login`,
+      }
+    }
+  }
   const user = JSON.parse(cookies.user);
   if (!user) {
     return {

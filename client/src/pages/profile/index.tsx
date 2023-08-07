@@ -45,26 +45,26 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { data: hangouts, err: getHangoutError } = await GetHangoutsByUserId({
     user_id,
   });
-  if (getHangoutError) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: `/login`,
-      },
-    };
-  }
+  // if (getHangoutError) {
+  //   return {
+  //     redirect: {
+  //       permanent: false,
+  //       destination: `/login`,
+  //     },
+  //   };
+  // }
 
   const { data: schedules, err: getScheduleError } = await GetSchedulesByUserId({
     user_id,
   });
-  if (getScheduleError) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: `/login`,
-      },
-    };
-  }
+  // if (getScheduleError) {
+  //   return {
+  //     redirect: {
+  //       permanent: false,
+  //       destination: `/login`,
+  //     },
+  //   };
+  // }
 
   return {
     props: {
