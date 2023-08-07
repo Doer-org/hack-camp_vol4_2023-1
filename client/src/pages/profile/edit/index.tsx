@@ -8,8 +8,8 @@ import { NextPage } from "next";
 const Edit:NextPage = () => {
   return (
     <RootLayout meta="ユーザー情報を編集する">
-      <div className="p-10 py-20 h-screen">
-        <Title>ユーザー情報編集</Title>
+      <div className="other-bg p-10 py-20 h-screen">
+        <Title color="text-new-blue-600">ユーザー情報編集</Title>
         <div>
           <EditForm />
         </div>

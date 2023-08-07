@@ -27,8 +27,8 @@ export const LoginForm: FC = () => {
 
     // localStorage.setItem("user", JSON.stringify(userData));
 
-    const cokkies = parseCookies();
-    console.log({cokkies})
+    const cookies = parseCookies();
+    console.log({cookies})
     setCookie(null, "user", JSON.stringify(userData))
     const idToken = await cred.user.getIdToken();
     await signInByNextAuth("credentials", {
