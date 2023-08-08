@@ -68,9 +68,6 @@ dependencies:
   postcss:
     specifier: 8.4.23
     version: 8.4.23
-  qrcode.react:
-    specifier: ^3.1.0
-    version: 3.1.0(react@18.2.0)
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -83,6 +80,9 @@ dependencies:
   react-icons:
     specifier: ^4.9.0
     version: 4.9.0(react@18.2.0)
+  react-qrcode-logo:
+    specifier: ^2.9.0
+    version: 2.9.0(react-dom@18.2.0)(react@18.2.0)
   tailwindcss:
     specifier: 3.3.2
     version: 3.3.2
@@ -5516,6 +5516,10 @@ packages:
     resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
     dev: false
 
+  /lodash.isequal@4.5.0:
+    resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    dev: false
+
   /lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: false
@@ -6469,12 +6473,8 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: true
 
-  /qrcode.react@3.1.0(react@18.2.0):
-    resolution: {integrity: sha512-oyF+Urr3oAMUG/OiOuONL3HXM+53wvuH3mtIWQrYmsXoAq0DkvZp2RYUWFSMFtbdOpuS++9v+WAkzNVkMlNW6Q==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      react: 18.2.0
+  /qrcode-generator@1.4.4:
+    resolution: {integrity: sha512-HM7yY8O2ilqhmULxGMpcHSF1EhJJ9yBj8gvDEuZ6M+KGJ0YY2hKpnXvRD+hZPLrDVck3ExIGhmPtSdcjC+guuw==}
     dev: false
 
   /queue-microtask@1.2.3:
@@ -6519,6 +6519,18 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+    dev: false
+
+  /react-qrcode-logo@2.9.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-x9uctB/8kuQ+x7p4V/BRv6qbQV4xYopLcitBuQT3925U/zVFb3bbDUsUZsi7hEKuAX/wRsfhs331FhlPSYCO9Q==}
+    peerDependencies:
+      react: '>=16.4.1'
+      react-dom: '>=16.4.1'
+    dependencies:
+      lodash.isequal: 4.5.0
+      qrcode-generator: 1.4.4
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react@18.2.0:
