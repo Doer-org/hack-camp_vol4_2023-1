@@ -33,9 +33,9 @@ export const ProfileOverview:FC<ProfileOverviewProps> = ({user}) => {
           </LinkButton>
         </div>
         <div className="w-28 h-9">
-          <Button className="bg-new-blue-700 text-new-white rounded-lg w-28 h-9">
+          <LinkButton className="bg-new-blue-700 text-new-white rounded-lg w-28 h-9" href={`/profile/share`}>
             Share
-          </Button>
+          </LinkButton>
         </div>
       </div>
     </div>

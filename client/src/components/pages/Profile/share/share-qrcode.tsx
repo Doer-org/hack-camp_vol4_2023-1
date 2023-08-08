@@ -1,20 +1,31 @@
+import { User } from "@/apollo/generated/graphql";
 import React, { FC } from "react";
-import { QRCodeCanvas } from "qrcode.react";
+import { QRCode } from "react-qrcode-logo";
 
 type ShareQrcodeProps = {
-    user_id : string
-}
+  url: string;
+  user: User;
+};
 
-export const ShareQrcode:FC<ShareQrcodeProps> = ({user_id}) => {
-  const url = `http://localhost:3000/friend/${user_id}`;
-  const qrcode = (
-    <QRCodeCanvas
-      id="qrCode"
-      value={url}
-      size={300}
-      bgColor={"#00ff00"}
-      level={"H"}
-    />
+export const ShareQrcode: FC<ShareQrcodeProps> = ({ url, user }) => {
+  return (
+    <div className="flex justify-center">
+      <div className="bg-white m-10 p-10 rounded-md shadow-md">
+        <QRCode
+          value={url}
+          ecLevel="M"
+          enableCORS={false}
+          size={180}
+          quietZone={10}
+          bgColor="#ffffff"
+          fgColor="#7E74ED"
+          logoImage={user.image}
+          logoWidth={60}
+          logoHeight={60}
+          logoOpacity={1}
+          qrStyle="dots"
+        />
+      </div>
+    </div>
   );
-  return <div>{qrcode}</div>;
 };

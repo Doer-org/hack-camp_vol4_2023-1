@@ -1,25 +1,26 @@
+import { CreateFriend } from "@/api/mutation";
 import { RootLayout } from "@/components/layout/Layout";
-import { ShareMain } from "@/components/pages/Profile/share/share-main";
-import { GetServerSideProps, NextPage } from "next";
+import { useRouter } from "next/router";
 import React from "react";
+import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
+import { AcceptMain } from "@/components/pages/Friend/Accept/accept-main";
 
 type Props = {
-  user: any
-}
+  user_id: string;
+};
 
-const Share: NextPage<Props> = ({user}) => {
+const FriendAdd: NextPage<Props> = ({ user_id }) => {
   return (
-    <RootLayout meta="プロフィールを共有">
-      <ShareMain user={user} />
+    <RootLayout meta="友達を追加する">
+      <AcceptMain user_id={user_id} />
     </RootLayout>
   );
 };
 
-export default Share;
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
+  console.log(cookies.user);
   const user = JSON.parse(cookies.user);
   if (!user) {
     return {
@@ -32,8 +33,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      user: user ? user : null,
-      id: user ? user.id : null,
+      user_id: user ? user.id : null,
     },
   };
 };
+
+export default FriendAdd;
