@@ -13,7 +13,7 @@ var (
 	dbDatabase = os.Getenv("DB_DATABASE")
 )
 
-func GetDbURI() (string, error) {
+func DSN() (string, error) {
 	if dbUser == "" || dbPass == "" || dbHost == "" || dbPort == "" || dbDatabase == "" {
 		return "", fmt.Errorf("env item empty")
 	}
