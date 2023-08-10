@@ -7,6 +7,7 @@ export const CREATE_USER = gql`
       id
       name
       description
+      image
     }
   }
 `;

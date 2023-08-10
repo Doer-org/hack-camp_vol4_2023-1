@@ -44,3 +44,10 @@
   background-repeat: no-repeat;
   background-image: url("/assets/addfriend_bg.png");
 }
+
+.other-bg {
+  background-size: cover;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-image: url("/assets/other_bg.png");
+}

@@ -7,7 +7,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Button } from "@/components/elements/Button";
 import { RiGoogleFill } from "react-icons/ri";
 import { CreateUser } from "@/api/mutation";
-
+import { parseCookies, setCookie } from "nookies";
 export const LoginForm: FC = () => {
   const login = async () => {
     const provider = new GoogleAuthProvider();
@@ -16,6 +16,7 @@ export const LoginForm: FC = () => {
       id: cred.user.uid,
       name: cred.user.displayName ? cred.user.displayName : "",
       description: "",
+      image: "",
     };
 
     const { data, err } = await CreateUser(userData);
@@ -24,13 +25,18 @@ export const LoginForm: FC = () => {
     }
     console.log(data);
 
-    localStorage.setItem("user", JSON.stringify(userData));
-    // const idToken = await cred.user.getIdToken();
-    // await signInByNextAuth("credentials", {
-    //   idToken,
-    //   callbackUrl: "/",
-    // });
+    // localStorage.setItem("user", JSON.stringify(userData));
+
+    const cookies = parseCookies();
+    console.log({cookies})
+    setCookie(null, "user", JSON.stringify(userData))
+    const idToken = await cred.user.getIdToken();
+    await signInByNextAuth("credentials", {
+      idToken,
+      callbackUrl: "/",
+    });
   };
+  
   return (
     <div className="w-60 mx-auto">
       <Button

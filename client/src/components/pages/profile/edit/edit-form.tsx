@@ -2,7 +2,7 @@
 import { Text } from "@/components/elements/Text";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { HiChatAlt } from "react-icons/hi";
@@ -38,7 +38,7 @@ export const EditForm: FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-y-3 py-5">
           <div className="pb-5">
-            <label className="text-navy-3 flex gap-[10px] py-4">
+            <label className="text-new-blue-600 flex gap-[10px] py-4">
               <MdDriveFileRenameOutline className="w-6 h-6" />
               <Text>name</Text>
             </label>
@@ -49,7 +49,7 @@ export const EditForm: FC = () => {
             />
           </div>
           <div className="">
-            <label className="text-navy-3 flex gap-[10px] py-4">
+            <label className="text-new-blue-600 flex gap-[10px] py-4">
               <HiChatAlt className="w-6 h-6" />
               <Text>description</Text>
             </label>
@@ -69,8 +69,8 @@ export const EditForm: FC = () => {
         <div className="w-32 mx-auto py-4">
           <input
             type="submit"
-            className="hover:shadow-lg hover:bg-transparent hover:border hover:border-navy-3
-             bg-navy-3  hover:bg-gray-200 hover:text-navy-3 text-new-white rounded-lg w-32 h-14"
+            className="hover:shadow-lg hover:bg-transparent hover:border hover:border-new-blue-600
+             bg-new-blue-600  hover:bg-gray-200 hover:text-new-blue-600 text-new-white rounded-lg w-32 h-14"
             value="保存"
             disabled={isSubmitting}
           />

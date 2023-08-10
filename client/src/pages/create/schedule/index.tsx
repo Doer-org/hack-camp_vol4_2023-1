@@ -1,8 +1,9 @@
 import { Text } from "@/components/elements/Text";
 import { Title } from "@/components/elements/Title";
 import { RootLayout } from "@/components/layout/Layout";
-import { ScheduleForm } from "@/components/pages/Create/Schedule/schedule-form";
-import { NextPage } from "next";
+import { ScheduleForm } from "@/components/pages/create/schedule/schedule-form";
+import { GetServerSideProps, NextPage } from "next";
+import { parseCookies } from "nookies";
 import React from "react";
 
 const Schedule: NextPage = () => {
@@ -25,6 +26,26 @@ const Schedule: NextPage = () => {
       </div>
     </RootLayout>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = parseCookies(context);
+  console.log(cookies.user);
+  const user = JSON.parse(cookies.user);
+  if (!user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/login`,
+      },
+    };
+  }
+
+  return {
+    props: {
+      id: user ? user.id : null,
+    },
+  };
 };
 
 export default Schedule;

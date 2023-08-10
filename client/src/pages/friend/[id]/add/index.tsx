@@ -1,19 +1,19 @@
+import { CreateFriend } from "@/api/mutation";
 import { RootLayout } from "@/components/layout/Layout";
-import { FriendsCloseButton } from "@/components/pages/profile/friends/friends-close-button";
+import { useRouter } from "next/router";
 import React from "react";
-import { FriendsList } from "@/components/pages/profile/friends/friends-list";
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
+import { AcceptMain } from "@/components/pages/friend/accept/accept-main";
 
-const Friends: NextPage = () => {
+type Props = {
+  user_id: string;
+};
+
+const FriendAdd: NextPage<Props> = ({ user_id }) => {
   return (
-    <RootLayout meta="友達を表示">
-      <div className="p-10 h-screen">
-        <div>
-          <FriendsCloseButton />
-        </div>
-        <FriendsList />
-      </div>
+    <RootLayout meta="友達を追加する">
+      <AcceptMain user_id={user_id} />
     </RootLayout>
   );
 };
@@ -33,9 +33,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      id: user ? user.id : null,
+      user_id: user ? user.id : null,
     },
   };
 };
 
-export default Friends;
+export default FriendAdd;

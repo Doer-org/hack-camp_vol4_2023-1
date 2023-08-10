@@ -49,6 +49,7 @@ export const CreateUser = async (input: CreateUserInput) => {
           name: input.name,
           id: input.id,
           description: input.description,
+          image: input.image
         },
       },
     })
@@ -67,6 +68,7 @@ export const UpdateUser = async (input: UpdateUserInput) => {
           name: input.name,
           id: input.id,
           description: input.description,
+          image: input.image
         },
       },
     })
@@ -167,7 +169,7 @@ export const UpdateSchedule = async (input: UpdateScheduleInput) => {
   let data, err;
   await client
     .mutate<Schedule, MutationUpdateScheduleArgs>({
-      mutation: UPDATE_HANGOUT,
+      mutation: UPDATE_SCHEDULE,
       variables: {
         input: {
           date: input.date,
