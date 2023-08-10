@@ -1,0 +1,17 @@
+import { Axios } from "@/api/core/axios";
+import { {{pascalCase name}} } from "./type";
+import { AxiosError, AxiosResponse } from "axios";
+
+export const get{{pascalCase name}} = async(input) => {
+  let {{name}}Data: {{pascalCase name}} | null = null;
+  let error: Error | null = null;
+  await Axios.get(`/{{name}}/${input}`)
+    .then((res: AxiosResponse<{{pascalCase name}}>) => {
+      const { data } = res;
+      {{name}}Data = data;
+    })
+    .catch((err: AxiosError<{ error: string }>) => {
+      error = err;
+    });
+  return { {{name}}Data, error };
+}

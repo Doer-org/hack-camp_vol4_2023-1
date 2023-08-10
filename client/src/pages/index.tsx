@@ -1,7 +1,7 @@
 import { Text } from "@/components/elements/Text";
 import { Title } from "@/components/elements/Title";
 import { RootLayout } from "@/components/layout/Layout";
-import { MatchingList } from "@/components/pages/Home/matching-list";
+import { MatchingList } from "@/components/pages/home/matching-list";
 import { GetServerSideProps, NextPage } from "next";
 import { User } from "@/apollo/generated/graphql";
 import { parseCookies } from "nookies";

@@ -2,7 +2,7 @@
 import { Text } from "@/components/elements/Text";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { HiChatAlt } from "react-icons/hi";

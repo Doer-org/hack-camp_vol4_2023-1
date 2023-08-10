@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { ShareQrcode } from "./share-qrcode";
-import { ShareButton } from "./share-button";
+import { ShareQrcode } from "@/components/pages/profile/share/share-qrcode";
+import { ShareButton } from "@/components/pages/profile/share/share-button";
 
 type ShareMainProps = {
   user: any;

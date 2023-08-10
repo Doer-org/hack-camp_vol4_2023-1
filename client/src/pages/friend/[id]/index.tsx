@@ -2,7 +2,7 @@ import { RootLayout } from "@/components/layout/Layout";
 import React from "react";
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
-import { FriendMain } from "@/components/pages/Friend/friend-main";
+import { FriendMain } from "@/components/pages/friend/friend-main";
 
 type Props = {
   user_id: string;

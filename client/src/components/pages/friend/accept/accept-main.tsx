@@ -1,8 +1,8 @@
 import { CreateFriend } from "@/api/mutation";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
-import { AcceptInfo } from "./accept-info";
-import { AcceptButtons } from "./accept-buttons";
+import { AcceptInfo } from "@/components/pages/friend/accept/accept-info";
+import { AcceptButtons } from "@/components/pages/friend/accept/accept-buttons";
 
 type AcceptMainProps = {
   user_id: string;
