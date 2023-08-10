@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import { ApolloProvider } from "@apollo/client";
-import apolloClient from "../apollo/apolloClient";
+import apolloClient from "@/apollo/apolloClient";
 import { SessionProvider } from "next-auth/react";
 import "./globals.css"
 

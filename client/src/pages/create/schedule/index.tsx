@@ -1,7 +1,7 @@
 import { Text } from "@/components/elements/Text";
 import { Title } from "@/components/elements/Title";
 import { RootLayout } from "@/components/layout/Layout";
-import { ScheduleForm } from "@/components/pages/Create/Schedule/schedule-form";
+import { ScheduleForm } from "@/components/pages/create/schedule/schedule-form";
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
 import React from "react";
@@ -34,11 +34,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const user = JSON.parse(cookies.user);
   if (!user) {
     return {
-      redirect:{
+      redirect: {
         permanent: false,
         destination: `/login`,
-      }
-    }
+      },
+    };
   }
 
   return {

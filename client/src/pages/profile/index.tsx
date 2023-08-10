@@ -1,5 +1,5 @@
-import { ProfileMylist } from "@/components/pages/Profile/profile-mylist";
-import { ProfileOverview } from "@/components/pages/Profile/profile-overview";
+import { ProfileMylist } from "@/components/pages/profile/profile-mylist";
+import { ProfileOverview } from "@/components/pages/profile/profile-overview";
 import React from "react";
 import { RootLayout } from "@/components/layout/Layout";
 import { GetServerSideProps, NextPage } from "next";
@@ -9,8 +9,8 @@ import { GetHangoutsByUserId, GetSchedulesByUserId } from "@/api/query";
 
 type Props = {
   user: User;
-  hangouts:Hangout[]
-  schedules:Schedule[]
+  hangouts: Hangout[];
+  schedules: Schedule[];
 };
 
 const Profile: NextPage<Props> = ({ user, hangouts, schedules }) => {
@@ -54,9 +54,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //   };
   // }
 
-  const { data: schedules, err: getScheduleError } = await GetSchedulesByUserId({
-    user_id,
-  });
+  const { data: schedules, err: getScheduleError } = await GetSchedulesByUserId(
+    {
+      user_id,
+    }
+  );
   // if (getScheduleError) {
   //   return {
   //     redirect: {
@@ -70,8 +72,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       user: user ? user : null,
       id: user ? user.id : null,
-      hangouts : hangouts ? hangouts : [],
-      schedules : schedules ? schedules : [],
+      hangouts: hangouts ? hangouts : [],
+      schedules: schedules ? schedules : [],
     },
   };
 };

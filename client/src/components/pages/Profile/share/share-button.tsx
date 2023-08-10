@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
-import { Text } from "../../../elements/Text";
-import { Button } from "../../../elements/Button";
+import { Text } from "@/components/elements/Text";
+import { Button } from "@/components/elements/Button";
 import { AiOutlinePaperClip } from "react-icons/ai";
 
 type ShareButtonProps = {

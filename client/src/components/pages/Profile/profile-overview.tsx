@@ -1,6 +1,6 @@
 import { Text } from "@/components/elements/Text";
 import React, { FC } from "react";
-import { Button, LinkButton } from "@/components/elements/Button";
+import { LinkButton } from "@/components/elements/Button";
 import { User } from "@/apollo/generated/graphql";
 
 type ProfileOverviewProps = {

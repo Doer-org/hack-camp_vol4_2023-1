@@ -1,6 +1,6 @@
 "use client";
 import React, { FC } from "react";
-import { MatchingList } from "./matching-list";
+import { MatchingList } from "@/components/pages/home/matching-list";
 
 export const HomeAfterLogin:FC = () => {
   const matchingList = [

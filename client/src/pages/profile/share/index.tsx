@@ -1,14 +1,14 @@
 import { RootLayout } from "@/components/layout/Layout";
-import { ShareMain } from "@/components/pages/Profile/share/share-main";
+import { ShareMain } from "@/components/pages/profile/share/share-main";
 import { GetServerSideProps, NextPage } from "next";
 import React from "react";
 import { parseCookies } from "nookies";
 
 type Props = {
-  user: any
-}
+  user: any;
+};
 
-const Share: NextPage<Props> = ({user}) => {
+const Share: NextPage<Props> = ({ user }) => {
   return (
     <RootLayout meta="プロフィールを共有">
       <ShareMain user={user} />

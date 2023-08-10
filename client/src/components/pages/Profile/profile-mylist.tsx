@@ -1,6 +1,5 @@
 import { Hangout, Schedule } from "@/apollo/generated/graphql";
 import { Text } from "@/components/elements/Text";
-import { type } from "os";
 import React, { FC } from "react";
 
 type ProfileMylistProps = {
