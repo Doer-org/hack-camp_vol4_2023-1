@@ -13,6 +13,9 @@ func Exec() {
 		log.Fatal(err)
 	}
 	r := router.NewRouter()
+
+// comment: InitUserRouterを挿入してください。
+
 	r.InitFriendRouter(conn)
 	r.Serve()
 }
