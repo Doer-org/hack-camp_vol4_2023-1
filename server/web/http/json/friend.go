@@ -11,12 +11,12 @@ type FriendJson struct {
 
 type FriendsJson []FriendJson
 
-func FriendEntityToJson(c *entity.Friend) *FriendJson {
+func FriendEntityToJson(f *entity.Friend) *FriendJson {
 	return &FriendJson{
-		Id:        c.Id,
-		User_id:   c.User_id,
-		Friend_id: c.Friend_id,
-		Accept:    c.Accept,
+		Id:        f.Id,
+		User_id:   f.User_id,
+		Friend_id: f.Friend_id,
+		Accept:    f.Accept,
 	}
 }
 
