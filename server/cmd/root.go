@@ -18,5 +18,6 @@ func Exec() {
 	r.InitScheduleRouter(conn)
 	r.InitHangoutRouter(conn)
 	r.InitFriendRouter(conn)
+	r.InitMatchingRouter(conn)
 	r.Serve()
 }
