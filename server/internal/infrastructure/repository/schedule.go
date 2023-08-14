@@ -41,7 +41,7 @@ func (ur *ScheduleRepository) DeleteSchedule(ctx context.Context, id string) err
 }
 
 func (ur *ScheduleRepository) GetSchedulesByUserId(ctx context.Context, id string) (entity.Schedules, error) {
-	query := `SELECT * FROM friend WHERE user_id = ?`
+	query := `SELECT * FROM schedule WHERE user_id = ?`
 	var dtos d.SchedulesDtos
 	err := ur.conn.DB.SelectContext(ctx, &dtos, query, id)
 	if err != nil {

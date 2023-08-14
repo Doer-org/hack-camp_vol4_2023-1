@@ -12,7 +12,7 @@ func (r Router) InitScheduleRouter(conn *database.Conn) {
 	uc := usecase.NewScheduleUsecase(repo)
 	h := handler.NewScheduleHandler(uc)
 
-	g := r.Engine.Group("/Schedule")
+	g := r.Engine.Group("/schedule")
 	g.POST("/", h.CreateSchedule)
 	g.GET("/:user_id", h.GetSchedulesByUserID)
 	g.PUT("/:id", h.UpdateSchedule)
