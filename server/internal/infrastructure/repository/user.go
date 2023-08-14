@@ -34,22 +34,21 @@ func (ur *UserRepository) CreateUser(ctx context.Context, user *entity.User) (*e
 func (ur *UserRepository) GetUserById(ctx context.Context, id string) (*entity.User, error) {
 	query := `SELECT * FROM user WHERE id = ?;`
 	var dto d.UserDto
-	err := ur.conn.DB.SelectContext(ctx, &dto, query, id)
+	err := ur.conn.DB.GetContext(ctx, &dto, query, id)
 	if err != nil {
-return nil, err
+		return nil, err
 	}
 	return d.UserDtoToEntity(&dto), nil
 }
 
 func (ur *UserRepository) UpdateUser(ctx context.Context, user *entity.User, id string) (*entity.User, error) {
-query := `UPDATE user SET name = :name, description = :description WHERE id = :id;`
-dto := d.UserEntityToDto(user)
-dto.Id = id
-_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
-if err != nil {
-	return nil, err
-}
-return d.UserDtoToEntity(&dto), nil
+	query := `UPDATE user SET name = :name, description = :description WHERE id = :id;`
+	dto := d.UserEntityToDto(user)
+	dto.Id = id
+	_, err := ur.conn.DB.NamedExecContext(ctx, query, &dto)
+	if err != nil {
+		return nil, err
+	}
+	return d.UserDtoToEntity(&dto), nil
 
 }
-
