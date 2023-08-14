@@ -16,7 +16,7 @@ type HangoutUsecase struct {
 }
 
 type IHangoutUsecase interface {
-	GetHangoutsByID(ctx context.Context, id string) (entity.Hangouts, error)
+	GetHangoutsByUserID(ctx context.Context, id string) (entity.Hangouts, error)
 	CreateHangout(ctx context.Context, hangout *entity.Hangout) (*entity.Hangout, error)
 	UpdateHangout(ctx context.Context, hangout *entity.Hangout, id string) (*entity.Hangout, error)
 	DeleteHangout(ctx context.Context, id string) error
@@ -28,11 +28,11 @@ func NewHangoutUsecase(repo repository.IHangoutRepository) IHangoutUsecase {
 	}
 }
 
-func (uu *HangoutUsecase) GetHangoutsByID(ctx context.Context, id string) (entity.Hangouts, error) {
-	if id == "" {
-		return nil, fmt.Errorf("id is empty")
+func (uu *HangoutUsecase) GetHangoutsByUserID(ctx context.Context, user_id string) (entity.Hangouts, error) {
+	if user_id == "" {
+		return nil, fmt.Errorf("user_id is empty")
 	}
-	user, err := uu.repo.GetHangoutsByUserId(ctx, id)
+	user, err := uu.repo.GetHangoutsByUserId(ctx, user_id)
 	return user, err
 }
 

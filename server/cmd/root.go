@@ -16,6 +16,7 @@ func Exec() {
 
 	r.InitUserRouter(conn)
 	r.InitScheduleRouter(conn)
+	r.InitHangoutRouter(conn)
 	r.InitFriendRouter(conn)
 	r.Serve()
 }
