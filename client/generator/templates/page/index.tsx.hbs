@@ -1,0 +1,45 @@
+import { RootLayout } from "@/components/layout/Layout";
+import { GetServerSideProps, NextPage } from "next";
+import { parseCookies } from "nookies";
+
+type Props = {
+
+};
+
+const {{pascalCase name}}: NextPage<Props> = ({ }) => {
+  return (
+    <RootLayout meta="">
+      <div>{{pascalCase name}}</div>
+    </RootLayout>
+  );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = parseCookies(context);
+  console.log(cookies.user);
+  if (!cookies.user) {
+    return {
+      redirect:{
+        permanent: false,
+        destination: `/login`,
+      }
+    }
+  }
+  const user = JSON.parse(cookies.user);
+  if (!user) {
+    return {
+      redirect:{
+        permanent: false,
+        destination: `/login`,
+      }
+    }
+  }
+
+  return {
+    props: {
+
+    },
+  };
+};
+
+export default Home;

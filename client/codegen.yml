@@ -1,0 +1,10 @@
+overwrite: true
+schema: "../server/graph/schema.graphqls"
+documents: "src/apollo/**/*.ts"
+generates:
+  src/apollo/generated/:
+    preset: "client"
+    plugins: 
+      - "typescript"
+      - "typescript-operations"
+      # - "typescript-graphql-request"

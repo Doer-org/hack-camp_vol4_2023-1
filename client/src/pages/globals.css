@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.home-bg {
+  background-size: cover;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-image: url("/assets/home_bg.png");
+}
+
+.hangout-bg {
+  background-size: cover;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-image: url("/assets/hangout_bg.png");
+}
+
+.login-bg {
+  background-size: cover;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-image: url("/assets/login_bg.png");
+}
+
+.schedule-bg {
+  background-size: cover;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-image: url("/assets/schedule_bg.png");
+}
+
+.user-bg {
+  background-size: cover;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-image: url("/assets/user_bg.png");
+}
+
+
+.addfriend-bg {
+  background-size: cover;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-image: url("/assets/addfriend_bg.png");
+}
+
+.other-bg {
+  background-size: cover;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-image: url("/assets/other_bg.png");
+}
