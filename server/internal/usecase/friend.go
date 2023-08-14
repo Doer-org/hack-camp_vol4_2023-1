@@ -17,6 +17,7 @@ type FriendUsecase struct {
 
 type IFriendUsecase interface {
 	GetFriendsByUserID(ctx context.Context, userId string) (entity.Friends, error)
+	GetRequestsByFriendID(ctx context.Context, userId string) (entity.Friends, error)
 	CreateFriend(ctx context.Context, friend *entity.Friend) (*entity.Friend, error)
 	DeleteFriend(ctx context.Context, id string) error
 	UpdateFriend(ctx context.Context, friend *entity.Friend, id string) (*entity.Friend, error)
@@ -33,6 +34,14 @@ func (uu *FriendUsecase) GetFriendsByUserID(ctx context.Context, userId string) 
 		return nil, fmt.Errorf("userId is empty")
 	}
 	friends, err := uu.repo.GetFriendsByUserID(ctx, userId)
+	return friends, err
+}
+
+func (uu *FriendUsecase) GetRequestsByFriendID(ctx context.Context, friendId string) (entity.Friends, error) {
+	if friendId == "" {
+		return nil, fmt.Errorf("friendId is empty")
+	}
+	friends, err := uu.repo.GetRequestsByFriendID(ctx, friendId)
 	return friends, err
 }
 

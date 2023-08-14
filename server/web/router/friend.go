@@ -15,6 +15,7 @@ func (r Router) InitFriendRouter(conn *database.Conn) {
 	g := r.Engine.Group("/friend")
 	g.POST("/", h.CreateFriend)
 	g.GET("/:user_id", h.GetFriendsByUserID)
+	g.GET("/request/:friend_id", h.GetRequestsByFriendID)
 	g.PUT("/:id", h.UpdateFriend)
 	g.DELETE("/:id", h.DeleteFriend)
 }
