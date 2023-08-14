@@ -14,8 +14,8 @@ func Exec() {
 	}
 	r := router.NewRouter()
 
-// comment: InitScheduleRouterを挿入してください。
-
+	r.InitUserRouter(conn)
+	r.InitScheduleRouter(conn)
 	r.InitFriendRouter(conn)
 	r.Serve()
 }
