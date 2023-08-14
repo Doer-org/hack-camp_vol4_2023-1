@@ -6,6 +6,7 @@ import (
 
 	"github.com/Doer-org/hack-camp_vol4_2023-1/internal/domain/entity"
 	"github.com/Doer-org/hack-camp_vol4_2023-1/internal/domain/repository"
+	"github.com/Doer-org/hack-camp_vol4_2023-1/utils"
 )
 
 var _ IScheduleUsecase = &ScheduleUsecase{}
@@ -44,6 +45,7 @@ func (uu *ScheduleUsecase) CreateSchedule(ctx context.Context, schedule *entity.
 		return nil, fmt.Errorf("user_id is empty")
 	}
 
+	schedule.Id = utils.GetUlid()
 	schedule, err := uu.repo.CreateSchedule(ctx, schedule)
 	return schedule, err
 
