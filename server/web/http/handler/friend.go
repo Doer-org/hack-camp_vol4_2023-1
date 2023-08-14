@@ -19,7 +19,7 @@ func NewFriendHandler(uc usecase.IFriendUsecase) *FriendHandler {
 	}
 }
 
-func (u *FriendHandler) CreateFriend(ctx *gin.Context) {
+func (f *FriendHandler) CreateFriend(ctx *gin.Context) {
 	var j json.FriendJson
 	if err := ctx.BindJSON(&j); err != nil {
 		log.Fatalf(err.Error())
@@ -29,7 +29,7 @@ func (u *FriendHandler) CreateFriend(ctx *gin.Context) {
 		)
 		return
 	}
-	friend, err := u.uc.CreateFriend(ctx, json.FriendJsonToEntity(&j))
+	friend, err := f.uc.CreateFriend(ctx, json.FriendJsonToEntity(&j))
 	if err != nil {
 		ctx.JSON(
 			http.StatusBadRequest,
@@ -44,9 +44,9 @@ func (u *FriendHandler) CreateFriend(ctx *gin.Context) {
 	)
 }
 
-func (u *FriendHandler) GetFriendsByUserID(ctx *gin.Context) {
+func (f *FriendHandler) GetFriendsByUserID(ctx *gin.Context) {
 	user_id := ctx.Param("user_id")
-	friends, err := u.uc.GetFriendsByUserID(ctx, user_id)
+	friends, err := f.uc.GetFriendsByUserID(ctx, user_id)
 	if err != nil {
 		ctx.JSON(
 			http.StatusBadRequest,
@@ -56,14 +56,14 @@ func (u *FriendHandler) GetFriendsByUserID(ctx *gin.Context) {
 	}
 	friendsjson := json.FriendsEntityToJson(friends)
 	ctx.JSON(
-		http.StatusCreated,
+		http.StatusOK,
 		gin.H{"data": friendsjson},
 	)
 }
 
-func (u *FriendHandler) DeleteFriend(ctx *gin.Context) {
+func (f *FriendHandler) DeleteFriend(ctx *gin.Context) {
 	id := ctx.Param("id")
-	err := u.uc.DeleteFriend(ctx, id)
+	err := f.uc.DeleteFriend(ctx, id)
 	if err != nil {
 		ctx.JSON(
 			http.StatusBadRequest,
@@ -72,12 +72,12 @@ func (u *FriendHandler) DeleteFriend(ctx *gin.Context) {
 		return
 	}
 	ctx.JSON(
-		http.StatusCreated,
+		http.StatusOK,
 		gin.H{"data": "success"},
 	)
 }
 
-func (u *FriendHandler) UpdateFriend(ctx *gin.Context) {
+func (f *FriendHandler) UpdateFriend(ctx *gin.Context) {
 	id := ctx.Param("id")
 	var j json.FriendJson
 	if err := ctx.BindJSON(&j); err != nil {
@@ -87,7 +87,7 @@ func (u *FriendHandler) UpdateFriend(ctx *gin.Context) {
 		)
 		return
 	}
-	friend, err := u.uc.UpdateFriend(ctx, json.FriendJsonToEntity(&j), id)
+	friend, err := f.uc.UpdateFriend(ctx, json.FriendJsonToEntity(&j), id)
 	if err != nil {
 		ctx.JSON(
 			http.StatusBadRequest,

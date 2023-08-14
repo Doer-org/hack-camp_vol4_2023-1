@@ -13,6 +13,8 @@ func Exec() {
 		log.Fatal(err)
 	}
 	r := router.NewRouter()
+
+	r.InitUserRouter(conn)
 	r.InitFriendRouter(conn)
 	r.Serve()
 }
