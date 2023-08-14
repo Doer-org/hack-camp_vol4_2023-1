@@ -61,6 +61,23 @@ func (f *FriendHandler) GetFriendsByUserID(ctx *gin.Context) {
 	)
 }
 
+func (f *FriendHandler) GetRequestsByFriendID(ctx *gin.Context) {
+	friend_id := ctx.Param("friend_id")
+	friends, err := f.uc.GetRequestsByFriendID(ctx, friend_id)
+	if err != nil {
+		ctx.JSON(
+			http.StatusBadRequest,
+			gin.H{"error": err.Error()},
+		)
+		return
+	}
+	friendsjson := json.FriendsEntityToJson(friends)
+	ctx.JSON(
+		http.StatusOK,
+		gin.H{"data": friendsjson},
+	)
+}
+
 func (f *FriendHandler) DeleteFriend(ctx *gin.Context) {
 	id := ctx.Param("id")
 	err := f.uc.DeleteFriend(ctx, id)

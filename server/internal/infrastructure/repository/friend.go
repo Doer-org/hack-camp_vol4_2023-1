@@ -50,6 +50,16 @@ func (fr *FriendRepository) GetFriendsByUserID(ctx context.Context, userId strin
 	return d.FriendsDtosToEntity(dtos), nil
 }
 
+func (fr *FriendRepository) GetRequestsByFriendID(ctx context.Context, userId string) (entity.Friends, error) {
+	query := `SELECT * FROM friend WHERE friend_id = ? AND accept = false`
+	var dtos d.FriendsDtos
+	err := fr.conn.DB.SelectContext(ctx, &dtos, query, userId)
+	if err != nil {
+		return nil, err
+	}
+	return d.FriendsDtosToEntity(dtos), nil
+}
+
 func (fr *FriendRepository) UpdateFriend(ctx context.Context, friend *entity.Friend, id string) (*entity.Friend, error) {
 	query := `UPDATE friend SET accept = :accept WHERE id = :id`
 	dto := d.FriendEntityToDto(friend)
