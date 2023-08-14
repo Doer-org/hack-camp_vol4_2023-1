@@ -14,9 +14,9 @@ func Exec() {
 	}
 	r := router.NewRouter()
 
-
 	r.InitUserRouter(conn)
-  r.InitHangoutRouter(conn)
+	r.InitScheduleRouter(conn)
+	r.InitHangoutRouter(conn)
 	r.InitFriendRouter(conn)
 	r.Serve()
 }
