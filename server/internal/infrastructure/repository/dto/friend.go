@@ -20,12 +20,12 @@ func FriendDtoToEntity(dto *FriendDto) *entity.Friend {
 	}
 }
 
-func FriendEntityToDto(u *entity.Friend) FriendDto {
+func FriendEntityToDto(f *entity.Friend) FriendDto {
 	return FriendDto{
-		Id:        u.Id,
-		User_id:   u.User_id,
-		Friend_id: u.Friend_id,
-		Accept:    u.Accept,
+		Id:        f.Id,
+		User_id:   f.User_id,
+		Friend_id: f.Friend_id,
+		Accept:    f.Accept,
 	}
 }
 
