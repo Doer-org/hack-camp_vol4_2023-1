@@ -14,8 +14,7 @@ func Exec() {
 	}
 	r := router.NewRouter()
 
-	// comment: InitHangoutRouterを挿入してください。
-
+	r.InitHangoutRouter(conn)
 	r.InitFriendRouter(conn)
 	r.Serve()
 }

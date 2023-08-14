@@ -22,7 +22,7 @@ func NewHangoutRepository(conn *database.Conn) repository.IHangoutRepository {
 }
 
 func (ur *HangoutReposiroty) CreateHangout(ctx context.Context, hangout *entity.Hangout) (*entity.Hangout, error) {
-	query := `INSERT INTO friend (id, user_id, name) VALUES (:id, :user_id, :name);`
+	query := `INSERT INTO hangout (id, user_id, name) VALUES (:id, :user_id, :name);`
 	dto := d.HangoutEntityToDto(hangout)
 	_, err := ur.conn.DB.NamedExecContext(ctx, query, dto)
 	if err != nil {
@@ -40,10 +40,10 @@ func (ur *HangoutReposiroty) DeleteHangout(ctx context.Context, id string) error
 	return nil
 }
 
-func (ur *HangoutReposiroty) GetHangoutsByUserId(ctx context.Context, id string) (entity.Hangouts, error) {
-	query := `SELECT * FROM hangout WHERE id = ?`
+func (ur *HangoutReposiroty) GetHangoutsByUserId(ctx context.Context, user_id string) (entity.Hangouts, error) {
+	query := `SELECT * FROM hangout WHERE user_id = ?`
 	var dtos d.HangoutsDtos
-	err := ur.conn.DB.SelectContext(ctx, &dtos, query, id)
+	err := ur.conn.DB.SelectContext(ctx, &dtos, query, user_id)
 	if err != nil {
 		return nil, err
 	}
