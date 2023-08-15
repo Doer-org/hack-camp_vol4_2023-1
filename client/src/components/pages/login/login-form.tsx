@@ -8,6 +8,7 @@ import { RiGoogleFill } from "react-icons/ri";
 import { createUser } from "@/api/user";
 import { Button } from "@/components/elements/Button";
 import auth from "@/firebase/client";
+
 export const LoginForm: FC = () => {
   const login = async () => {
     const provider = new GoogleAuthProvider();
