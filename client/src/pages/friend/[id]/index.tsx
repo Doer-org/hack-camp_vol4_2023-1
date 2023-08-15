@@ -11,7 +11,7 @@ type Props = {
 const Friend: NextPage<Props> = ({}) => {
   return (
     <RootLayout meta={`{"friend"}`}>
-      <FriendMain />
+      <FriendMain friend={} />
     </RootLayout>
   );
 };

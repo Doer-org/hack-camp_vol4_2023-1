@@ -1,12 +1,12 @@
 import React, { FC } from "react";
-import { Friend } from "@/api/friend/type";
 import { Hangout } from "@/api/hangout/type";
 import { Schedule } from "@/api/schedule/type";
+import { User } from "@/api/user/type";
 import { FriendMylist } from "@/components/pages/friend/friend-mylist";
 import { FriendOverview } from "@/components/pages/friend/friend-overview";
 
 type FriendMainProps = {
-  friend: Friend;
+  friend: User;
   hangouts: Hangout[];
   schedules: Schedule[];
 };

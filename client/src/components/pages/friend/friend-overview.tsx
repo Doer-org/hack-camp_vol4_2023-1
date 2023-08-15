@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { Friend } from "@/api/friend/type";
+import { User } from "@/api/user/type";
 import { Text } from "@/components/elements/Text";
 
 type FriendOverviewProps = {
-  friend: Friend;
+  friend: User;
 };
 export const FriendOverview: FC<FriendOverviewProps> = ({ friend }) => {
   const number_friend = 2;
