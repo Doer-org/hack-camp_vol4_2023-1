@@ -7,7 +7,7 @@ type FriendMyListProps = {
   schedules: Schedule[];
 };
 
-export const FriendMylist: FC<FriendMyListProps> = ({hangouts, schedules}) => {
+export const FriendMylist: FC<FriendMyListProps> = ({ hangouts, schedules }) => {
   return (
     <div className="bg-new-white shadow-md rounded-lg p-4">
       {/* <div>
