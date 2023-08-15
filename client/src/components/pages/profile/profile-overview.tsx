@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { User } from "@/apollo/generated/graphql";
+import { User } from "@/api/user/type";
 import { LinkButton } from "@/components/elements/Button";
 import { Text } from "@/components/elements/Text";
 
