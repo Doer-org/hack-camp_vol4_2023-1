@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/husky.sh"
 
-pnpm lint
 pnpm run lint-staged
 
 
