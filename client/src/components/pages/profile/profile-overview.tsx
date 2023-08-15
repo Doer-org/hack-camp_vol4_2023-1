@@ -23,7 +23,7 @@ export const ProfileOverview:FC<ProfileOverviewProps> = ({user}) => {
           </LinkButton>
         </div>
       </div>
-      <div className="flex justify-between p-8 pt-24">
+      <div className="flex justify-between p-8 pt-28">
         <div className="w-28 h-9">
           <LinkButton
             className="bg-new-blue-700 text-new-white rounded-lg w-28 h-9"
