@@ -9,9 +9,15 @@ type Props = {
 };
 
 const Friend: NextPage<Props> = ({}) => {
+  const friend = {
+    id: "1",
+    name: "hoge",
+    image: "",
+    description: "",
+  };
   return (
     <RootLayout meta={`{"friend"}`}>
-      <FriendMain friend={} />
+      <FriendMain friend={friend} hangouts={[]} schedules={[]} />
     </RootLayout>
   );
 };
