@@ -1,4 +1,5 @@
-import { Hangout, Schedule } from "@/apollo/generated/graphql";
+import { Hangout } from "@/api/hangout/type";
+import { Schedule } from "@/api/schedule/type";
 import { Text } from "@/components/elements/Text";
 import React, { FC } from "react";
 
@@ -8,12 +9,6 @@ type ProfileMylistProps = {
 }
 
 export const ProfileMylist:FC<ProfileMylistProps> = ({hangouts, schedules}) => {
-  const hangoutList = ["hoge", "hoge", "hoge"];
-  const scheduleList = [
-    new Date(2022, 5 - 1, 5, 6, 35, 20, 333),
-    new Date(2022, 5 - 1, 5, 6, 35, 20, 333),
-    new Date(2022, 5 - 1, 5, 6, 35, 20, 333),
-  ];
   return (
     <div className="bg-new-white shadow-md rounded-lg p-4">
       <div>
