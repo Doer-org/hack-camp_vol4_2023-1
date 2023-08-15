@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import { CreateSchedule } from "@/api/mutation";
+import { createSchedule } from "@/api/schedule/index";
 import { Text } from "@/components/elements/Text";
 
 type Inputs = {
@@ -38,7 +38,7 @@ export const ScheduleForm: FC = () => {
       date: "6/4",
     };
 
-    const { data: schedule, err } = await CreateSchedule(userData);
+    const { scheduleData: schedule, error: err } = await createSchedule(userData);
     if (err) {
       console.log("Error:", err);
     }

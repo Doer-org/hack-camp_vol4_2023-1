@@ -6,21 +6,20 @@ export type Schedule = {
 };
 
 export type GetSchedulesByUserId = {
-    user_id: string;
-}
+  user_id: string;
+};
 
 export type CreateScheduleInput = {
-    date: string;
-    id: string;
-    user_id: string;
-}
+  date: string;
+  user_id: string;
+};
 
 export type UpdateScheduleInput = {
-    date: string;
-    id: string;
-    user_id: string;
-}
+  date: string;
+  id: string;
+  user_id: string;
+};
 
 export type DeleteScheduleInput = {
-    id: string;
-}
+  id: string;
+};

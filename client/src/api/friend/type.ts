@@ -1,29 +1,28 @@
 export type Friend = {
-    __typename?: "Friend";
-    accept: Boolean;
-    friend_id: string;
-    id: string;
-    user_id: string;
-}
+  __typename?: "Friend";
+  accept: Boolean;
+  friend_id: string;
+  id: string;
+  user_id: string;
+};
 
 export type GetFriendsByUserIdInput = {
-    user_id: string;
-}
+  user_id: string;
+};
 
 export type CreateFriendInput = {
-    accept: Boolean;
-    friend_id: string;
-    id: string;
-    user_id: string;
-}
+  accept: Boolean;
+  friend_id: string;
+  user_id: string;
+};
 
 export type UpdateFriendInput = {
-    accept: Boolean;
-    friend_id: string;
-    id: string;
-    user_id: string;
-}
+  accept: Boolean;
+  friend_id: string;
+  id: string;
+  user_id: string;
+};
 
 export type DeleteFriendInput = {
-    id: string;
-}
+  id: string;
+};
