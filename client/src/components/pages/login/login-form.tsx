@@ -1,13 +1,13 @@
 "use client";
 
-import auth from "@/firebase/client";
-import React, { FC } from "react";
-import { signIn as signInByNextAuth } from "next-auth/react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { Button } from "@/components/elements/Button";
-import { RiGoogleFill } from "react-icons/ri";
+import { signIn as signInByNextAuth } from "next-auth/react";
 import { parseCookies, setCookie } from "nookies";
+import React, { FC } from "react";
+import { RiGoogleFill } from "react-icons/ri";
 import { createUser } from "@/api/user";
+import { Button } from "@/components/elements/Button";
+import auth from "@/firebase/client";
 export const LoginForm: FC = () => {
   const login = async () => {
     const provider = new GoogleAuthProvider();
@@ -28,14 +28,14 @@ export const LoginForm: FC = () => {
     // localStorage.setItem("user", JSON.stringify(userData));
 
     const cookies = parseCookies();
-    setCookie(null, "user", JSON.stringify(userData))
+    setCookie(null, "user", JSON.stringify(userData));
     const idToken = await cred.user.getIdToken();
     await signInByNextAuth("credentials", {
       idToken,
       callbackUrl: "/",
     });
   };
-  
+
   return (
     <div className="w-60 mx-auto">
       <Button

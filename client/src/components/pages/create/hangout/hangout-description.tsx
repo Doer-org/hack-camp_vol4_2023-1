@@ -1,7 +1,7 @@
+import React, { FC } from "react";
 import { User } from "@/api/user/type";
 import { Text } from "@/components/elements/Text";
 import { Title } from "@/components/elements/Title";
-import React, { FC } from "react";
 
 type HangoutDescriptionProps = {
   user: User;

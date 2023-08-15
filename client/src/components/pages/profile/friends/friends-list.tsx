@@ -1,6 +1,6 @@
-import { Title } from "@/components/elements/Title";
 import React from "react";
 import { Text } from "@/components/elements/Text";
+import { Title } from "@/components/elements/Title";
 
 export const FriendsList = () => {
   return (

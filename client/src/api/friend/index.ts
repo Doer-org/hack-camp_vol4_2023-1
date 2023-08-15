@@ -1,12 +1,6 @@
-import { Axios } from "@/api/core/axios";
-import {
-  CreateFriendInput,
-  DeleteFriendInput,
-  Friend,
-  GetFriendsByUserIdInput,
-  UpdateFriendInput,
-} from "./type";
 import { AxiosError, AxiosResponse } from "axios";
+import { CreateFriendInput, DeleteFriendInput, Friend, GetFriendsByUserIdInput, UpdateFriendInput } from "./type";
+import { Axios } from "@/api/core/axios";
 
 export const getFriendsbyUserId = async (input: GetFriendsByUserIdInput) => {
   let friendData: Friend | null = null;

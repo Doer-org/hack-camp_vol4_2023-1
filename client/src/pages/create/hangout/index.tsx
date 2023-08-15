@@ -1,18 +1,18 @@
-import { User } from "@/api/user/type";
-import { RootLayout } from "@/components/layout/Layout";
-import { HangoutMain } from "@/components/pages/create/hangout/hangout-main";
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
 import React from "react";
+import { User } from "@/api/user/type";
+import { RootLayout } from "@/components/layout/Layout";
+import { HangoutMain } from "@/components/pages/create/hangout/hangout-main";
 
 type Props = {
-  user: User
-}
+  user: User;
+};
 
-const Hangout: NextPage<Props> = ({user}) => {
+const Hangout: NextPage<Props> = ({ user }) => {
   return (
     <RootLayout meta="遊びを登録する">
-      <HangoutMain user={user}/>
+      <HangoutMain user={user} />
     </RootLayout>
   );
 };

@@ -1,13 +1,13 @@
-import React from "react";
-import { RootLayout } from "@/components/layout/Layout";
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
-import { ProfileMain } from "@/components/pages/profile/profile-main";
-import { User } from "@/api/user/type";
-import { Hangout } from "@/api/hangout/type";
-import { Schedule } from "@/api/schedule/type";
+import React from "react";
 import { getHangoutsByUserId } from "@/api/hangout";
+import { Hangout } from "@/api/hangout/type";
 import { getSchedulesByUserId } from "@/api/schedule";
+import { Schedule } from "@/api/schedule/type";
+import { User } from "@/api/user/type";
+import { RootLayout } from "@/components/layout/Layout";
+import { ProfileMain } from "@/components/pages/profile/profile-main";
 
 type Props = {
   user: User;

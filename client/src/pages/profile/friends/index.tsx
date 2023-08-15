@@ -1,9 +1,9 @@
-import { RootLayout } from "@/components/layout/Layout";
-import { FriendsCloseButton } from "@/components/pages/profile/friends/friends-close-button";
-import React from "react";
-import { FriendsList } from "@/components/pages/profile/friends/friends-list";
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
+import React from "react";
+import { RootLayout } from "@/components/layout/Layout";
+import { FriendsCloseButton } from "@/components/pages/profile/friends/friends-close-button";
+import { FriendsList } from "@/components/pages/profile/friends/friends-list";
 
 const Friends: NextPage = () => {
   return (

@@ -1,6 +1,6 @@
-import { Axios } from "@/api/core/axios";
-import { User, CreateUserInput, GetUserByIdInput, UpdateUserInput } from "./type";
 import { AxiosError, AxiosResponse } from "axios";
+import { User, CreateUserInput, GetUserByIdInput, UpdateUserInput } from "./type";
+import { Axios } from "@/api/core/axios";
 
 export const getUserById = async (input: GetUserByIdInput) => {
   let userData: User | null = null;

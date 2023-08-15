@@ -1,9 +1,9 @@
+import { GetServerSideProps, NextPage } from "next";
+import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
+import React from "react";
 import { CreateFriend } from "@/api/mutation";
 import { RootLayout } from "@/components/layout/Layout";
-import { useRouter } from "next/router";
-import React from "react";
-import { GetServerSideProps, NextPage } from "next";
-import { parseCookies } from "nookies";
 import { AcceptMain } from "@/components/pages/friend/accept/accept-main";
 
 type Props = {

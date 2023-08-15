@@ -1,6 +1,6 @@
-import { User } from "@/apollo/generated/graphql";
 import React, { FC } from "react";
 import { QRCode } from "react-qrcode-logo";
+import { User } from "@/apollo/generated/graphql";
 
 type ShareQrcodeProps = {
   url: string;

@@ -1,9 +1,9 @@
+import React, { FC } from "react";
+import { HangoutDescription } from "./hangout-description";
+import { User } from "@/api/user/type";
 import { Text } from "@/components/elements/Text";
 import { Title } from "@/components/elements/Title";
-import React, { FC } from "react";
 import { HangoutForm } from "@/components/pages/create/hangout/hangout-form";
-import { User } from "@/api/user/type";
-import { HangoutDescription } from "./hangout-description";
 
 type HangoutMainProps = {
   user: User;

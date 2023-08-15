@@ -1,12 +1,6 @@
-import { Axios } from "@/api/core/axios";
-import {
-  CreateHangoutInput,
-  DeleteHangoutInput,
-  GetHangoutsByUserIdInput,
-  Hangout,
-  UpdateHangoutInput,
-} from "./type";
 import { AxiosError, AxiosResponse } from "axios";
+import { CreateHangoutInput, DeleteHangoutInput, GetHangoutsByUserIdInput, Hangout, UpdateHangoutInput } from "./type";
+import { Axios } from "@/api/core/axios";
 
 export const getHangoutsByUserId = async (input: GetHangoutsByUserIdInput) => {
   let hangoutsData: Hangout[] | null = null;
@@ -19,7 +13,7 @@ export const getHangoutsByUserId = async (input: GetHangoutsByUserIdInput) => {
     .catch((err: AxiosError<{ error: string }>) => {
       error = err;
     });
-    console.log(hangoutsData, error);
+  console.log(hangoutsData, error);
   return { hangoutsData, error };
 };
 

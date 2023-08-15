@@ -1,18 +1,14 @@
+import React, { FC } from "react";
 import { Hangout } from "@/api/hangout/type";
 import { Schedule } from "@/api/schedule/type";
-import { Text } from "@/components/elements/Text";
-import React, { FC } from "react";
 
 type ProfileMylistProps = {
   hangouts: Hangout[];
   schedules: Schedule[];
 };
 
-export const ProfileMylist: FC<ProfileMylistProps> = ({
-  hangouts,
-  schedules,
-}) => {
-  console.log(hangouts)
+export const ProfileMylist: FC<ProfileMylistProps> = ({ hangouts, schedules }) => {
+  console.log(hangouts);
   return (
     <div className="bg-new-white shadow-md rounded-lg p-4">
       {/* <div>

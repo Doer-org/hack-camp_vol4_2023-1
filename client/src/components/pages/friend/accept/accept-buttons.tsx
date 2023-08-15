@@ -1,6 +1,6 @@
-import { Button } from "@/components/elements/Button";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
+import { Button } from "@/components/elements/Button";
 
 type AcceptButtonsProps = {
   handleSubmit: () => Promise<void>;
@@ -18,10 +18,7 @@ export const AcceptButtons: FC<AcceptButtonsProps> = ({ handleSubmit }) => {
       >
         cancel
       </Button>
-      <Button
-        onClick={handleSubmit}
-        className="w-20 h-10 bg-new-blue-800 text-new-white rounded-md"
-      >
+      <Button onClick={handleSubmit} className="w-20 h-10 bg-new-blue-800 text-new-white rounded-md">
         follow
       </Button>
     </div>

@@ -1,10 +1,10 @@
+import { GetServerSideProps, NextPage } from "next";
+import { parseCookies } from "nookies";
+import React from "react";
 import { Text } from "@/components/elements/Text";
 import { Title } from "@/components/elements/Title";
 import { RootLayout } from "@/components/layout/Layout";
 import { ScheduleForm } from "@/components/pages/create/schedule/schedule-form";
-import { GetServerSideProps, NextPage } from "next";
-import { parseCookies } from "nookies";
-import React from "react";
 
 const Schedule: NextPage = () => {
   return (
