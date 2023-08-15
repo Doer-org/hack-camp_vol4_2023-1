@@ -6,9 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix",
+    "lint": "eslint . --fix",
+    "format":"prettier --write **/*.{js,ts,jsx,tsx,md,json}",
     "gene": "plop --plopfile generator/index.js",
-    "plop": "plop",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
