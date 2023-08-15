@@ -19,14 +19,15 @@ export const getHangoutsByUserId = async (input: GetHangoutsByUserIdInput) => {
     .catch((err: AxiosError<{ error: string }>) => {
       error = err;
     });
+    console.log(hangoutsData, error);
   return { hangoutsData, error };
 };
 
 export const createHangout = async (input: CreateHangoutInput) => {
-  let hangoutsData: Hangout[] | null = null;
+  let hangoutsData: Hangout | null = null;
   let error: Error | null = null;
   await Axios.post(`/hangout`, input)
-    .then((res: AxiosResponse<Hangout[]>) => {
+    .then((res: AxiosResponse<Hangout>) => {
       const { data } = res;
       hangoutsData = data;
     })
@@ -37,10 +38,10 @@ export const createHangout = async (input: CreateHangoutInput) => {
 };
 
 export const updateHangout = async (input: UpdateHangoutInput) => {
-  let hangoutsData: Hangout[] | null = null;
+  let hangoutsData: Hangout | null = null;
   let error: Error | null = null;
   await Axios.put(`/hangout/${input.id}`, input)
-    .then((res: AxiosResponse<Hangout[]>) => {
+    .then((res: AxiosResponse<Hangout>) => {
       const { data } = res;
       hangoutsData = data;
     })
@@ -51,10 +52,10 @@ export const updateHangout = async (input: UpdateHangoutInput) => {
 };
 
 export const deleteHangout = async (input: DeleteHangoutInput) => {
-  let hangoutsData: Hangout[] | null = null;
+  let hangoutsData: Hangout | null = null;
   let error: Error | null = null;
   await Axios.delete(`/hangout/${input.id}`)
-    .then((res: AxiosResponse<Hangout[]>) => {
+    .then((res: AxiosResponse<Hangout>) => {
       const { data } = res;
       hangoutsData = data;
     })

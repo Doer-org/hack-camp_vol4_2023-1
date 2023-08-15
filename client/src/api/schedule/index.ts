@@ -1,6 +1,6 @@
 import { Axios } from "@/api/core/axios";
 import { AxiosError, AxiosResponse } from "axios";
-import { DeleteScheduleInput } from './type';
+import { DeleteScheduleInput } from "./type";
 import {
   CreateScheduleInput,
   GetSchedulesByUserId,
@@ -8,18 +8,18 @@ import {
   UpdateScheduleInput,
 } from "./type";
 
-export const getScheduleByUserId = async (input: GetSchedulesByUserId) => {
-  let scheduleData: Schedule | null = null;
+export const getSchedulesByUserId = async (input: GetSchedulesByUserId) => {
+  let schedulesData: Schedule[] | null = null;
   let error: Error | null = null;
   await Axios.get(`/schedule/${input.user_id}`)
-    .then((res: AxiosResponse<Schedule>) => {
+    .then((res: AxiosResponse<Schedule[]>) => {
       const { data } = res;
-      scheduleData = data;
+      schedulesData = data;
     })
     .catch((err: AxiosError<{ error: string }>) => {
       error = err;
     });
-  return { scheduleData, error };
+  return { schedulesData, error };
 };
 
 export const createSchedule = async (input: CreateScheduleInput) => {

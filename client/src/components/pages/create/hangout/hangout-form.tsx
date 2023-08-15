@@ -6,8 +6,12 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { Text } from "@/components/elements/Text";
-import { CreateHangout } from "@/api/mutation";
+import { User } from "@/api/user/type";
+import { createHangout } from "@/api/hangout";
 
+type HangoutFormProps = {
+  user: User;
+};
 
 type Inputs = {
   hangouts: string[];
@@ -20,7 +24,7 @@ const schema = z.object({
     .max(3, { message: "3つまで選択してください" }),
 });
 
-export const HangoutForm: FC = () => {
+export const HangoutForm: FC<HangoutFormProps> = ({ user }) => {
   const {
     register,
     handleSubmit,
@@ -39,17 +43,18 @@ export const HangoutForm: FC = () => {
   ];
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     console.log(data);
+    data.hangouts.map(async (hangout: string) => {
+      const InputData = {
+        name: hangout,
+        user_id: user.id,
+      };
+      const { hangoutsData, error } = await createHangout(InputData);
+      if (error) {
+        console.log(error);
+      }
+      console.log(hangoutsData);
+    });
     router.push("/profile");
-    const userData = {
-      name:  "hogehoge",
-      user_id: "hoge",
-    };
-
-    const { data:hangout, err } = await CreateHangout(userData);
-    if (err) {
-      console.log("Error:", err);
-    }
-    console.log(hangout);
   };
 
   return (
@@ -64,7 +69,7 @@ export const HangoutForm: FC = () => {
                   id={hangout.value}
                   value={hangout.value}
                   className="peer hidden"
-                  {...register("hangouts",)}
+                  {...register("hangouts")}
                 />
                 <label
                   htmlFor={hangout.value}
@@ -74,9 +79,13 @@ export const HangoutForm: FC = () => {
                 </label>
               </div>
             )
-            )}
+          )}
         </div>
-            {errors.hangouts && <Text style="text-red-600 text-center pb-4">遊びは1つ以上3つ以下で設定してください</Text>}
+        {errors.hangouts && (
+          <Text style="text-red-600 text-center pb-4">
+            遊びは1つ以上3つ以下で設定してください
+          </Text>
+        )}
         <div className="w-32 mx-auto py-4">
           <input
             type="submit"

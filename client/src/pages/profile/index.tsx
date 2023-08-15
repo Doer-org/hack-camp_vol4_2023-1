@@ -2,11 +2,12 @@ import React from "react";
 import { RootLayout } from "@/components/layout/Layout";
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
-import { GetHangoutsByUserId, GetSchedulesByUserId } from "@/api/query";
 import { ProfileMain } from "@/components/pages/profile/profile-main";
 import { User } from "@/api/user/type";
 import { Hangout } from "@/api/hangout/type";
 import { Schedule } from "@/api/schedule/type";
+import { getHangoutsByUserId } from "@/api/hangout";
+import { getSchedulesByUserId } from "@/api/schedule";
 
 type Props = {
   user: User;
@@ -23,7 +24,6 @@ const Profile: NextPage<Props> = ({ user, hangouts, schedules }) => {
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
-  console.log(cookies.user);
   const user = JSON.parse(cookies.user);
   if (!user) {
     return {
@@ -34,11 +34,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
   const user_id = user.id;
-  const { data: hangouts } = await GetHangoutsByUserId({
+  const { hangoutsData: hangouts } = await getHangoutsByUserId({
     user_id,
   });
 
-  const { data: schedules } = await GetSchedulesByUserId({
+  const { schedulesData: schedules } = await getSchedulesByUserId({
     user_id,
   });
 

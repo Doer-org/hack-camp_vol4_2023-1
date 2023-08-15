@@ -10,7 +10,6 @@ export type GetHangoutsByUserIdInput = {
 };
 
 export type CreateHangoutInput = {
-  id: string;
   name: string;
   user_id: string;
 };

@@ -6,29 +6,28 @@ import { signIn as signInByNextAuth } from "next-auth/react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Button } from "@/components/elements/Button";
 import { RiGoogleFill } from "react-icons/ri";
-import { CreateUser } from "@/api/mutation";
 import { parseCookies, setCookie } from "nookies";
+import { createUser } from "@/api/user";
 export const LoginForm: FC = () => {
   const login = async () => {
     const provider = new GoogleAuthProvider();
     const cred = await signInWithPopup(auth, provider);
-    const userData = {
+    const inputData = {
       id: cred.user.uid,
       name: cred.user.displayName ? cred.user.displayName : "",
       description: "",
       image: "",
     };
 
-    const { data, err } = await CreateUser(userData);
-    if (err) {
-      console.log("Error:", err);
+    const { userData, error } = await createUser(inputData);
+    if (error) {
+      console.log("Error:", error);
     }
-    console.log(data);
+    console.log(userData);
 
     // localStorage.setItem("user", JSON.stringify(userData));
 
     const cookies = parseCookies();
-    console.log({cookies})
     setCookie(null, "user", JSON.stringify(userData))
     const idToken = await cred.user.getIdToken();
     await signInByNextAuth("credentials", {
