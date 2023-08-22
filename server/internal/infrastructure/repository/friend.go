@@ -46,7 +46,7 @@ func (fr *FriendRepository) GetFriendsByUserID(ctx context.Context, userId strin
 	SELECT friend.id, friend.user_id, friend.friend_id, friend.accept, user.name, user.image
 	FROM friend
 	INNER JOIN user ON friend.friend_id = user.id
-	WHERE user_id = ? AND accept = true`
+	WHERE friend.user_id = ? AND friend.accept = true;`
 	var dtos d.FriendByIdDtos
 	err := fr.conn.DB.SelectContext(ctx, &dtos, query, userId)
 	if err != nil {
@@ -61,7 +61,7 @@ func (fr *FriendRepository) GetRequestsByFriendID(ctx context.Context, friendId 
 	SELECT friend.id, friend.user_id, friend.friend_id, friend.accept, user.name, user.image
 	FROM friend
 	INNER JOIN user ON friend.friend_id = user.id
-	WHERE friend_id = ? AND accept = true`
+	WHERE friend.friend_id = ? AND friend.accept = true;`
 	var dtos d.FriendByIdDtos
 	err := fr.conn.DB.SelectContext(ctx, &dtos, query, friendId)
 	if err != nil {
@@ -71,7 +71,7 @@ func (fr *FriendRepository) GetRequestsByFriendID(ctx context.Context, friendId 
 }
 
 func (fr *FriendRepository) UpdateFriend(ctx context.Context, friend *entity.Friend, id string) (*entity.Friend, error) {
-	query := `UPDATE friend SET accept = :accept WHERE id = :id`
+	query := `UPDATE friend SET accept = :accept WHERE id = :id;`
 	dto := d.FriendEntityToDto(friend)
 	dto.Id = id
 	_, err := fr.conn.DB.NamedExecContext(ctx, query, &dto)
