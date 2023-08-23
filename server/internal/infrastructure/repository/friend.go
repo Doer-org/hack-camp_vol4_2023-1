@@ -41,9 +41,11 @@ func (fr *FriendRepository) DeleteFriend(ctx context.Context, id string) error {
 }
 
 func (fr *FriendRepository) GetFriendsByUserID(ctx context.Context, userId string) (entity.FriendsById, error) {
-	//query := `SELECT * FROM friend WHERE user_id = ? AND accept = true`
 	query := `
-	SELECT friend.id, friend.user_id, friend.friend_id, friend.accept, user.name, user.image FROM friend INNER JOIN user ON friend.friend_id = user.id WHERE friend.user_id = ? AND friend.accept = true;
+	SELECT friend.id, friend.user_id, friend.friend_id, friend.accept, user.name, user.image 
+	FROM friend 
+	INNER JOIN user ON friend.friend_id = user.id 
+	WHERE friend.user_id = ? AND friend.accept = true;
 	`
 	var dtos d.FriendByIdDtos
 	err := fr.conn.DB.SelectContext(ctx, &dtos, query, userId)
@@ -54,9 +56,11 @@ func (fr *FriendRepository) GetFriendsByUserID(ctx context.Context, userId strin
 }
 
 func (fr *FriendRepository) GetRequestsByFriendID(ctx context.Context, friendId string) (entity.FriendsById, error) {
-	//query := `SELECT * FROM friend WHERE friend_id = ? AND accept = false`
 	query := `
-	SELECT friend.id, friend.user_id, friend.friend_id, friend.accept, user.name, user.image FROM friend INNER JOIN user ON friend.friend_id = user.id WHERE friend.friend_id = ? AND friend.accept = true;
+	SELECT friend.id, friend.user_id, friend.friend_id, friend.accept, user.name, user.image 
+	FROM friend 
+	INNER JOIN user ON friend.friend_id = user.id 
+	WHERE friend.friend_id = ? AND friend.accept = true;
 	`
 	var dtos d.FriendByIdDtos
 	err := fr.conn.DB.SelectContext(ctx, &dtos, query, friendId)
