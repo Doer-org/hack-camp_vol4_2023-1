@@ -16,8 +16,8 @@ type FriendByIdDto struct {
 	User_id     string `db:"user_id"`
 	Friend_id   string `db:"friend_id"`
 	Accept      bool   `db:"accept"`
-	FriendName  string `db:"friend_name"`
-	FriendImage string `db:"friend_image"`
+	FriendName  string `db:"name"`
+	FriendImage string `db:"image"`
 }
 
 type FriendByIdDtos []FriendByIdDto
