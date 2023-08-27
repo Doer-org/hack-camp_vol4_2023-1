@@ -19,7 +19,6 @@ const Hangout: NextPage<Props> = ({ user }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
-  console.log(cookies.user);
   const user = JSON.parse(cookies.user);
   if (!user) {
     return {
@@ -32,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      user: user ? user : null,
+      user: user ? user.data : null,
     },
   };
 };

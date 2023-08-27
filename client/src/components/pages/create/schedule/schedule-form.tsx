@@ -5,7 +5,12 @@ import React, { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { createSchedule } from "@/api/schedule/index";
+import { User } from "@/api/user/type";
 import { Text } from "@/components/elements/Text";
+
+type ScheduleFormProps = {
+  user: User;
+};
 
 type Inputs = {
   schedule1: string;
@@ -14,12 +19,12 @@ type Inputs = {
 };
 
 const schema = z.object({
-  schedule1: z.string().min(1, { message: "1つ以上選択してください" }),
+  schedule1: z.string().min(1, { message: "1つ以上設定してください" }),
   schedule2: z.string(),
   schedule3: z.string(),
 });
 
-export const ScheduleForm: FC = () => {
+export const ScheduleForm: FC<ScheduleFormProps> = ({ user }) => {
   const {
     register,
     handleSubmit,
@@ -29,20 +34,44 @@ export const ScheduleForm: FC = () => {
     defaultValues: {},
   });
   const router = useRouter();
-  const onSubmit: SubmitHandler<Inputs> = async (data: any) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     console.log(data);
-    router.push("/profile");
 
-    const userData = {
-      user_id: "hoge",
-      date: "6/4",
+    const userData1 = {
+      user_id: user.id,
+      date: data.schedule1,
     };
 
-    const { scheduleData: schedule, error: err } = await createSchedule(userData);
-    if (err) {
-      console.log("Error:", err);
+    const { scheduleData: schedule1, error: err1 } = await createSchedule(userData1);
+    if (err1) {
+      console.log("Error1:", err1);
     }
-    console.log(schedule);
+    console.log(schedule1);
+
+    if (data.schedule2) {
+      const userData2 = {
+        user_id: user.id,
+        date: data.schedule2,
+      };
+      const { scheduleData: schedule2, error: err2 } = await createSchedule(userData2);
+      if (err2) {
+        console.log("Error2:", err2);
+      }
+      console.log(schedule2);
+    }
+
+    if (data.schedule3) {
+      const userData3 = {
+        user_id: user.id,
+        date: data.schedule3,
+      };
+      const { scheduleData: schedule3, error: err3 } = await createSchedule(userData3);
+      if (err3) {
+        console.log("Error:", err3);
+      }
+      console.log(schedule3);
+    }
+    router.push("/profile");
   };
 
   return (

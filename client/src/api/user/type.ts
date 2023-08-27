@@ -6,6 +6,10 @@ export type User = {
   name: string;
 };
 
+export type resUser = {
+  data: User;
+};
+
 export type GetUserByIdInput = {
   id: string;
 };

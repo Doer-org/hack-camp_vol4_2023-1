@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-  const user_id = user.id;
+  const user_id = user.data.id;
   const { hangoutsData: hangouts } = await getHangoutsByUserId({
     user_id,
   });
@@ -44,10 +44,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      user: user ? user : null,
-      id: user ? user.id : null,
-      hangouts: hangouts ? hangouts : [],
-      schedules: schedules ? schedules : [],
+      user: user ? user.data : null,
+      id: user ? user.data.id : null,
+      hangouts: hangouts ? hangouts.data : [],
+      schedules: schedules ? schedules.data : [],
     },
   };
 };

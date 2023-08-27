@@ -6,6 +6,14 @@ export type Friend = {
   user_id: string;
 };
 
+export type resFriend = {
+  data: Friend;
+};
+
+export type resFriends = {
+  data: Friend[];
+};
+
 export type GetFriendsByUserIdInput = {
   user_id: string;
 };
