@@ -17,7 +17,7 @@ export const RootLayout: FC<LayoutProps> = ({ children, meta }) => {
   return (
     <div lang="en" className="w-screen h-screen">
       <Head>
-        <title>{meta} | あそ募</title>
+        <title>{`${meta} | あそ募`}</title>
       </Head>
       <div className={`${mplus1.className} ${"bg-new-white"}`}>
         <div>{children}</div>
