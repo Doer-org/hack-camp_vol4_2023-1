@@ -2,23 +2,23 @@ import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
 import React from "react";
 import { getHangoutsByUserId } from "@/api/hangout";
-import { Hangout } from "@/api/hangout/type";
+import { resHangouts } from "@/api/hangout/type";
 import { getSchedulesByUserId } from "@/api/schedule";
-import { Schedule } from "@/api/schedule/type";
+import { resSchedules } from "@/api/schedule/type";
 import { User } from "@/api/user/type";
 import { RootLayout } from "@/components/layout/Layout";
 import { ProfileMain } from "@/components/pages/profile/profile-main";
 
 type Props = {
   user: User;
-  hangouts: Hangout[];
-  schedules: Schedule[];
+  hangouts: resHangouts;
+  schedules: resSchedules;
 };
 
 const Profile: NextPage<Props> = ({ user, hangouts, schedules }) => {
   return (
     <RootLayout meta="プロフィール">
-      <ProfileMain user={user} hangouts={hangouts} schedules={schedules} />
+      <ProfileMain user={user} hangouts={hangouts.data} schedules={schedules.data} />
     </RootLayout>
   );
 };
@@ -34,10 +34,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
   const user_id = user.data.id;
-  const { hangoutsData: hangouts } = await getHangoutsByUserId({
+  const { hangoutsData:hangouts } = await getHangoutsByUserId({
     user_id,
   });
-
   const { schedulesData: schedules } = await getSchedulesByUserId({
     user_id,
   });
@@ -46,8 +45,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       user: user ? user.data : null,
       id: user ? user.data.id : null,
-      hangouts: hangouts ? hangouts.data : [],
-      schedules: schedules ? schedules.data : [],
+      hangouts: hangouts ? hangouts : null,
+      schedules: schedules ? schedules : null,
     },
   };
 };

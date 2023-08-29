@@ -20,7 +20,6 @@ export const getHangoutsByUserId = async (input: GetHangoutsByUserIdInput) => {
     .catch((err: AxiosError<{ error: string }>) => {
       error = err;
     });
-  console.log(hangoutsData, error);
   return { hangoutsData, error };
 };
 
