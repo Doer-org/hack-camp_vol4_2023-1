@@ -1,18 +1,12 @@
-import { Axios } from "@/api/core/axios";
-import {
-  CreateFriendInput,
-  DeleteFriendInput,
-  Friend,
-  GetFriendsByUserIdInput,
-  UpdateFriendInput,
-} from "./type";
 import { AxiosError, AxiosResponse } from "axios";
+import { CreateFriendInput, DeleteFriendInput, resFriend, resFriends, GetFriendsByUserIdInput, UpdateFriendInput } from "./type";
+import { Axios } from "@/api/core/axios";
 
 export const getFriendsbyUserId = async (input: GetFriendsByUserIdInput) => {
-  let friendData: Friend | null = null;
+  let friendData: resFriends | null = null;
   let error: Error | null = null;
   await Axios.get(`/friend/${input.user_id}`)
-    .then((res: AxiosResponse<Friend>) => {
+    .then((res: AxiosResponse<resFriends>) => {
       const { data } = res;
       friendData = data;
     })
@@ -23,10 +17,10 @@ export const getFriendsbyUserId = async (input: GetFriendsByUserIdInput) => {
 };
 
 export const createFriend = async (input: CreateFriendInput) => {
-  let friendData: Friend | null = null;
+  let friendData: resFriend | null = null;
   let error: Error | null = null;
   await Axios.post(`/friend`, input)
-    .then((res: AxiosResponse<Friend>) => {
+    .then((res: AxiosResponse<resFriend>) => {
       const { data } = res;
       friendData = data;
     })
@@ -37,10 +31,10 @@ export const createFriend = async (input: CreateFriendInput) => {
 };
 
 export const updateFriend = async (input: UpdateFriendInput) => {
-  let friendData: Friend | null = null;
+  let friendData: resFriend | null = null;
   let error: Error | null = null;
   await Axios.put(`/friend/${input.id}`, input)
-    .then((res: AxiosResponse<Friend>) => {
+    .then((res: AxiosResponse<resFriend>) => {
       const { data } = res;
       friendData = data;
     })
@@ -51,10 +45,10 @@ export const updateFriend = async (input: UpdateFriendInput) => {
 };
 
 export const deleteFriend = async (input: DeleteFriendInput) => {
-  let friendData: Friend | null = null;
+  let friendData: resFriend | null = null;
   let error: Error | null = null;
   await Axios.delete(`/friend/${input.id}`)
-    .then((res: AxiosResponse<Friend>) => {
+    .then((res: AxiosResponse<resFriend>) => {
       const { data } = res;
       friendData = data;
     })

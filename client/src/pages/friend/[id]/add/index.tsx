@@ -1,9 +1,7 @@
-import { CreateFriend } from "@/api/mutation";
-import { RootLayout } from "@/components/layout/Layout";
-import { useRouter } from "next/router";
-import React from "react";
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
+import React from "react";
+import { RootLayout } from "@/components/layout/Layout";
 import { AcceptMain } from "@/components/pages/friend/accept/accept-main";
 
 type Props = {
@@ -20,7 +18,6 @@ const FriendAdd: NextPage<Props> = ({ user_id }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
-  console.log(cookies.user);
   const user = JSON.parse(cookies.user);
   if (!user) {
     return {
@@ -33,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      user_id: user ? user.id : null,
+      user_id: user ? user.data.id : null,
     },
   };
 };

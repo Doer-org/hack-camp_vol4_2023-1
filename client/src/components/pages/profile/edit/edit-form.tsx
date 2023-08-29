@@ -1,12 +1,12 @@
 "use client";
-import { Text } from "@/components/elements/Text";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import React, { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
 import { HiChatAlt } from "react-icons/hi";
 import { MdDriveFileRenameOutline } from "react-icons/md";
+import { z } from "zod";
+import { Text } from "@/components/elements/Text";
 
 type Inputs = {
   name: string;
@@ -42,30 +42,18 @@ export const EditForm: FC = () => {
               <MdDriveFileRenameOutline className="w-6 h-6" />
               <Text>name</Text>
             </label>
-            <input
-              type="text"
-              className="w-full h-10 text-xl px-2 rounded-lg"
-              {...register("name")}
-            />
+            <input type="text" className="w-full h-10 text-xl px-2 rounded-lg" {...register("name")} />
           </div>
           <div className="">
             <label className="text-new-blue-600 flex gap-[10px] py-4">
               <HiChatAlt className="w-6 h-6" />
               <Text>description</Text>
             </label>
-            <textarea
-              className="w-full text-xl px-2 p-1 rounded-lg"
-              rows={3}
-              {...register("discription")}
-            />
+            <textarea className="w-full text-xl px-2 p-1 rounded-lg" rows={3} {...register("discription")} />
           </div>
         </div>
 
-        {errors.name && (
-          <Text style="text-red-600 text-center pb-4">
-            名前を設定してください
-          </Text>
-        )}
+        {errors.name && <Text style="text-red-600 text-center pb-4">名前を設定してください</Text>}
         <div className="w-32 mx-auto py-4">
           <input
             type="submit"

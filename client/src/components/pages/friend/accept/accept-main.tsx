@@ -1,8 +1,8 @@
-import { CreateFriend } from "@/api/mutation";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
-import { AcceptInfo } from "@/components/pages/friend/accept/accept-info";
+import { createFriend } from "@/api/friend/index";
 import { AcceptButtons } from "@/components/pages/friend/accept/accept-buttons";
+import { AcceptInfo } from "@/components/pages/friend/accept/accept-info";
 
 type AcceptMainProps = {
   user_id: string;
@@ -14,10 +14,11 @@ export const AcceptMain: FC<AcceptMainProps> = ({ user_id }) => {
   const userData = {
     user_id: user_id,
     friend_id: id as string,
+    accept: false,
   };
 
   const handleSubmit = async () => {
-    const { data: friend, err } = await CreateFriend(userData);
+    const { friendData: friend, error: err } = await createFriend(userData);
     if (err) {
       console.log("Error:", err);
     }

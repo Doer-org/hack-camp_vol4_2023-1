@@ -2,7 +2,7 @@
 import React, { FC } from "react";
 import { MatchingList } from "@/components/pages/home/matching-list";
 
-export const HomeAfterLogin:FC = () => {
+export const HomeAfterLogin: FC = () => {
   const matchingList = [
     {
       name: "hoge",

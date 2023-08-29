@@ -1,13 +1,13 @@
-import { Text } from "@/components/elements/Text";
 import React, { FC } from "react";
+import { User } from "@/api/user/type";
 import { LinkButton } from "@/components/elements/Button";
-import { User } from "@/apollo/generated/graphql";
+import { Text } from "@/components/elements/Text";
 
 type ProfileOverviewProps = {
-  user:User
-}
+  user: User;
+};
 
-export const ProfileOverview:FC<ProfileOverviewProps> = ({user}) => {
+export const ProfileOverview: FC<ProfileOverviewProps> = ({ user }) => {
   const number_friend = 2;
   return (
     <div>
@@ -17,18 +17,19 @@ export const ProfileOverview:FC<ProfileOverviewProps> = ({user}) => {
           <Text fontsize="text-[32px]" style="font-bold text-new-white">
             {user.name}
           </Text>
-          <Text fontsize="text-[18px]" style="text-new-white">{user.description!==""&& user.description}</Text>
+          <Text fontsize="text-[18px]" style="text-new-white">
+            {user.description !== "" && user.description}
+          </Text>
           <LinkButton href="/profile/friends" className="py-1">
-            <Text fontsize="text-[18px]" style="text-new-white">friend: {number_friend}</Text>
+            <Text fontsize="text-[18px]" style="text-new-white">
+              friend: {number_friend}
+            </Text>
           </LinkButton>
         </div>
       </div>
       <div className="flex justify-between p-8 pt-28">
         <div className="w-28 h-9">
-          <LinkButton
-            className="bg-new-blue-700 text-new-white rounded-lg w-28 h-9"
-            href="/profile/edit"
-          >
+          <LinkButton className="bg-new-blue-700 text-new-white rounded-lg w-28 h-9" href="/profile/edit">
             Edit
           </LinkButton>
         </div>

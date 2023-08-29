@@ -1,13 +1,17 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import React, { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { createHangout } from "@/api/hangout";
+import { User } from "@/api/user/type";
 import { Text } from "@/components/elements/Text";
-import { CreateHangout } from "@/api/mutation";
 
+type HangoutFormProps = {
+  user: User;
+};
 
 type Inputs = {
   hangouts: string[];
@@ -20,7 +24,7 @@ const schema = z.object({
     .max(3, { message: "3つまで選択してください" }),
 });
 
-export const HangoutForm: FC = () => {
+export const HangoutForm: FC<HangoutFormProps> = ({ user }) => {
   const {
     register,
     handleSubmit,
@@ -39,44 +43,43 @@ export const HangoutForm: FC = () => {
   ];
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     console.log(data);
+    data.hangouts.map(async (hangout: string) => {
+      const InputData = {
+        name: hangout,
+        user_id: user.id,
+      };
+      const { hangoutsData, error } = await createHangout(InputData);
+      if (error) {
+        console.log(error);
+      }
+      console.log(hangoutsData);
+    });
     router.push("/profile");
-    const userData = {
-      name:  "hogehoge",
-      user_id: "hoge",
-    };
-
-    const { data:hangout, err } = await CreateHangout(userData);
-    if (err) {
-      console.log("Error:", err);
-    }
-    console.log(hangout);
   };
 
   return (
     <div className="py-8">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 gap-3 py-6">
-          {hangoutList.map(
-            (hangout: { value: string; label: string }, index: number) => (
-              <div className="w-36 h-14" key={index}>
-                <input
-                  type="checkbox"
-                  id={hangout.value}
-                  value={hangout.value}
-                  className="peer hidden"
-                  {...register("hangouts",)}
-                />
-                <label
-                  htmlFor={hangout.value}
-                  className="flex cursor-pointer bg-new-white shadow-md w-36 h-14 rounded-lg justify-center items-center peer-checked:bg-new-yellow-300"
-                >
-                  {hangout.label}
-                </label>
-              </div>
-            )
-            )}
+          {hangoutList.map((hangout: { value: string; label: string }, index: number) => (
+            <div className="w-36 h-14" key={index}>
+              <input
+                type="checkbox"
+                id={hangout.value}
+                value={hangout.value}
+                className="peer hidden"
+                {...register("hangouts")}
+              />
+              <label
+                htmlFor={hangout.value}
+                className="flex cursor-pointer bg-new-white shadow-md w-36 h-14 rounded-lg justify-center items-center peer-checked:bg-new-yellow-300"
+              >
+                {hangout.label}
+              </label>
+            </div>
+          ))}
         </div>
-            {errors.hangouts && <Text style="text-red-600 text-center pb-4">遊びは1つ以上3つ以下で設定してください</Text>}
+        {errors.hangouts && <Text style="text-red-600 text-center pb-4">遊びは1つ以上3つ以下で設定してください</Text>}
         <div className="w-32 mx-auto py-4">
           <input
             type="submit"

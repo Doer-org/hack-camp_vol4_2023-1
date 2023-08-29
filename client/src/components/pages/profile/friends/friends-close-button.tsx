@@ -1,6 +1,6 @@
-import { LinkButton } from "@/components/elements/Button";
 import React from "react";
 import { RiCloseLine } from "react-icons/ri";
+import { LinkButton } from "@/components/elements/Button";
 
 export const FriendsCloseButton = () => {
   return (

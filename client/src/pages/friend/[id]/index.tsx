@@ -1,7 +1,7 @@
-import { RootLayout } from "@/components/layout/Layout";
-import React from "react";
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
+import React from "react";
+import { RootLayout } from "@/components/layout/Layout";
 import { FriendMain } from "@/components/pages/friend/friend-main";
 
 type Props = {
@@ -9,15 +9,20 @@ type Props = {
 };
 
 const Friend: NextPage<Props> = ({}) => {
+  const friend = {
+    id: "1",
+    name: "hoge",
+    image: "",
+    description: "",
+  };
   return (
     <RootLayout meta={`{"friend"}`}>
-      <FriendMain />
+      <FriendMain friend={friend} hangouts={[]} schedules={[]} />
     </RootLayout>
   );
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
-  console.log(cookies.user);
   const user = JSON.parse(cookies.user);
   if (!user) {
     return {
@@ -30,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      user_id: user ? user.id : null,
+      user_id: user ? user.data.id : null,
     },
   };
 };

@@ -16,7 +16,6 @@ const {{pascalCase name}}: NextPage<Props> = ({ }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
-  console.log(cookies.user);
   if (!cookies.user) {
     return {
       redirect:{

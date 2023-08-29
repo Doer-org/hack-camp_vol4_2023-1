@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
-import { Text } from "@/components/elements/Text";
-import { Button } from "@/components/elements/Button";
 import { AiOutlinePaperClip } from "react-icons/ai";
+import { Button } from "@/components/elements/Button";
+import { Text } from "@/components/elements/Text";
 
 type ShareButtonProps = {
   url: string;

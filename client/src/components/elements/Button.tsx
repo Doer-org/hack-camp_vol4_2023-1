@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import React, { FC, ReactNode } from "react";
@@ -27,15 +27,9 @@ type LinkButtonProps = {
   children: ReactNode;
 };
 
-export const LinkButton: FC<LinkButtonProps> = ({
-  href,
-  className,
-  children,
-  onClick,
-  disabled,
-}) => {
+export const LinkButton: FC<LinkButtonProps> = ({ href, className, children, onClick, disabled }) => {
   return (
-    <Link href={href} as={href} className={disabled?"pointer-events-none":""}>
+    <Link href={href} as={href} className={disabled ? "pointer-events-none" : ""}>
       <button className={className} onClick={onClick} disabled={disabled}>
         {children}
       </button>

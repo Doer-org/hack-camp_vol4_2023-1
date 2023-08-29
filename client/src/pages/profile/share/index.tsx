@@ -1,8 +1,8 @@
+import { GetServerSideProps, NextPage } from "next";
+import { parseCookies } from "nookies";
+import React from "react";
 import { RootLayout } from "@/components/layout/Layout";
 import { ShareMain } from "@/components/pages/profile/share/share-main";
-import { GetServerSideProps, NextPage } from "next";
-import React from "react";
-import { parseCookies } from "nookies";
 
 type Props = {
   user: any;
