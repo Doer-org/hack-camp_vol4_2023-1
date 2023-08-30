@@ -5,10 +5,10 @@ import { Title } from "@/components/elements/Title";
 import { ScheduleForm } from "@/components/pages/create/schedule/schedule-form";
 
 type ScheduleMainProps = {
-  user:User
-}
+  user: User;
+};
 
-export const ScheduleMain: FC<ScheduleMainProps> = ({user}) => {
+export const ScheduleMain: FC<ScheduleMainProps> = ({ user }) => {
   return (
     <div className="schedule-bg p-10 py-20 h-screen">
       <div className="py-4">

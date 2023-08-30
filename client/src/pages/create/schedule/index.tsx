@@ -6,10 +6,10 @@ import { RootLayout } from "@/components/layout/Layout";
 import { ScheduleMain } from "@/components/pages/create/schedule/schedule-main";
 
 type Props = {
-  user:User
-}
+  user: User;
+};
 
-const Schedule: NextPage<Props> = ({user}) => {
+const Schedule: NextPage<Props> = ({ user }) => {
   return (
     <RootLayout meta="予定を登録する">
       <ScheduleMain user={user} />
