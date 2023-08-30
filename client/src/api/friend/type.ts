@@ -2,6 +2,8 @@ export type Friend = {
   __typename?: "Friend";
   accept: Boolean;
   friend_id: string;
+  friend_name: string;
+  friend_image: string;
   id: string;
   user_id: string;
 };
@@ -15,6 +17,10 @@ export type resFriends = {
 };
 
 export type GetFriendsByUserIdInput = {
+  user_id: string;
+};
+
+export type GetRequestsByUserIdInput = {
   user_id: string;
 };
 
