@@ -5,10 +5,10 @@ import { Text } from "@/components/elements/Text";
 
 type ProfileOverviewProps = {
   user: User;
+  number_friends: number;
 };
 
-export const ProfileOverview: FC<ProfileOverviewProps> = ({ user }) => {
-  const number_friend = 2;
+export const ProfileOverview: FC<ProfileOverviewProps> = ({ user, number_friends }) => {
   const url = `${process.env.NEXT_PUBLIC_CLIENT_URL}/friend/${user.id}/add`;
   return (
     <div>
@@ -23,7 +23,7 @@ export const ProfileOverview: FC<ProfileOverviewProps> = ({ user }) => {
           </Text>
           <LinkButton href="/profile/friends" className="py-1">
             <Text fontsize="text-[18px]" style="text-new-white">
-              friend: {number_friend}
+              friends: {number_friends}
             </Text>
           </LinkButton>
         </div>

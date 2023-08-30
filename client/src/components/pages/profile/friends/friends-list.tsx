@@ -1,22 +1,34 @@
-import React from "react";
+import React, { FC } from "react";
+import { Friend } from "@/api/friend/type";
 import { LinkButton } from "@/components/elements/Button";
 import { Text } from "@/components/elements/Text";
-import { Title } from "@/components/elements/Title";
 
-export const FriendsList = () => {
-  const friend = { id: "1" };
+type FriendsListProps = {
+  friends: Friend[];
+};
+
+export const FriendsList: FC<FriendsListProps> = ({ friends }) => {
   return (
     <div>
-      <div className="py-5">
-        <Title fontsize="text-[24px]">フレンド一覧</Title>
-      </div>
-      <div>
-        <hr />
-        <LinkButton className="flex gap-4 py-4" href={`/friend/${friend.id}`}>
-          <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
-          <Text>Name</Text>
-        </LinkButton>
-      </div>
+      {friends ? (
+        <div>
+          {friends.map((friend, index) => {
+            return (
+              <div key={index}>
+                {index !== 0 && <hr />}
+                <LinkButton className="flex gap-4 py-4" href={`/friend/${friend.friend_id}`}>
+                  <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
+                  <Text>{friend.friend_name}</Text>
+                </LinkButton>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div>
+          <Text>友達はまだいません</Text>
+        </div>
+      )}
     </div>
   );
 };

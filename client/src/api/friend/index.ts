@@ -6,6 +6,7 @@ import {
   resFriends,
   GetFriendsByUserIdInput,
   UpdateFriendInput,
+  GetRequestsByUserIdInput,
 } from "./type";
 import { Axios } from "@/api/core/axios";
 
@@ -13,6 +14,20 @@ export const getFriendsbyUserId = async (input: GetFriendsByUserIdInput) => {
   let friendData: resFriends | null = null;
   let error: Error | null = null;
   await Axios.get(`/friend/${input.user_id}`)
+    .then((res: AxiosResponse<resFriends>) => {
+      const { data } = res;
+      friendData = data;
+    })
+    .catch((err: AxiosError<{ error: string }>) => {
+      error = err;
+    });
+  return { friendData, error };
+};
+
+export const GetRequestsByUserId = async (input: GetRequestsByUserIdInput) => {
+  let friendData: resFriends | null = null;
+  let error: Error | null = null;
+  await Axios.get(`/friend/request/${input.user_id}`)
     .then((res: AxiosResponse<resFriends>) => {
       const { data } = res;
       friendData = data;

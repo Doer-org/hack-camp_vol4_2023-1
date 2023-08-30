@@ -60,7 +60,7 @@ func (fr *FriendRepository) GetRequestsByFriendID(ctx context.Context, friendId 
 	SELECT friend.id, friend.user_id, friend.friend_id, friend.accept, user.name, user.image 
 	FROM friend 
 	INNER JOIN user ON friend.friend_id = user.id 
-	WHERE friend.friend_id = ? AND friend.accept = true;
+	WHERE friend.friend_id = ? AND friend.accept = false;
 	`
 	var dtos d.FriendByIdDtos
 	err := fr.conn.DB.SelectContext(ctx, &dtos, query, friendId)
