@@ -2,11 +2,11 @@ import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { Button } from "@/components/elements/Button";
 
-type AcceptButtonsProps = {
+type AddButtonsProps = {
   handleSubmit: () => Promise<void>;
 };
 
-export const AcceptButtons: FC<AcceptButtonsProps> = ({ handleSubmit }) => {
+export const AddButtons: FC<AddButtonsProps> = ({ handleSubmit }) => {
   const router = useRouter();
   return (
     <div className="mt-8 flex justify-between px-4">

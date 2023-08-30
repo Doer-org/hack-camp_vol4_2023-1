@@ -36,3 +36,19 @@ export const LinkButton: FC<LinkButtonProps> = ({ href, className, children, onC
     </Link>
   );
 };
+
+type ExternalLinkButtonProps = {
+  className: string;
+  href: string;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  children: ReactNode;
+  blank?: Boolean;
+};
+
+export const ExternalLinkButton: FC<ExternalLinkButtonProps> = ({ className, href, onClick, children, blank }) => {
+  return (
+    <a href={href} className={`${className} w-full h-full flex`} onClick={onClick} target={blank && "_blank"}>
+      <span className="inline-flex items-center mx-auto">{children}</span>
+    </a>
+  );
+};

@@ -24,6 +24,14 @@ const Profile: NextPage<Props> = ({ user, hangouts, schedules }) => {
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
+  if (!cookies.user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/login`,
+      },
+    };
+  }
   const user = JSON.parse(cookies.user);
   if (!user) {
     return {
@@ -34,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
   const user_id = user.data.id;
-  const { hangoutsData:hangouts } = await getHangoutsByUserId({
+  const { hangoutsData: hangouts } = await getHangoutsByUserId({
     user_id,
   });
   const { schedulesData: schedules } = await getSchedulesByUserId({

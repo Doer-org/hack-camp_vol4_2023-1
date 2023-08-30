@@ -1,7 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
+import { User } from "@/api/user/type";
 import { Text } from "@/components/elements/Text";
 
-export const AcceptInfo = () => {
+type AddInfoProps = {
+  friend: User;
+};
+
+export const AddInfo: FC<AddInfoProps> = ({ friend }) => {
+  console.log(friend);
   return (
     <div className="bg-white p-8 rounded-lg">
       <div className="">
@@ -10,9 +16,9 @@ export const AcceptInfo = () => {
       </div>
       <div className="mt-10">
         <Text style="font-bold" fontsize="text-[20px]">
-          name
+          {friend.name}
         </Text>
-        <Text fontsize="text-[14px]">discription</Text>
+        <Text fontsize="text-[14px]">{friend.description}</Text>
       </div>
     </div>
   );

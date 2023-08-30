@@ -1,17 +1,20 @@
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
 import React from "react";
+import { getUserById } from "@/api/user";
+import { resUser } from "@/api/user/type";
 import { RootLayout } from "@/components/layout/Layout";
-import { AcceptMain } from "@/components/pages/friend/accept/accept-main";
+import { AddMain } from "@/components/pages/friend/add/add-main";
 
 type Props = {
-  user_id: string;
+  userId: string;
+  friend: resUser;
 };
 
-const FriendAdd: NextPage<Props> = ({ user_id }) => {
+const FriendAdd: NextPage<Props> = ({ userId, friend }) => {
   return (
     <RootLayout meta="友達を追加する">
-      <AcceptMain user_id={user_id} />
+      <AddMain user_id={userId} friend={friend.data} />
     </RootLayout>
   );
 };
@@ -28,9 +31,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
+  const query = context.query;
+  const id = String(query.id);
+  const { userData: friend } = await getUserById({ id });
+
   return {
     props: {
-      user_id: user ? user.data.id : null,
+      userId: user ? user.data.id : null,
+      friend: friend ? friend : null,
     },
   };
 };
