@@ -9,12 +9,6 @@ type TextProps = {
 
 export const Text: FC<TextProps> = ({ children, fontsize, style }) => {
   return (
-    <p
-      className={`${fontsize ? fontsize : "text-[16px]"} ${
-        style ? style : ""
-      } ${"text-new-black"}`}
-    >
-      {children}
-    </p>
+    <p className={`${fontsize ? fontsize : "text-[16px]"} ${style ? style : ""} ${"text-new-black"}`}>{children}</p>
   );
 };

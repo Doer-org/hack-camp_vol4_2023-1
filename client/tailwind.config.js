@@ -9,8 +9,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
         "new-white": "#fafafa",
@@ -27,12 +26,12 @@ module.exports = {
           900: "#ff2c06",
         },
         "new-yellow": {
-          100:"#FFF1CE",
-          200:"#FFE7AB",
-          300:"#FFDF8E",
-          400:"#FFD875",
-          500:"#FFD261",
-          600:"#FFCB46",
+          100: "#FFF1CE",
+          200: "#FFE7AB",
+          300: "#FFDF8E",
+          400: "#FFD875",
+          500: "#FFD261",
+          600: "#FFCB46",
           700: "#ffc32a",
           800: "#FFBA0A",
           900: "#E8A600",
@@ -46,7 +45,7 @@ module.exports = {
           600: "#7E74ED",
           700: "#6c61e8",
           800: "#5D50EB",
-          900: "#4132F0",
+          900: "#333399",
         },
 
         // don't use

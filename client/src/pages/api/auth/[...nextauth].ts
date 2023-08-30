@@ -1,8 +1,7 @@
 import NextAuth from "next-auth";
 import type { NextAuthOptions, DefaultSession } from "next-auth";
-import auth from "@/firebase/admin";
-
 import CredentialsProvider from "next-auth/providers/credentials";
+import auth from "@/firebase/admin";
 
 declare module "next-auth" {
   interface Session {

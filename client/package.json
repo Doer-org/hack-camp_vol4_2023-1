@@ -6,15 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint . --fix",
+    "format":"prettier --write **/*.{js,ts,jsx,tsx,md,json}",
     "gene": "plop --plopfile generator/index.js",
-    "plop": "plop"
+    "lint-staged": "lint-staged",
+    "prepare": "cd .. && husky install front/.husky"
   },
   "dependencies": {
     "@firebase/auth": "^0.23.2",
     "@firebase/firestore": "^3.12.1",
-    "@graphql-codegen/client-preset": "^4.1.0",
-    "@graphql-codegen/typescript": "^4.0.1",
     "@hookform/resolvers": "^3.1.0",
     "@next/font": "^13.4.4",
     "@types/node": "20.1.4",
@@ -39,14 +39,18 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@apollo/client": "^3.8.0",
-    "@graphql-codegen/cli": "^5.0.0",
-    "@graphql-typed-document-node/core": "^3.2.0",
-    "apollo-server-micro": "^3.12.0",
-    "graphql": "^16.7.1",
-    "graphql-tag": "^2.12.6",
+    "eslint-config-prettier": "^9.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.0",
     "plop": "^3.1.2",
+    "prettier": "^3.0.1",
     "typescript": "5.0.4",
     "zod": "^3.21.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint . --fix",
+      "prettier --write **/*.{js,ts,jsx,tsx,md,json}"
+    ]
   }
 }

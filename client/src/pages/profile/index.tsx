@@ -1,37 +1,37 @@
-import { ProfileMylist } from "@/components/pages/profile/profile-mylist";
-import { ProfileOverview } from "@/components/pages/profile/profile-overview";
-import React from "react";
-import { RootLayout } from "@/components/layout/Layout";
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
-import { Hangout, Schedule, User } from "@/apollo/generated/graphql";
-import { GetHangoutsByUserId, GetSchedulesByUserId } from "@/api/query";
+import React from "react";
+import { getHangoutsByUserId } from "@/api/hangout";
+import { resHangouts } from "@/api/hangout/type";
+import { getSchedulesByUserId } from "@/api/schedule";
+import { resSchedules } from "@/api/schedule/type";
+import { User } from "@/api/user/type";
+import { RootLayout } from "@/components/layout/Layout";
+import { ProfileMain } from "@/components/pages/profile/profile-main";
 
 type Props = {
   user: User;
-  hangouts: Hangout[];
-  schedules: Schedule[];
+  hangouts: resHangouts;
+  schedules: resSchedules;
 };
 
 const Profile: NextPage<Props> = ({ user, hangouts, schedules }) => {
   return (
     <RootLayout meta="プロフィール">
-      <div className="user-bg py-16 h-screen">
-        <div className="w-[320px] mx-auto">
-          <div className="">
-            <ProfileOverview user={user} />
-            <div>
-              {/* <ProfileMylist hangouts={hangouts} schedules={schedules} /> */}
-            </div>
-          </div>
-        </div>
-      </div>
+      <ProfileMain user={user} hangouts={hangouts.data} schedules={schedules.data} />
     </RootLayout>
   );
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
-  console.log(cookies.user);
+  if (!cookies.user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/login`,
+      },
+    };
+  }
   const user = JSON.parse(cookies.user);
   if (!user) {
     return {
@@ -41,39 +41,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-  const user_id = user.id;
-  const { data: hangouts, err: getHangoutError } = await GetHangoutsByUserId({
+  const user_id = user.data.id;
+  const { hangoutsData: hangouts } = await getHangoutsByUserId({
     user_id,
   });
-  // if (getHangoutError) {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: `/login`,
-  //     },
-  //   };
-  // }
-
-  const { data: schedules, err: getScheduleError } = await GetSchedulesByUserId(
-    {
-      user_id,
-    }
-  );
-  // if (getScheduleError) {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: `/login`,
-  //     },
-  //   };
-  // }
+  const { schedulesData: schedules } = await getSchedulesByUserId({
+    user_id,
+  });
 
   return {
     props: {
-      user: user ? user : null,
-      id: user ? user.id : null,
-      hangouts: hangouts ? hangouts : [],
-      schedules: schedules ? schedules : [],
+      user: user ? user.data : null,
+      id: user ? user.data.id : null,
+      hangouts: hangouts ? hangouts : null,
+      schedules: schedules ? schedules : null,
     },
   };
 };

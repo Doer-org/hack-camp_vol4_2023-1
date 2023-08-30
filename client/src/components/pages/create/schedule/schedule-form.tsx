@@ -1,11 +1,16 @@
 "use client";
-import { Text } from "@/components/elements/Text";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import { CreateSchedule } from "@/api/mutation";
+import { createSchedule } from "@/api/schedule/index";
+import { User } from "@/api/user/type";
+import { Text } from "@/components/elements/Text";
+
+type ScheduleFormProps = {
+  user: User;
+};
 
 type Inputs = {
   schedule1: string;
@@ -14,34 +19,59 @@ type Inputs = {
 };
 
 const schema = z.object({
-  schedule1: z.string().min(1, { message: "1つ以上選択してください" }),
+  schedule1: z.string().min(1, { message: "1つ以上設定してください" }),
   schedule2: z.string(),
   schedule3: z.string(),
 });
 
-export const ScheduleForm: FC = () => {
+export const ScheduleForm: FC<ScheduleFormProps> = ({ user }) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
   } = useForm<Inputs>({
-    resolver: zodResolver(schema), defaultValues: {}
+    resolver: zodResolver(schema),
+    defaultValues: {},
   });
   const router = useRouter();
-  const onSubmit: SubmitHandler<Inputs> = async (data:any) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     console.log(data);
-    router.push("/profile");
 
-    const userData = {
-      user_id:"hoge",
-      date: "6/4",
+    const userData1 = {
+      user_id: user.id,
+      date: data.schedule1,
     };
 
-    const { data:schedule, err } = await CreateSchedule(userData);
-    if (err) {
-      console.log("Error:", err);
+    const { scheduleData: schedule1, error: err1 } = await createSchedule(userData1);
+    if (err1) {
+      console.log("Error1:", err1);
     }
-    console.log(schedule);
+    console.log(schedule1);
+
+    if (data.schedule2) {
+      const userData2 = {
+        user_id: user.id,
+        date: data.schedule2,
+      };
+      const { scheduleData: schedule2, error: err2 } = await createSchedule(userData2);
+      if (err2) {
+        console.log("Error2:", err2);
+      }
+      console.log(schedule2);
+    }
+
+    if (data.schedule3) {
+      const userData3 = {
+        user_id: user.id,
+        date: data.schedule3,
+      };
+      const { scheduleData: schedule3, error: err3 } = await createSchedule(userData3);
+      if (err3) {
+        console.log("Error:", err3);
+      }
+      console.log(schedule3);
+    }
+    router.push("/profile");
   };
 
   return (
@@ -49,32 +79,16 @@ export const ScheduleForm: FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-y-3 py-5">
           <div className="">
-            <input
-              type="date"
-              className="w-full h-10 text-xl px-2 rounded-lg shadow-md"
-              {...register("schedule1")}
-            />
+            <input type="date" className="w-full h-10 text-xl px-2 rounded-lg shadow-md" {...register("schedule1")} />
           </div>
           <div className="">
-            <input
-              type="date"
-              className="w-full h-10 text-xl px-2 rounded-lg shadow-md"
-              {...register("schedule2")}
-            />
+            <input type="date" className="w-full h-10 text-xl px-2 rounded-lg shadow-md" {...register("schedule2")} />
           </div>
           <div className="">
-            <input
-              type="date"
-              className="w-full h-10 text-xl px-2 rounded-lg shadow-md"
-              {...register("schedule3")}
-            />
+            <input type="date" className="w-full h-10 text-xl px-2 rounded-lg shadow-md" {...register("schedule3")} />
           </div>
         </div>
-        {errors.schedule1 && (
-          <Text style="text-red-600 text-center pb-4">
-            予定は1つ以上3つ以下で設定してください
-          </Text>
-        )}
+        {errors.schedule1 && <Text style="text-red-600 text-center pb-4">予定は1つ以上3つ以下で設定してください</Text>}
         <div className="w-32 mx-auto py-4">
           <input
             type="submit"

@@ -6,13 +6,16 @@ export type User = {
   name: string;
 };
 
+export type resUser = {
+  data: User;
+};
+
 export type GetUserByIdInput = {
   id: string;
 };
 
 export type CreateUserInput = {
   description: string;
-  id: string;
   image: string;
   name: string;
 };
