@@ -1,8 +1,8 @@
+import { NextPage } from "next";
 import React from "react";
 import { Title } from "@/components/elements/Title";
 import { RootLayout } from "@/components/layout/Layout";
 import { EditForm } from "@/components/pages/profile/edit/edit-form";
-import { NextPage } from "next";
 
 const Edit: NextPage = () => {
   return (

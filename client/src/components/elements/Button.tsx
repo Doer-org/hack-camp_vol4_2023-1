@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import React, { FC, ReactNode } from "react";
@@ -27,18 +27,28 @@ type LinkButtonProps = {
   children: ReactNode;
 };
 
-export const LinkButton: FC<LinkButtonProps> = ({
-  href,
-  className,
-  children,
-  onClick,
-  disabled,
-}) => {
+export const LinkButton: FC<LinkButtonProps> = ({ href, className, children, onClick, disabled }) => {
   return (
-    <Link href={href} as={href} className={disabled?"pointer-events-none":""}>
+    <Link href={href} as={href} className={disabled ? "pointer-events-none" : ""}>
       <button className={className} onClick={onClick} disabled={disabled}>
         {children}
       </button>
     </Link>
+  );
+};
+
+type ExternalLinkButtonProps = {
+  className: string;
+  href: string;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  children: ReactNode;
+  blank?: Boolean;
+};
+
+export const ExternalLinkButton: FC<ExternalLinkButtonProps> = ({ className, href, onClick, children, blank }) => {
+  return (
+    <a href={href} className={`${className} w-full h-full flex`} onClick={onClick} target={blank && "_blank"}>
+      <span className="inline-flex items-center mx-auto">{children}</span>
+    </a>
   );
 };

@@ -1,10 +1,10 @@
+import { GetServerSideProps, NextPage } from "next";
+import { parseCookies } from "nookies";
+import { User } from "@/api/user/type";
 import { Text } from "@/components/elements/Text";
 import { Title } from "@/components/elements/Title";
 import { RootLayout } from "@/components/layout/Layout";
 import { MatchingList } from "@/components/pages/home/matching-list";
-import { GetServerSideProps, NextPage } from "next";
-import { User } from "@/apollo/generated/graphql";
-import { parseCookies } from "nookies";
 
 type Props = {
   user: User;
@@ -41,29 +41,28 @@ const Home: NextPage<Props> = ({ user, id }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
-  console.log(cookies.user);
   if (!cookies.user) {
     return {
-      redirect:{
+      redirect: {
         permanent: false,
         destination: `/login`,
-      }
-    }
+      },
+    };
   }
   const user = JSON.parse(cookies.user);
   if (!user) {
     return {
-      redirect:{
+      redirect: {
         permanent: false,
         destination: `/login`,
-      }
-    }
+      },
+    };
   }
 
   return {
     props: {
-      user: user ? user : null,
-      id: user ? user.id : null,
+      user: user ? user.data : null,
+      id: user ? user.data.id : null,
     },
   };
 };

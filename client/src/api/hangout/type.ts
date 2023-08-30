@@ -5,12 +5,19 @@ export type Hangout = {
   user_id: string;
 };
 
+export type resHangout = {
+  data: Hangout;
+};
+
+export type resHangouts = {
+  data: Hangout[];
+};
+
 export type GetHangoutsByUserIdInput = {
   user_id: string;
 };
 
 export type CreateHangoutInput = {
-  id: string;
   name: string;
   user_id: string;
 };

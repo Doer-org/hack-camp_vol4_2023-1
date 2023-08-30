@@ -1,29 +1,37 @@
-import React from "react";
-import { RootLayout } from "@/components/layout/Layout";
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
-import { GetHangoutsByUserId, GetSchedulesByUserId } from "@/api/query";
-import { ProfileMain } from "@/components/pages/profile/profile-main";
+import React from "react";
+import { getHangoutsByUserId } from "@/api/hangout";
+import { resHangouts } from "@/api/hangout/type";
+import { getSchedulesByUserId } from "@/api/schedule";
+import { resSchedules } from "@/api/schedule/type";
 import { User } from "@/api/user/type";
-import { Hangout } from "@/api/hangout/type";
-import { Schedule } from "@/api/schedule/type";
+import { RootLayout } from "@/components/layout/Layout";
+import { ProfileMain } from "@/components/pages/profile/profile-main";
 
 type Props = {
   user: User;
-  hangouts: Hangout[];
-  schedules: Schedule[];
+  hangouts: resHangouts;
+  schedules: resSchedules;
 };
 
 const Profile: NextPage<Props> = ({ user, hangouts, schedules }) => {
   return (
     <RootLayout meta="プロフィール">
-      <ProfileMain user={user} hangouts={hangouts} schedules={schedules} />
+      <ProfileMain user={user} hangouts={hangouts.data} schedules={schedules.data} />
     </RootLayout>
   );
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
-  console.log(cookies.user);
+  if (!cookies.user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/login`,
+      },
+    };
+  }
   const user = JSON.parse(cookies.user);
   if (!user) {
     return {
@@ -33,21 +41,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-  const user_id = user.id;
-  const { data: hangouts } = await GetHangoutsByUserId({
+  const user_id = user.data.id;
+  const { hangoutsData: hangouts } = await getHangoutsByUserId({
     user_id,
   });
-
-  const { data: schedules } = await GetSchedulesByUserId({
+  const { schedulesData: schedules } = await getSchedulesByUserId({
     user_id,
   });
 
   return {
     props: {
-      user: user ? user : null,
-      id: user ? user.id : null,
-      hangouts: hangouts ? hangouts : [],
-      schedules: schedules ? schedules : [],
+      user: user ? user.data : null,
+      id: user ? user.data.id : null,
+      hangouts: hangouts ? hangouts : null,
+      schedules: schedules ? schedules : null,
     },
   };
 };
