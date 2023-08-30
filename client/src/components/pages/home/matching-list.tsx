@@ -13,10 +13,6 @@ export const MatchingList: FC<MatchingListProps> = ({ matchingList }) => {
           </div>
           <div>
             <p>{matching.name}</p>
-            <div className="flex items-center gap-4">
-              <p className="text-[20px] font-bold">{matching.event}</p>
-              <p>{matching.date}</p>
-            </div>
           </div>
         </div>
       ))}

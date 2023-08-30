@@ -54,7 +54,7 @@ func (f *FriendHandler) GetFriendsByUserID(ctx *gin.Context) {
 		)
 		return
 	}
-	friendsjson := json.FriendsEntityToJson(friends)
+	friendsjson := json.FriendsByIdEntityToJson(friends)
 	ctx.JSON(
 		http.StatusOK,
 		gin.H{"data": friendsjson},
@@ -71,7 +71,7 @@ func (f *FriendHandler) GetRequestsByFriendID(ctx *gin.Context) {
 		)
 		return
 	}
-	friendsjson := json.FriendsEntityToJson(friends)
+	friendsjson := json.FriendsByIdEntityToJson(friends)
 	ctx.JSON(
 		http.StatusOK,
 		gin.H{"data": friendsjson},
