@@ -1,27 +1,28 @@
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
 import React from "react";
+import { GetRequestsByUserId, getFriendsbyUserId } from "@/api/friend";
+import { resFriends } from "@/api/friend/type";
 import { RootLayout } from "@/components/layout/Layout";
-import { FriendsCloseButton } from "@/components/pages/profile/friends/friends-close-button";
-import { FriendsList } from "@/components/pages/profile/friends/friends-list";
+import { FriendsMain } from "@/components/pages/profile/friends/friends-main";
 
-const Friends: NextPage = () => {
+type Props = {
+  user_id: string;
+  friends: resFriends;
+  requests: resFriends;
+};
+
+const Friends: NextPage<Props> = ({ user_id, friends, requests }) => {
   return (
     <RootLayout meta="友達を表示">
-      <div className="p-10 h-screen">
-        <div>
-          <FriendsCloseButton />
-        </div>
-        <FriendsList />
-      </div>
+      <FriendsMain user_id={user_id} friends={friends.data} requests={requests.data} />
     </RootLayout>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
-  const user = JSON.parse(cookies.user);
-  if (!user) {
+  if (!cookies.user) {
     return {
       redirect: {
         permanent: false,
@@ -29,10 +30,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
+  const user_id = String(cookies.user);
+  console.log(user_id);
+  if (!user_id) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/login`,
+      },
+    };
+  }
+  const { friendData: friends } = await getFriendsbyUserId({ user_id });
+  const { friendData: requests } = await GetRequestsByUserId({ user_id });
 
   return {
     props: {
-      id: user ? user.data.id : null,
+      id: user_id ? user_id : null,
+      friends: friends ? friends : null,
+      requests: requests ? requests : null,
     },
   };
 };

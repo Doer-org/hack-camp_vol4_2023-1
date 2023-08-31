@@ -24,7 +24,7 @@ func NewMatchingRepository(conn *database.Conn) repository.IMatchingRepository {
 }
 
 func (mr *MatchingRepository) GetMatchingsByUserId(ctx context.Context, user_id string) (entity.Matchings, error) {
-	friend_query := `SELECT friend_id FROM friend WHERE user_id = ?`
+	friend_query := `SELECT friend.friend_id, user.name, user.image FROM friend JOIN user ON friend.friend_id = user.id WHERE friend.user_id = ? AND friend.accept = true;`
 	hangout_query := `SELECT name FROM hangout WHERE user_id = ?`
 	schedule_query := `SELECT date FROM schedule WHERE user_id = ?`
 	hangout_user_query := `SELECT user_id FROM hangout WHERE name = ?`
@@ -52,7 +52,7 @@ func (mr *MatchingRepository) GetMatchingsByUserId(ctx context.Context, user_id 
 	}
 	schedules := d.MatchingSchedulesDtosToEntity(schedule_dtos)
 
-	var hangouts_friends entity.Matchings
+	var hangouts_friends entity.MatchingFriendsId
 	for _, hangout := range hangouts {
 		var dtos d.MatchingHangoutUserDtos
 		err := mr.conn.DB.SelectContext(ctx, &dtos, hangout_user_query, hangout.Name)
@@ -63,7 +63,7 @@ func (mr *MatchingRepository) GetMatchingsByUserId(ctx context.Context, user_id 
 		hangouts_friends = append(hangouts_friends, hangout_friends...)
 	}
 
-	var schedules_friends entity.Matchings
+	var schedules_friends entity.MatchingFriendsId
 	for _, schedule := range schedules {
 		var dtos d.MatchingScheduleUserDtos
 		err := mr.conn.DB.SelectContext(ctx, &dtos, schedule_user_query, schedule.Date)

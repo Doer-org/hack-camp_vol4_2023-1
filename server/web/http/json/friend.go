@@ -11,6 +11,17 @@ type FriendJson struct {
 
 type FriendsJson []FriendJson
 
+type FriendByIdJson struct {
+	Id          string `json:"id"`
+	User_id     string `json:"user_id"`
+	Friend_id   string `json:"friend_id"`
+	Accept      bool   `json:"accept"`
+	FriendName  string `json:"friend_name"`
+	FriendImage string `json:"friend_image"`
+}
+
+type FriendsByIdJson []FriendByIdJson
+
 func FriendEntityToJson(f *entity.Friend) *FriendJson {
 	return &FriendJson{
 		Id:        f.Id,
@@ -35,4 +46,23 @@ func FriendJsonToEntity(j *FriendJson) *entity.Friend {
 		Friend_id: j.Friend_id,
 		Accept:    j.Accept,
 	}
+}
+
+func FriendByIdEntityToJson(f *entity.FriendById) *FriendByIdJson {
+	return &FriendByIdJson{
+		Id:          f.Id,
+		User_id:     f.User_id,
+		Friend_id:   f.Friend_id,
+		Accept:      f.Accept,
+		FriendName:  f.FriendName,
+		FriendImage: f.FriendImage,
+	}
+}
+
+func FriendsByIdEntityToJson(c entity.FriendsById) *FriendsByIdJson {
+	var FriendsJson FriendsByIdJson
+	for _, friend := range c {
+		FriendsJson = append(FriendsJson, *FriendByIdEntityToJson(friend))
+	}
+	return &FriendsJson
 }

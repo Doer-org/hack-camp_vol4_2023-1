@@ -16,8 +16,8 @@ type FriendUsecase struct {
 }
 
 type IFriendUsecase interface {
-	GetFriendsByUserID(ctx context.Context, userId string) (entity.Friends, error)
-	GetRequestsByFriendID(ctx context.Context, userId string) (entity.Friends, error)
+	GetFriendsByUserID(ctx context.Context, userId string) (entity.FriendsById, error)
+	GetRequestsByFriendID(ctx context.Context, userId string) (entity.FriendsById, error)
 	CreateFriend(ctx context.Context, friend *entity.Friend) (*entity.Friend, error)
 	DeleteFriend(ctx context.Context, id string) error
 	UpdateFriend(ctx context.Context, friend *entity.Friend, id string) (*entity.Friend, error)
@@ -29,7 +29,7 @@ func NewFriendUsecase(repo repository.IFriendRepository) IFriendUsecase {
 	}
 }
 
-func (uu *FriendUsecase) GetFriendsByUserID(ctx context.Context, userId string) (entity.Friends, error) {
+func (uu *FriendUsecase) GetFriendsByUserID(ctx context.Context, userId string) (entity.FriendsById, error) {
 	if userId == "" {
 		return nil, fmt.Errorf("userId is empty")
 	}
@@ -37,7 +37,7 @@ func (uu *FriendUsecase) GetFriendsByUserID(ctx context.Context, userId string) 
 	return friends, err
 }
 
-func (uu *FriendUsecase) GetRequestsByFriendID(ctx context.Context, friendId string) (entity.Friends, error) {
+func (uu *FriendUsecase) GetRequestsByFriendID(ctx context.Context, friendId string) (entity.FriendsById, error) {
 	if friendId == "" {
 		return nil, fmt.Errorf("friendId is empty")
 	}

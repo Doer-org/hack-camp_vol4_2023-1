@@ -1,26 +1,29 @@
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
 import React from "react";
-import { User } from "@/api/user/type";
+import { getHangoutsByUserId } from "@/api/hangout";
+import { resHangouts } from "@/api/hangout/type";
+import { getUserById } from "@/api/user";
+import { User, resUser } from "@/api/user/type";
 import { RootLayout } from "@/components/layout/Layout";
 import { HangoutMain } from "@/components/pages/create/hangout/hangout-main";
 
 type Props = {
-  user: User;
+  user: resUser;
+  hangouts: resHangouts;
 };
 
-const Hangout: NextPage<Props> = ({ user }) => {
+const Hangout: NextPage<Props> = ({ user, hangouts }) => {
   return (
     <RootLayout meta="遊びを登録する">
-      <HangoutMain user={user} />
+      <HangoutMain user={user.data} hangouts={hangouts.data} />
     </RootLayout>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
-  const user = JSON.parse(cookies.user);
-  if (!user) {
+  if (!cookies.user) {
     return {
       redirect: {
         permanent: false,
@@ -28,10 +31,23 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
+  const user_id = String(cookies.user);
+  console.log(user_id);
+  if (!user_id) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/login`,
+      },
+    };
+  }
+  const { userData: user } = await getUserById({ id: user_id });
+  const { hangoutsData: hangouts } = await getHangoutsByUserId({ user_id });
 
   return {
     props: {
-      user: user ? user.data : null,
+      user: user ? user : null,
+      hangouts: hangouts ? hangouts : null,
     },
   };
 };

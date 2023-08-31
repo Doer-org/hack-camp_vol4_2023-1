@@ -4,9 +4,9 @@ import { Text } from "@/components/elements/Text";
 
 type FriendOverviewProps = {
   friend: User;
+  number_friends: number;
 };
-export const FriendOverview: FC<FriendOverviewProps> = ({ friend }) => {
-  const number_friend = 2;
+export const FriendOverview: FC<FriendOverviewProps> = ({ friend, number_friends }) => {
   return (
     <div>
       <div className="flex gap-x-6">
@@ -19,7 +19,7 @@ export const FriendOverview: FC<FriendOverviewProps> = ({ friend }) => {
             {friend.description}
           </Text>
           <Text fontsize="text-[18px]" style="text-new-white">
-            friend: {number_friend}
+            friend: {number_friends}
           </Text>
         </div>
       </div>
