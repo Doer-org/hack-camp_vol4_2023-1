@@ -4,6 +4,8 @@ import "github.com/Doer-org/hack-camp_vol4_2023-1/internal/domain/entity"
 
 type MatchingFriendDto struct {
 	FriendId string `db:"friend_id"`
+	FriendName string `db:"name"`
+	FriendImage string `db:"image"`
 }
 
 type MatchingFriendDtos []MatchingFriendDto
@@ -35,6 +37,8 @@ type MatchingScheduleUserDtos []MatchingScheduleUserDto
 func MatchingFriendDtoToEntity(dto *MatchingFriendDto) *entity.Matching {
 	return &entity.Matching{
 		FriendId: dto.FriendId,
+		FriendName: dto.FriendName,
+		FriendImage: dto.FriendImage,
 	}
 }
 
@@ -77,14 +81,14 @@ func MatchingSchedulesDtosToEntity(dtos MatchingSchedulesDtos) entity.MatchingSc
 	return schedules
 }
 
-func MatchingHangoutUserDtoToEntity(dto *MatchingHangoutUserDto) *entity.Matching {
-	return &entity.Matching{
+func MatchingHangoutUserDtoToEntity(dto *MatchingHangoutUserDto) *entity.MatchingFriendId {
+	return &entity.MatchingFriendId{
 		FriendId: dto.FriendId,
 	}
 }
 
-func MatchingHangoutUserDtosToEntity(dtos MatchingHangoutUserDtos) entity.Matchings {
-	var hangouts entity.Matchings
+func MatchingHangoutUserDtosToEntity(dtos MatchingHangoutUserDtos) entity.MatchingFriendsId {
+	var hangouts entity.MatchingFriendsId
 	for _, dto := range dtos {
 		hangout := MatchingHangoutUserDtoToEntity(&dto)
 		hangouts = append(hangouts, hangout)
@@ -92,14 +96,14 @@ func MatchingHangoutUserDtosToEntity(dtos MatchingHangoutUserDtos) entity.Matchi
 	return hangouts
 }
 
-func MatchingScheduleUserDtoToEntity(dto *MatchingScheduleUserDto) *entity.Matching {
-	return &entity.Matching{
+func MatchingScheduleUserDtoToEntity(dto *MatchingScheduleUserDto) *entity.MatchingFriendId {
+	return &entity.MatchingFriendId{
 		FriendId: dto.FriendId,
 	}
 }
 
-func MatchingScheduleUserDtosToEntity(dtos MatchingScheduleUserDtos) entity.Matchings {
-	var friends entity.Matchings
+func MatchingScheduleUserDtosToEntity(dtos MatchingScheduleUserDtos) entity.MatchingFriendsId {
+	var friends entity.MatchingFriendsId
 	for _, dto := range dtos {
 		friend := MatchingScheduleUserDtoToEntity(&dto)
 		friends = append(friends, friend)
