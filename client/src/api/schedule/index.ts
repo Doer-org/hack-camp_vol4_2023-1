@@ -20,7 +20,7 @@ export const getSchedulesByUserId = async (input: GetSchedulesByUserId) => {
 export const createSchedule = async (input: CreateScheduleInput) => {
   let scheduleData: resSchedule | null = null;
   let error: Error | null = null;
-  await Axios.post(`/schedule`, input)
+  await Axios.post(`/schedule/`, input)
     .then((res: AxiosResponse<resSchedule>) => {
       const { data } = res;
       scheduleData = data;

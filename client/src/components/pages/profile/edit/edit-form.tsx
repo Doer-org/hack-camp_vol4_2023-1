@@ -35,15 +35,13 @@ export const EditForm: FC<EditFormProps> = ({ user }) => {
   });
   const router = useRouter();
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
-    console.log(data);
     const reqData: UpdateUserInput = {
       description: data.discription !== "" ? data.discription : "",
       id: user.id,
       image: user.image,
       name: data.name !== "" ? data.name : user.name,
     };
-    const { userData: resUser } = await updateUser(reqData);
-    console.log(resUser);
+    await updateUser(reqData);
     router.push("/profile");
   };
 

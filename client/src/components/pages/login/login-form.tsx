@@ -23,14 +23,11 @@ export const LoginForm: FC = () => {
 
     const { userData, error } = await createUser(inputData);
     if (error) {
-      console.log("Error:", error);
+      setCookie(null, "user", cred.user.uid);
+    } else {
+      const user: resUser = userData ? userData : { data: { id: "", name: "", image: "", description: "" } };
+      setCookie(null, "user", user.data.id);
     }
-    console.log(userData);
-
-    // localStorage.setItem("user", JSON.stringify(userData));
-    const user: resUser = userData ? userData : { data: { id: "", name: "", image: "", description: "" } };
-    const cookies = parseCookies();
-    setCookie(null, "user", user.data.id);
     const idToken = await cred.user.getIdToken();
     await signInByNextAuth("credentials", {
       idToken,

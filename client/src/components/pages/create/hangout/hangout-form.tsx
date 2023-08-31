@@ -60,7 +60,6 @@ export const HangoutForm: FC<HangoutFormProps> = ({ user, hangouts }) => {
       if (error) {
         console.log(error);
       }
-      console.log(hangoutsData);
     });
     router.push("/profile");
   };

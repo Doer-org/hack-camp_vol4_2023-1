@@ -10,7 +10,6 @@ type HangoutMainProps = {
 };
 
 export const HangoutMain: FC<HangoutMainProps> = ({ user, hangouts }) => {
-  console.log(user);
   return (
     <div className="hangout-bg p-10 py-20 h-screen">
       <HangoutDescription user={user} />

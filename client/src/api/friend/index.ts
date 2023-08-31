@@ -24,7 +24,7 @@ export const getFriendsbyUserId = async (input: GetFriendsByUserIdInput) => {
   return { friendData, error };
 };
 
-export const GetRequestsByUserId = async (input: GetRequestsByUserIdInput) => {
+export const getRequestsByUserId = async (input: GetRequestsByUserIdInput) => {
   let friendData: resFriends | null = null;
   let error: Error | null = null;
   await Axios.get(`/friend/request/${input.user_id}`)
@@ -41,7 +41,7 @@ export const GetRequestsByUserId = async (input: GetRequestsByUserIdInput) => {
 export const createFriend = async (input: CreateFriendInput) => {
   let friendData: resFriend | null = null;
   let error: Error | null = null;
-  await Axios.post(`/friend`, input)
+  await Axios.post(`/friend/`, input)
     .then((res: AxiosResponse<resFriend>) => {
       const { data } = res;
       friendData = data;

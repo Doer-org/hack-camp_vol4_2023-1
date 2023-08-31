@@ -39,7 +39,9 @@ func (r *Router) cors() {
 	r.Engine.Use(cors.New(cors.Config{
 		// アクセスを許可したいアクセス元
 		AllowOrigins: []string{
-			"*",
+			"http://localhost:3000",
+			"https://hack-camp-vol4-2023-1-qqg93k4lw-hack-camp-vol4-2023-1.vercel.app/",
+			"https://hack-camp-vol4-2023-1.vercel.app/",
 		},
 		// アクセスを許可したいHTTPメソッド(以下の例だとPUTやDELETEはアクセスできません)
 		AllowMethods: []string{
