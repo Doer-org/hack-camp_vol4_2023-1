@@ -23,10 +23,8 @@ export const LoginForm: FC = () => {
 
     const { userData, error } = await createUser(inputData);
     if (error) {
-      console.log("Error:", error);
       setCookie(null, "user", cred.user.uid);
     } else {
-      console.log(userData);
       const user: resUser = userData ? userData : { data: { id: "", name: "", image: "", description: "" } };
       setCookie(null, "user", user.data.id);
     }

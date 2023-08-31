@@ -19,7 +19,7 @@ export const getUserById = async (input: GetUserByIdInput) => {
 export const createUser = async (input: CreateUserInput) => {
   let userData: resUser | null = null;
   let error: Error | null = null;
-  await Axios.post(`/user`, input)
+  await Axios.post(`/user/`, input)
     .then((res: AxiosResponse<resUser>) => {
       const { data } = res;
       userData = data;

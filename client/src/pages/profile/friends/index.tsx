@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
 import React from "react";
-import { GetRequestsByUserId, getFriendsbyUserId } from "@/api/friend";
+import { getRequestsByUserId, getFriendsbyUserId } from "@/api/friend";
 import { resFriends } from "@/api/friend/type";
 import { RootLayout } from "@/components/layout/Layout";
 import { FriendsMain } from "@/components/pages/profile/friends/friends-main";
@@ -31,7 +31,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
   const user_id = String(cookies.user);
-  console.log(user_id);
   if (!user_id) {
     return {
       redirect: {
@@ -41,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
   const { friendData: friends } = await getFriendsbyUserId({ user_id });
-  const { friendData: requests } = await GetRequestsByUserId({ user_id });
+  const { friendData: requests } = await getRequestsByUserId({ user_id });
 
   return {
     props: {

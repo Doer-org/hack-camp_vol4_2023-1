@@ -30,7 +30,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
   const user_id = String(cookies.user);
-  console.log(user_id);
   if (!user_id) {
     return {
       redirect: {

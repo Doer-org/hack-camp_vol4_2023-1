@@ -24,7 +24,6 @@ export const AddMain: FC<AddMainProps> = ({ user_id, friend }) => {
     if (err) {
       console.log("Error:", err);
     }
-    console.log(friend);
     router.push(`/profile`);
   };
   return (

@@ -53,7 +53,6 @@ export const ScheduleForm: FC<ScheduleFormProps> = ({ user, schedules }) => {
     if (err1) {
       console.log("Error1:", err1);
     }
-    console.log(schedule1);
 
     if (data.schedule2) {
       const userData2 = {
@@ -64,7 +63,6 @@ export const ScheduleForm: FC<ScheduleFormProps> = ({ user, schedules }) => {
       if (err2) {
         console.log("Error2:", err2);
       }
-      console.log(schedule2);
     }
 
     if (data.schedule3) {
@@ -76,7 +74,6 @@ export const ScheduleForm: FC<ScheduleFormProps> = ({ user, schedules }) => {
       if (err3) {
         console.log("Error:", err3);
       }
-      console.log(schedule3);
     }
     router.push("/profile");
   };

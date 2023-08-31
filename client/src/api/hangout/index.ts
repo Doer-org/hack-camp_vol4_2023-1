@@ -26,7 +26,7 @@ export const getHangoutsByUserId = async (input: GetHangoutsByUserIdInput) => {
 export const createHangout = async (input: CreateHangoutInput) => {
   let hangoutsData: resHangout | null = null;
   let error: Error | null = null;
-  await Axios.post(`/hangout`, input)
+  await Axios.post(`/hangout/`, input)
     .then((res: AxiosResponse<resHangout>) => {
       const { data } = res;
       hangoutsData = data;

@@ -13,7 +13,6 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ user, matchings }) => {
-  console.log(user);
   return (
     <RootLayout meta="ホーム">
       <HomeComponent matchings={matchings.data} user={user.data} />
@@ -32,7 +31,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
   const user_id = String(cookies.user);
-  console.log(cookies.user);
   if (!user_id) {
     return {
       redirect: {

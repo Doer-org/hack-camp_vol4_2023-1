@@ -18,31 +18,28 @@ export const FriendsAcceptButtons: FC<FriendsAcceptButtonsProps> = ({ friend }) 
       id: friend.id,
       user_id: friend.user_id,
     };
-    const { friendData: resAccept, error: acceptError } = await updateFriend(acceptData);
+    const { error: acceptError } = await updateFriend(acceptData);
     if (acceptError) {
       console.log("error from accept: ", acceptError);
     }
-    console.log(resAccept);
 
     const friendData = {
       accept: true,
       friend_id: friend.user_id,
       user_id: friend.friend_id,
     };
-    const { friendData: resCreate, error: createError } = await createFriend(friendData);
+    const { error: createError } = await createFriend(friendData);
     if (createError) {
       console.log("error from create: ", createError);
     }
-    console.log(resCreate);
     router.reload();
   };
 
   const handleReject = async () => {
-    const { friendData, error } = await deleteFriend({ id: friend.id });
+    const { error } = await deleteFriend({ id: friend.id });
     if (error) {
       console.log("error from rejection: ", error);
     }
-    console.log(friendData);
   };
 
   return (
