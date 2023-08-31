@@ -13,14 +13,15 @@ import { RootLayout } from "@/components/layout/Layout";
 import { FriendMain } from "@/components/pages/friend/friend-main";
 
 type Props = {
+  access_user_id: string;
   user: resUser;
   hangouts: resHangouts;
   schedules: resSchedules;
   friends: resFriends;
 };
 
-const Friend: NextPage<Props> = ({ user, hangouts, schedules, friends }) => {
-  const number_friends = friends.data.length;
+const Friend: NextPage<Props> = ({ access_user_id, user, hangouts, schedules, friends }) => {
+  const number_friends = friends.data ? friends.data.length : 0;
   return (
     <RootLayout meta={`${user.data.name}のprofile`}>
       <FriendMain
@@ -28,6 +29,7 @@ const Friend: NextPage<Props> = ({ user, hangouts, schedules, friends }) => {
         hangouts={hangouts.data}
         schedules={schedules.data}
         number_friends={number_friends}
+        access_user_id={access_user_id}
       />
     </RootLayout>
   );
@@ -56,6 +58,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { friendData: friends } = await getFriendsbyUserId({ user_id });
   return {
     props: {
+      access_user_id: user ? user.data.id : null,
       user: friendinfo ? friendinfo : null,
       hangouts: hangouts ? hangouts : null,
       schedules: schedules ? schedules : null,

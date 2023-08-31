@@ -48,7 +48,7 @@ type ExternalLinkButtonProps = {
 export const ExternalLinkButton: FC<ExternalLinkButtonProps> = ({ className, href, onClick, children, blank }) => {
   return (
     <a href={href} className={`${className} w-full h-full flex`} onClick={onClick} target={blank && "_blank"}>
-      <span className="inline-flex items-center mx-auto">{children}</span>
+      <span className="inline-flex items-center mx-auto gap-3">{children}</span>
     </a>
   );
 };

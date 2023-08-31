@@ -1,40 +1,22 @@
 import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
+import { getMatchingByUserId } from "@/api/matching";
+import { resMatchings } from "@/api/matching/type";
 import { User } from "@/api/user/type";
-import { Text } from "@/components/elements/Text";
-import { Title } from "@/components/elements/Title";
 import { RootLayout } from "@/components/layout/Layout";
-import { MatchingList } from "@/components/pages/home/matching-list";
+import { HomeComponent } from "@/components/pages/home/home-main";
 
 type Props = {
   user: User;
   id: string;
+  matchings: resMatchings;
 };
 
-const Home: NextPage<Props> = ({ user, id }) => {
-  const matchingList = [
-    {
-      name: "hoge",
-      event: "hoge",
-      date: "2/10",
-    },
-  ];
-
+const Home: NextPage<Props> = ({ user, id, matchings }) => {
+  console.log(matchings);
   return (
     <RootLayout meta="ホーム">
-      <div className="home-bg text-navy-3 px-[15px] h-screen pt-32">
-        <div className="pl-[15px]">
-          <div className=" pb-[100px]">
-            <Title fontsize="text-[32px]">マッチング一覧</Title>
-          </div>
-          <div className="py-7">
-            <Text>{user && user.name}さん、今日はx件マッチングしました！</Text>
-          </div>
-        </div>
-        <div className="pt-6">
-          <MatchingList matchingList={matchingList} />
-        </div>
-      </div>
+      <HomeComponent matchings={matchings.data} user={user} />
     </RootLayout>
   );
 };
@@ -59,10 +41,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
+  const user_id = String(user.data.id);
+  const { matchingsData: matchings } = await getMatchingByUserId({ user_id });
+
   return {
     props: {
       user: user ? user.data : null,
       id: user ? user.data.id : null,
+      matchings: matchings ? matchings : null,
     },
   };
 };
