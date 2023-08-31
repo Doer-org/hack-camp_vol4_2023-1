@@ -18,6 +18,7 @@ export type CreateUserInput = {
   description: string;
   image: string;
   name: string;
+  id: string;
 };
 
 export type UpdateUserInput = {

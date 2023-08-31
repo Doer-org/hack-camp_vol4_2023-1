@@ -16,14 +16,17 @@ export const MatchingList: FC<MatchingListProps> = ({ matchings }) => {
               className="bg-new-white px-6 py-4 rounded-lg flex items-center gap-4 shadow-md w-full"
               href={`/friend/${matching.friend_id}?from=matching`}
             >
-              <div>
-                <div className="rounded-full bg-navy-1 w-12 h-12"></div>
+              <div className="rounded-full w-12 h-12 mt-1">
+                <Image
+                  src={matching.friend_image}
+                  alt={"user image"}
+                  width={48}
+                  height={48}
+                  className="rounded-full"
+                ></Image>
               </div>
-              {/* <div className="rounded-full w-12 h-12 mt-1">
-                <Image src={matching.friend_image} alt={"user image"} width={48} height={48} className="rounded-full"></Image>
-              </div> */}
               <div>
-                <p>matching.friend_id</p>
+                <p>{matching.friend_name}</p>
               </div>
             </LinkButton>
           </div>
