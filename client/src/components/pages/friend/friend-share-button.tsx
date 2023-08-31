@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { BsLine } from "react-icons/bs";
-import { Button, ExternalLinkButton } from "@/components/elements/Button";
+import { ExternalLinkButton } from "@/components/elements/Button";
 
 type FriendShareButtonProps = {
   url: string;
