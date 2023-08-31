@@ -6,7 +6,6 @@ import (
 
 	"github.com/Doer-org/hack-camp_vol4_2023-1/internal/domain/entity"
 	"github.com/Doer-org/hack-camp_vol4_2023-1/internal/domain/repository"
-	"github.com/Doer-org/hack-camp_vol4_2023-1/utils"
 )
 
 var _ IUserUsecase = &UserUsecase{}
@@ -31,7 +30,10 @@ func (uu *UserUsecase) CreateUser(ctx context.Context, user *entity.User) (*enti
 	if user.Name == "" {
 		return nil, fmt.Errorf("user name empty")
 	}
-	user.Id = utils.GetUlid()
+
+	if user.Id == "" {
+		return nil, fmt.Errorf("user id empty")
+	}
 
 	resuser, err := uu.repo.CreateUser(ctx, user)
 	return resuser, err
