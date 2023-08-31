@@ -2,7 +2,7 @@ package utils
 
 import "github.com/Doer-org/hack-camp_vol4_2023-1/internal/domain/entity"
 
-func BinarySearch(key string, array entity.Matchings) string {
+func BinarySearch(key string, array entity.MatchingFriendsId) string {
 	left, right := 0, len(array)-1
 
 	for left <= right {
