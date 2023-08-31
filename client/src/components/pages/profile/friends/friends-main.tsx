@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { FC, useEffect, useState } from "react";
 import { FriendsRequestsList } from "./friends-requests-list";
 import FriendsToggle from "./friends-toggle";

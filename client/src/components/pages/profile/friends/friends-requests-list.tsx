@@ -17,7 +17,7 @@ export const FriendsRequestsList: FC<FriendsRequestsListProps> = ({ requests, us
             return (
               <div key={index}>
                 {index !== 0 && <hr />}
-                <div className="flex jus">
+                <div className="flex justify-between">
                   <div className="flex gap-4 py-4">
                     <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
                     <Text>{request.friend_name}</Text>

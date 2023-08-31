@@ -25,7 +25,7 @@ export const AddMain: FC<AddMainProps> = ({ user_id, friend }) => {
       console.log("Error:", err);
     }
     console.log(friend);
-    router.push(`/friend/${id}`);
+    router.push(`/profile`);
   };
   return (
     <div className="addfriend-bg h-screen p-4">
