@@ -1,16 +1,18 @@
 package entity
 
 type Matching struct {
-	FriendId string
+	FriendId    string
+	FriendName  string
+	FriendImage string
 }
 
 type Matchings []*Matching
 
-type MatchingFriend struct {
+type MatchingFriendId struct {
 	FriendId string
 }
 
-type MatchingFriends []*MatchingFriend
+type MatchingFriendsId []*MatchingFriendId
 
 type MatchingHangout struct {
 	Name string
