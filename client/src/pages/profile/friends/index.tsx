@@ -30,8 +30,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-  const user = JSON.parse(cookies.user);
-  if (!user) {
+  const user_id = String(cookies.user);
+  console.log(user_id);
+  if (!user_id) {
     return {
       redirect: {
         permanent: false,
@@ -39,13 +40,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-  const user_id = user.data.id;
   const { friendData: friends } = await getFriendsbyUserId({ user_id });
   const { friendData: requests } = await GetRequestsByUserId({ user_id });
 
   return {
     props: {
-      id: user ? user.data.id : null,
+      id: user_id ? user_id : null,
       friends: friends ? friends : null,
       requests: requests ? requests : null,
     },

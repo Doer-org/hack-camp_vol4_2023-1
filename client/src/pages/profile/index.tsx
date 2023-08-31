@@ -7,12 +7,13 @@ import { getHangoutsByUserId } from "@/api/hangout";
 import { resHangouts } from "@/api/hangout/type";
 import { getSchedulesByUserId } from "@/api/schedule";
 import { resSchedules } from "@/api/schedule/type";
-import { User } from "@/api/user/type";
+import { getUserById } from "@/api/user";
+import { resUser } from "@/api/user/type";
 import { RootLayout } from "@/components/layout/Layout";
 import { ProfileMain } from "@/components/pages/profile/profile-main";
 
 type Props = {
-  user: User;
+  user: resUser;
   hangouts: resHangouts;
   schedules: resSchedules;
   friends: resFriends;
@@ -21,7 +22,7 @@ type Props = {
 const Profile: NextPage<Props> = ({ user, hangouts, schedules, friends }) => {
   return (
     <RootLayout meta="プロフィール">
-      <ProfileMain user={user} hangouts={hangouts.data} schedules={schedules.data} friends={friends.data} />
+      <ProfileMain user={user.data} hangouts={hangouts.data} schedules={schedules.data} friends={friends.data} />
     </RootLayout>
   );
 };
@@ -35,8 +36,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-  const user = JSON.parse(cookies.user);
-  if (!user) {
+  const user_id = String(cookies.user);
+  if (!user_id) {
     return {
       redirect: {
         permanent: false,
@@ -44,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-  const user_id = user.data.id;
+  const { userData: user } = await getUserById({ id: user_id });
   const { hangoutsData: hangouts } = await getHangoutsByUserId({
     user_id,
   });
@@ -54,8 +55,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { friendData: friends } = await getFriendsbyUserId({ user_id });
   return {
     props: {
-      user: user ? user.data : null,
-      id: user ? user.data.id : null,
+      user: user ? user : null,
       hangouts: hangouts ? hangouts : null,
       schedules: schedules ? schedules : null,
       friends: friends ? friends : null,

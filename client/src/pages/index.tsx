@@ -2,21 +2,21 @@ import { GetServerSideProps, NextPage } from "next";
 import { parseCookies } from "nookies";
 import { getMatchingByUserId } from "@/api/matching";
 import { resMatchings } from "@/api/matching/type";
-import { User } from "@/api/user/type";
+import { getUserById } from "@/api/user";
+import { resUser } from "@/api/user/type";
 import { RootLayout } from "@/components/layout/Layout";
 import { HomeComponent } from "@/components/pages/home/home-main";
 
 type Props = {
-  user: User;
-  id: string;
+  user: resUser;
   matchings: resMatchings;
 };
 
-const Home: NextPage<Props> = ({ user, id, matchings }) => {
-  console.log(matchings);
+const Home: NextPage<Props> = ({ user, matchings }) => {
+  console.log(user);
   return (
     <RootLayout meta="ホーム">
-      <HomeComponent matchings={matchings.data} user={user} />
+      <HomeComponent matchings={matchings.data} user={user.data} />
     </RootLayout>
   );
 };
@@ -31,8 +31,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-  const user = JSON.parse(cookies.user);
-  if (!user) {
+  const user_id = String(cookies.user);
+  console.log(cookies.user);
+  if (!user_id) {
     return {
       redirect: {
         permanent: false,
@@ -40,14 +41,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-
-  const user_id = String(user.data.id);
+  const { userData: user } = await getUserById({ id: user_id });
   const { matchingsData: matchings } = await getMatchingByUserId({ user_id });
 
   return {
     props: {
-      user: user ? user.data : null,
-      id: user ? user.data.id : null,
+      user: user ? user : null,
       matchings: matchings ? matchings : null,
     },
   };

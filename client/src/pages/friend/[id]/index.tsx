@@ -36,8 +36,17 @@ const Friend: NextPage<Props> = ({ access_user_id, user, hangouts, schedules, fr
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
-  const user = JSON.parse(cookies.user);
-  if (!user) {
+  if (!cookies.user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/login`,
+      },
+    };
+  }
+  const user_id = String(cookies.user);
+  console.log(user_id);
+  if (!user_id) {
     return {
       redirect: {
         permanent: false,
@@ -48,17 +57,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = context.query;
   const id = String(query.id);
   const { userData: friendinfo } = await getUserById({ id });
-  const user_id = id;
   const { hangoutsData: hangouts } = await getHangoutsByUserId({
-    user_id,
+    user_id: id,
   });
   const { schedulesData: schedules } = await getSchedulesByUserId({
-    user_id,
+    user_id: id,
   });
-  const { friendData: friends } = await getFriendsbyUserId({ user_id });
+  const { friendData: friends } = await getFriendsbyUserId({ user_id: id });
   return {
     props: {
-      access_user_id: user ? user.data.id : null,
+      access_user_id: user_id ? user_id : null,
       user: friendinfo ? friendinfo : null,
       hangouts: hangouts ? hangouts : null,
       schedules: schedules ? schedules : null,

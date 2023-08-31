@@ -6,7 +6,13 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { HiChatAlt } from "react-icons/hi";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import { z } from "zod";
+import { updateUser } from "@/api/user";
+import { UpdateUserInput, User } from "@/api/user/type";
 import { Text } from "@/components/elements/Text";
+
+type EditFormProps = {
+  user: User;
+};
 
 type Inputs = {
   name: string;
@@ -18,7 +24,7 @@ const schema = z.object({
   discription: z.string(),
 });
 
-export const EditForm: FC = () => {
+export const EditForm: FC<EditFormProps> = ({ user }) => {
   const {
     register,
     handleSubmit,
@@ -28,8 +34,16 @@ export const EditForm: FC = () => {
     defaultValues: {},
   });
   const router = useRouter();
-  const onSubmit: SubmitHandler<Inputs> = (data: any) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     console.log(data);
+    const reqData: UpdateUserInput = {
+      description: data.discription !== "" ? data.discription : "",
+      id: user.id,
+      image: user.image,
+      name: data.name !== "" ? data.name : user.name,
+    };
+    const { userData: resUser } = await updateUser(reqData);
+    console.log(resUser);
     router.push("/profile");
   };
 

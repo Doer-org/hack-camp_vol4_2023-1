@@ -4,12 +4,14 @@ import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import { createSchedule } from "@/api/schedule/index";
+import { createSchedule, deleteSchedule } from "@/api/schedule/index";
+import { Schedule } from "@/api/schedule/type";
 import { User } from "@/api/user/type";
 import { Text } from "@/components/elements/Text";
 
 type ScheduleFormProps = {
   user: User;
+  schedules: Schedule[];
 };
 
 type Inputs = {
@@ -24,7 +26,7 @@ const schema = z.object({
   schedule3: z.string(),
 });
 
-export const ScheduleForm: FC<ScheduleFormProps> = ({ user }) => {
+export const ScheduleForm: FC<ScheduleFormProps> = ({ user, schedules }) => {
   const {
     register,
     handleSubmit,
@@ -35,8 +37,13 @@ export const ScheduleForm: FC<ScheduleFormProps> = ({ user }) => {
   });
   const router = useRouter();
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
-    console.log(data);
-
+    if (schedules) {
+      schedules.map(async (schedule: Schedule) => {
+        const id = schedule.id;
+        const { scheduleData: delSchedule } = await deleteSchedule({ id });
+        console.log(delSchedule);
+      });
+    }
     const userData1 = {
       user_id: user.id,
       date: data.schedule1,

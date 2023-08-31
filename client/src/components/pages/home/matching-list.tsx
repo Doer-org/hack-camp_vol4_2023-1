@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { FC } from "react";
 import { Matching } from "@/api/matching/type";
 import { LinkButton } from "@/components/elements/Button";
@@ -18,6 +19,9 @@ export const MatchingList: FC<MatchingListProps> = ({ matchings }) => {
               <div>
                 <div className="rounded-full bg-navy-1 w-12 h-12"></div>
               </div>
+              {/* <div className="rounded-full w-12 h-12 mt-1">
+                <Image src={matching.friend_image} alt={"user image"} width={48} height={48} className="rounded-full"></Image>
+              </div> */}
               <div>
                 <p>matching.friend_id</p>
               </div>

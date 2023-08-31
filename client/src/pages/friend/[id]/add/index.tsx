@@ -7,22 +7,31 @@ import { RootLayout } from "@/components/layout/Layout";
 import { AddMain } from "@/components/pages/friend/add/add-main";
 
 type Props = {
-  userId: string;
+  user_id: string;
   friend: resUser;
 };
 
-const FriendAdd: NextPage<Props> = ({ userId, friend }) => {
+const FriendAdd: NextPage<Props> = ({ user_id, friend }) => {
   return (
     <RootLayout meta="友達を追加する">
-      <AddMain user_id={userId} friend={friend.data} />
+      <AddMain user_id={user_id} friend={friend.data} />
     </RootLayout>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = parseCookies(context);
-  const user = JSON.parse(cookies.user);
-  if (!user) {
+  if (!cookies.user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/login`,
+      },
+    };
+  }
+  const user_id = String(cookies.user);
+  console.log(user_id);
+  if (!user_id) {
     return {
       redirect: {
         permanent: false,
@@ -37,7 +46,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      userId: user ? user.data.id : null,
+      user_id: user_id ? user_id : null,
       friend: friend ? friend : null,
     },
   };

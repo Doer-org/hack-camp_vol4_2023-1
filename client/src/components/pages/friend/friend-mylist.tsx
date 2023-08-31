@@ -27,8 +27,8 @@ export const FriendMylist: FC<FriendMyListProps> = ({ hangouts, schedules }) => 
               return el.value === hangout.name;
             });
             return (
-              <div key={index} className="text-center ">
-                <Text style="font-bold" fontsize="text-[18px]">
+              <div key={index} className="text-center">
+                <Text style="font-bold" fontsize="text-[16px]">
                   {hangoutName[0].label}
                 </Text>
               </div>
