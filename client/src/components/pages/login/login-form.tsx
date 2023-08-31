@@ -6,6 +6,7 @@ import { parseCookies, setCookie } from "nookies";
 import React, { FC } from "react";
 import { RiGoogleFill } from "react-icons/ri";
 import { createUser } from "@/api/user";
+import { resUser } from "@/api/user/type";
 import { Button } from "@/components/elements/Button";
 import auth from "@/firebase/client";
 
@@ -17,19 +18,18 @@ export const LoginForm: FC = () => {
       id: cred.user.uid,
       name: cred.user.displayName ? cred.user.displayName : "",
       description: "",
-      image: "",
+      image: cred.user.photoURL ? cred.user.photoURL : "",
     };
 
     const { userData, error } = await createUser(inputData);
     if (error) {
       console.log("Error:", error);
+      setCookie(null, "user", cred.user.uid);
+    } else {
+      console.log(userData);
+      const user: resUser = userData ? userData : { data: { id: "", name: "", image: "", description: "" } };
+      setCookie(null, "user", user.data.id);
     }
-    console.log(userData);
-
-    // localStorage.setItem("user", JSON.stringify(userData));
-
-    const cookies = parseCookies();
-    setCookie(null, "user", JSON.stringify(userData));
     const idToken = await cred.user.getIdToken();
     await signInByNextAuth("credentials", {
       idToken,

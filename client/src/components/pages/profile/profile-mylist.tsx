@@ -20,14 +20,14 @@ export const ProfileMylist: FC<ProfileMylistProps> = ({ hangouts, schedules }) =
   return (
     <div className="bg-new-white shadow-lg rounded-lg p-4">
       {hangouts !== null && hangouts.length !== 0 ? (
-        <div className="grid grid-cols-3 gap-4 py-4 pb-8 border-b border-new-blue-900">
+        <div className="grid grid-cols-3 gap-3 py-4 pb-8 border-b border-new-blue-900">
           {hangouts.map((hangout, index) => {
             const hangoutName = hangoutList.filter((el) => {
               return el.value === hangout.name;
             });
             return (
               <div key={index} className="text-center ">
-                <Text style="font-bold" fontsize="text-[18px]">
+                <Text style="font-bold" fontsize="text-[16px]">
                   {hangoutName[0].label}
                 </Text>
               </div>
@@ -40,7 +40,7 @@ export const ProfileMylist: FC<ProfileMylistProps> = ({ hangouts, schedules }) =
         </div>
       )}
       {schedules !== null && schedules.length !== 0 ? (
-        <div className="grid grid-cols-3 gap-4 py-4 pt-8">
+        <div className="grid grid-cols-3 gap-3 py-4 pt-8">
           {schedules.map((schedule, index) => {
             const scheduleDate = schedule.date.replaceAll("-", "/").slice(5);
             return (

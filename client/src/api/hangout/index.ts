@@ -52,15 +52,15 @@ export const updateHangout = async (input: UpdateHangoutInput) => {
 };
 
 export const deleteHangout = async (input: DeleteHangoutInput) => {
-  let hangoutsData: resHangout | null = null;
+  let hangoutData: resHangout | null = null;
   let error: Error | null = null;
   await Axios.delete(`/hangout/${input.id}`)
     .then((res: AxiosResponse<resHangout>) => {
       const { data } = res;
-      hangoutsData = data;
+      hangoutData = data;
     })
     .catch((err: AxiosError<{ error: string }>) => {
       error = err;
     });
-  return { hangoutsData, error };
+  return { hangoutData, error };
 };

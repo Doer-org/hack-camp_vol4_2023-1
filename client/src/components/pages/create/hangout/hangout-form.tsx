@@ -5,12 +5,14 @@ import { useRouter } from "next/navigation";
 import React, { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import { createHangout } from "@/api/hangout";
+import { createHangout, deleteHangout } from "@/api/hangout";
+import { Hangout } from "@/api/hangout/type";
 import { User } from "@/api/user/type";
 import { Text } from "@/components/elements/Text";
 
 type HangoutFormProps = {
   user: User;
+  hangouts: Hangout[];
 };
 
 type Inputs = {
@@ -24,7 +26,7 @@ const schema = z.object({
     .max(3, { message: "3つまで選択してください" }),
 });
 
-export const HangoutForm: FC<HangoutFormProps> = ({ user }) => {
+export const HangoutForm: FC<HangoutFormProps> = ({ user, hangouts }) => {
   const {
     register,
     handleSubmit,
@@ -42,7 +44,13 @@ export const HangoutForm: FC<HangoutFormProps> = ({ user }) => {
     { value: "other", label: "その他" },
   ];
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
-    console.log(data);
+    if (hangouts) {
+      hangouts.map(async (hangout) => {
+        const id = hangout.id;
+        const { hangoutData: delHangout } = await deleteHangout({ id });
+        console.log(delHangout);
+      });
+    }
     data.hangouts.map(async (hangout: string) => {
       const InputData = {
         name: hangout,
