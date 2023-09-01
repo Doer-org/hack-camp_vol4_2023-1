@@ -42,6 +42,7 @@ func (r *Router) cors() {
 			"http://localhost:3000",
 			"https://hack-camp-vol4-2023-1-qqg93k4lw-hack-camp-vol4-2023-1.vercel.app/",
 			"https://hack-camp-vol4-2023-1.vercel.app/",
+			"https://hack-camp-vol4-2023-1-ncuasu5d1-hack-camp-vol4-2023-1.vercel.app",
 		},
 		// アクセスを許可したいHTTPメソッド(以下の例だとPUTやDELETEはアクセスできません)
 		AllowMethods: []string{
